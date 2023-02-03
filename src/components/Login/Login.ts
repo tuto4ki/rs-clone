@@ -1,48 +1,43 @@
+import { elementGenerator } from '../controller/taggenerator';
+import './style.css';
+
 export default class Login {
-  root: HTMLDivElement;
-
-  header: HTMLDivElement;
-
-  main: HTMLDivElement;
-
-  forms: HTMLDivElement;
+  private _headline: HTMLParagraphElement;
+  private _passwordFiled: InputField;
+  private _loginFiled: InputField;
 
   constructor() {
-    this.root = document.querySelector('#root') as HTMLDivElement;
-    this.header = this.createHeader();
-    this.main = this.createMain();
-    this.forms = this.createForm();
+    this._headline = elementGenerator.createParagraph({ className: 'headline', text: 'Login' });
+    this._passwordFiled = new InputField('password', '', 'pwd', 'Password', 'Enter your password');
+    this._loginFiled = new InputField('text', '', 'user-name', 'Username', 'Enter username');
   }
 
-  createHeader() {
-    const header = document.createElement('div');
-    header.classList.add('header');
-    this.root.append(header);
-    return header;
-  }
-
-  createMain() {
-    const main = document.createElement('div');
-    main.classList.add('main');
-    this.root.append(main);
-    return main;
+  setTranslation() {
+    this._headline.innerText = 'iz massiva text';
+    this._passwordFiled.setTranslation();
+    this._loginFiled.setTranslation();
+    // TODO
   }
 
   createForm() {
-    const forms = document.createElement('div');
-    forms.classList.add('forms');
-    this.root.append(forms);
-    const formLoginContainer = document.createElement('div');
-    formLoginContainer.classList.add('formLoginContainer');
-    const formLogin = document.createElement('form');
-    formLogin.action = '#';
-    formLogin.classList.add('formLogin', 'form');
-    formLogin.id = 'formLogin';
-    forms.append(formLoginContainer);
-    const formLoginHeader = document.createElement('h1');
-    formLoginHeader.textContent = 'Login';
-    formLoginContainer.append(formLoginHeader);
-    formLoginContainer.append(formLogin);
+    // const root = document.querySelector('#root') as HTMLDivElement;
+    const fragment = document.createDocumentFragment();
+    const forms = elementGenerator.createDiv({ className: 'forms' });
+    // forms.classList.add('forms');
+    // root.append(forms);
+    const formLoginContainer = elementGenerator.createDiv({ className: 'formLoginContainer' });
+    // formLoginContainer.classList.add('formLoginContainer');
+    // const formLogin = document.createElement('form');
+    // formLogin.action = '#';
+    // formLogin.classList.add('formLogin', 'form');
+    // formLogin.id = 'formLogin';
+    formLoginContainer.append(this._headline, this._passwordFiled.getInputField(), this._loginFiled.getInputField());
+    fragment.append(formLoginContainer);
+    forms.append(fragment);
+    // const formLoginHeader = document.createElement('h1');
+    // this._headline.textContent = 'Login';
+
+    // formLoginContainer.append(formLogin);
     //
     const inputLoginControl = document.createElement('div');
     inputLoginControl.classList.add('input-control');
@@ -56,7 +51,7 @@ export default class Login {
     const err1 = document.createElement('div');
     err1.classList.add('error');
     inputLoginControl.append(labelLogin, login, err1);
-    formLogin.append(inputLoginControl);
+    // formLogin.append(inputLoginControl);
     //
     const inputPasswordControl = document.createElement('div');
     inputPasswordControl.classList.add('input-control');
@@ -70,12 +65,12 @@ export default class Login {
     const err2 = document.createElement('div');
     err2.classList.add('error');
     inputPasswordControl.append(labelPassword, password, err2);
-    formLogin.append(inputPasswordControl);
+    // formLogin.append(inputPasswordControl);
     //
     const btn = document.createElement('button');
     btn.textContent = 'Log In Now';
     btn.type = 'submit';
-    formLogin.append(btn);
+    // formLogin.append(btn);
     //
     const registrationContainer = document.createElement('div');
     registrationContainer.classList.add('registrationContainer');
@@ -87,7 +82,7 @@ export default class Login {
     signUpLink.textContent = 'Register Now';
     signUpLink.classList.add('registrationLink');
     registrationContainer.append(spanSign, signUpLink);
-    formLogin.append(registrationContainer);
+    // formLogin.append(registrationContainer);
 
     //
     const formRegistrationContainer = document.createElement('div');
@@ -160,6 +155,37 @@ export default class Login {
     loginLink.classList.add('registrationLink');
     loginContainer.append(spanSign1, loginLink);
     formRegistration.append(loginContainer);
+
+    console.log('a');
     return forms;
+  }
+}
+
+class InputField {
+  private _inputField: HTMLInputElement;
+  private _label: HTMLLabelElement;
+  constructor(
+    inputType: string,
+    inputClassName: string,
+    inputId: string,
+    labelValue: string,
+    placeholderValue: string
+  ) {
+    this._inputField = elementGenerator.createInput(inputType, {
+      className: inputClassName,
+      placeholder: placeholderValue,
+      id: inputId,
+    });
+    this._label = elementGenerator.createLabel({ for: inputId, text: labelValue });
+  }
+
+  getInputField() {
+    const field = elementGenerator.createDiv({ className: 'input-wrap' });
+    field.append(this._label, this._inputField);
+    return field;
+  }
+
+  setTranslation() {
+    // set translation for inputs TODO
   }
 }
