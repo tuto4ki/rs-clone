@@ -1,0 +1,75 @@
+body {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+}
+.inputLoginControl input.focus,
+.inputPasswordControl input:focus,
+.inputNameControl input:focus,
+.inputPswControl input:focus,
+.inputEmail input:focus {
+  outline: 0;
+}
+
+.inputLoginControl .success input,
+.inputPasswordControl .success input,
+.inputNameControl .success input,
+.inputPswControl .success input,
+.inputEmail .success input {
+  border-color: green;
+}
+
+.inputLoginControl .error input,
+.inputPasswordControl .error input,
+.inputNameControl .error input,
+.inputPswControl .error input,
+.inputEmail .error input {
+  border-color: red;
+}
+
+.form {
+  width: 100%;
+}
+
+.formLoginContainer,
+.formRegistrationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  background: whitesmoke;
+  background-repeat: 4px;
+  font-size: 12px;
+}
+
+.input-control {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.input-control input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+}
+.input-control label {
+  margin-bottom: 10px;
+}
+
+.registrationContainer,
+.loginContainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form button {
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  color: white;
+  background-color: darkviolet;
+  border: none;
+  background-repeat: 4px;
+}
