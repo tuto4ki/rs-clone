@@ -1,4 +1,4 @@
-import { SPEED_PLAYER } from '../constGame';
+import { SCALE_SIZE_PLAYER, SPEED_PLAYER } from '../constGame';
 import Player from '../player';
 import FallLeftAnimation from './fallLeftAnimation';
 import IdleAnimation from './idleAnimation';
@@ -12,7 +12,7 @@ export default class FallRightAnimation extends StateAnimation {
     this.onEnter();
   }
   onEnter(): void {
-    this.player.sprite.body.setVelocityX(SPEED_PLAYER);
+    this.player.sprite.setScale(SCALE_SIZE_PLAYER, SCALE_SIZE_PLAYER).body.setVelocityX(SPEED_PLAYER);
     this.player.sprite.play('jumpPlayer');
   }
   onExit(): void {
@@ -31,6 +31,6 @@ export default class FallRightAnimation extends StateAnimation {
     }
   }
   jump(): void {
-    console.log('jump');
+    // console.log('jump');
   }
 }

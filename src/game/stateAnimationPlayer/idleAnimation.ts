@@ -14,7 +14,7 @@ export default class IdleAnimation extends StateAnimation {
     this.player.sprite.play('stayPlayer');
   }
   onExit(): void {
-    console.log('exit');
+    // console.log('exit');
   }
   moveLeft(): void {
     this.player.changeState(new MoveLeftAnimation(this.player));

@@ -19,6 +19,8 @@ export class GameScene extends Phaser.Scene {
     this._cursor = this.input.keyboard.createCursorKeys();
     this._player = new Player(this, 100, 580, 'fox');
     this.physics.add.collider(platforms, this._player.sprite);
+    this._cursor?.up.on('down', () => this._player?.moveUp());
+    this._cursor?.space.on('down', () => this._player?.moveUp());
   }
 
   public update(/* time: number, delta: number */): void {
@@ -29,9 +31,6 @@ export class GameScene extends Phaser.Scene {
         this._player.moveRight();
       } else if (this._player.sprite.body.onFloor()) {
         this._player.moveDown();
-      }
-      if ((this._cursor.space.isDown || this._cursor.up.isDown) && this._player.sprite.body.onFloor()) {
-        this._player.moveUp();
       }
     }
   }
