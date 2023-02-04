@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { WIDTH_GAME, HEIGHT_GAME, GRAVITY } from '../../constGame';
+import { WIDTH_GAME, HEIGHT_GAME, GRAVITY } from '../../game/constGame';
 import { GameScene } from '../../scenes/gameScene';
 import { StartScene } from '../../scenes/startScene';
 import './game.scss';

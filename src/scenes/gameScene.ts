@@ -1,8 +1,9 @@
-import { HEIGHT_GAME, WIDTH_GAME } from '../constGame';
+import { HEIGHT_GAME, WIDTH_GAME } from '../game/constGame';
+import Player from '../game/player';
 
 export class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
-  private _player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody | null = null;
+  private _player: Player | null = null;
   constructor() {
     super('Game');
   }
@@ -16,22 +17,21 @@ export class GameScene extends Phaser.Scene {
       platforms.create(i * 128 + 64, HEIGHT_GAME - 64, 'groundMiddle');
     }
     this._cursor = this.input.keyboard.createCursorKeys();
-    this._player = this.physics.add.sprite(200, 200, 'player');
-    this._player.setScale(0.2).refreshBody();
-    this.physics.add.collider(platforms, this._player);
+    this._player = new Player(this, 100, 580, 'fox');
+    this.physics.add.collider(platforms, this._player.sprite);
   }
 
   public update(/* time: number, delta: number */): void {
     if (this._cursor && this._player) {
       if (this._cursor.left.isDown) {
-        this._player.body.setVelocityX(-200); // move left
+        this._player.moveLeft();
       } else if (this._cursor.right.isDown) {
-        this._player.body.setVelocityX(200); // move right
-      } else if (this._player.body.onFloor()) {
-        this._player.body.setVelocityX(0);
+        this._player.moveRight();
+      } else if (this._player.sprite.body.onFloor()) {
+        this._player.moveDown();
       }
-      if ((this._cursor.space.isDown || this._cursor.up.isDown) && this._player.body.onFloor()) {
-        this._player.body.setVelocityY(-500); // jump up
+      if ((this._cursor.space.isDown || this._cursor.up.isDown) && this._player.sprite.body.onFloor()) {
+        this._player.moveUp();
       }
     }
   }
