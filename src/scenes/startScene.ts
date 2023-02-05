@@ -17,6 +17,7 @@ export class StartScene extends Phaser.Scene {
     this.load.image('bgGame', '../assets/sprites/bg.png');
     this.load.image('groundMiddle', '../assets/sprites/ground.png');
     this.load.image('player', '../assets/sprites/dog.png');
+    this.load.image('gear', '../assets/sprites/gear.png');
   }
   public create(): void {
     this.add
