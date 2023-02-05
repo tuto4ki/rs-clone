@@ -1,36 +1,24 @@
 body {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
 }
-.inputLoginControl input.focus,
-.inputPasswordControl input:focus,
-.inputNameControl input:focus,
-.inputPswControl input:focus,
-.inputEmail input:focus {
+
+input:focus {
   outline: 0;
 }
 
-.inputLoginControl .success input,
-.inputPasswordControl .success input,
-.inputNameControl .success input,
-.inputPswControl .success input,
-.inputEmail .success input {
-  border-color: green;
+.input-wrap .success {
+  border: 3px solid green;
 }
 
-.inputLoginControl .error input,
-.inputPasswordControl .error input,
-.inputNameControl .error input,
-.inputPswControl .error input,
-.inputEmail .error input {
-  border-color: red;
+.input-wrap .error {
+  border: 3px solid red;
 }
 
 .form {
   width: 100%;
 }
 
-.formLoginContainer,
-.formRegistrationContainer {
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -38,21 +26,23 @@ body {
   margin: 50px auto;
   padding: 20px;
   background: whitesmoke;
-  background-repeat: 4px;
+  border-radius: 4px;
   font-size: 12px;
 }
 
-.input-control {
+.input-wrap {
   display: flex;
+  width: 100%;
   flex-direction: column;
   margin: 10px 0;
 }
 
-.input-control input {
+.input-wrap input {
   border: 2px solid #f0f0f0;
   border-radius: 4px;
+  font-size: 18px;
 }
-.input-control label {
+.input-wrap label {
   margin-bottom: 10px;
 }
 
@@ -61,7 +51,6 @@ body {
   display: flex;
   justify-content: space-around;
 }
-
 .form button {
   cursor: pointer;
   padding: 10px;
@@ -71,5 +60,5 @@ body {
   color: white;
   background-color: darkviolet;
   border: none;
-  background-repeat: 4px;
+  border-radius: 4px;
 }
