@@ -15,3 +15,5 @@ export const WIDTH_PLAYER = 40;
 export const HEIGHT_PLAYER = 330;
 
 export const SCALE_SIZE_PLAYER = 0.2;
+
+export const SCALE_SIZE_WORLD = 1.2;

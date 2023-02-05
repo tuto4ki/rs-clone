@@ -15,8 +15,10 @@ export class StartScene extends Phaser.Scene {
   }
   public preload(): void {
     this.load.image('bgGame', '../assets/sprites/bg.png');
-    this.load.image('groundMiddle', '../assets/sprites/ground.png');
     this.load.atlas('fox', '../assets/sprites/fox.png', '../assets/json/fox.json');
+    // load level 1
+    this.load.image('tiles', '../assets/sprites/freeTiles.png');
+    this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
   }
   public create(): void {
     this.add
@@ -32,7 +34,6 @@ export class StartScene extends Phaser.Scene {
         color: Styles.color,
       })
       .setOrigin(0.5);
-
     this.input.once('pointerdown', () => {
       this.scene.start('Game');
     });
