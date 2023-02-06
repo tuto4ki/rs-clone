@@ -1,6 +1,5 @@
-import Modal from '../components/menu/modal';
+import Modal from '../components/modal/modal';
 import { HEIGHT_GAME, WIDTH_GAME } from '../constGame';
-
 export class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody | null = null;
@@ -22,6 +21,7 @@ export class GameScene extends Phaser.Scene {
     this._player = this.physics.add.sprite(200, 200, 'player');
     this._player.setScale(0.2).refreshBody();
     this.physics.add.collider(platforms, this._player);
+    //settings modal
     const gear = this.add.image(25, 25, 'gear').setInteractive().setScale(0.6);
     gear.name = 'gear';
     const modal = new Modal(this, 400, 300, 300, 200);
