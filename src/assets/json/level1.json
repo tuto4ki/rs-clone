@@ -1,12 +1,4 @@
 { "compressionlevel":-1,
- "editorsettings":
-    {
-     "chunksize":
-        {
-         "height":32,
-         "width":32
-        }
-    },
  "height":10,
  "infinite":false,
  "layers":[
@@ -16,6 +8,7 @@
          "encoding":"base64",
          "height":10,
          "id":1,
+         "locked":true,
          "name":"ground",
          "opacity":1,
          "type":"tilelayer",
@@ -53,9 +46,76 @@
          "width":100,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "locked":true,
+         "name":"waterObj",
+         "objects":[
+                {
+                 "class":"obstacles",
+                 "height":88,
+                 "id":4,
+                 "name":"water",
+                 "rotation":0,
+                 "visible":true,
+                 "width":580,
+                 "x":700,
+                 "y":550
+                }, 
+                {
+                 "class":"obstacles",
+                 "height":88,
+                 "id":6,
+                 "name":"water",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":2494,
+                 "y":550
+                }, 
+                {
+                 "class":"obstacles",
+                 "height":88,
+                 "id":7,
+                 "name":"water",
+                 "rotation":0,
+                 "visible":true,
+                 "width":768,
+                 "x":3326,
+                 "y":550
+                }, 
+                {
+                 "class":"obstacles",
+                 "height":88,
+                 "id":9,
+                 "name":"water",
+                 "rotation":0,
+                 "visible":true,
+                 "width":64,
+                 "x":4798,
+                 "y":550
+                }, 
+                {
+                 "class":"obstacles",
+                 "height":88,
+                 "id":10,
+                 "name":"water",
+                 "rotation":0,
+                 "visible":true,
+                 "width":704,
+                 "x":5246,
+                 "y":550
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":1,
+ "nextlayerid":8,
+ "nextobjectid":13,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",
@@ -64,7 +124,7 @@
         {
          "columns":10,
          "firstgid":1,
-         "image":"../sprites/freeTiles.png",
+         "image":"freeTiles.png",
          "imageheight":257,
          "imagewidth":640,
          "margin":0,

@@ -14,7 +14,8 @@ export class StartScene extends Phaser.Scene {
     super('Start');
   }
   public preload(): void {
-    this.load.image('bgGame', '../assets/sprites/bg.png');
+    this.load.image('bgGame', '../assets/images/bg.png');
+    this.load.image('emptyPicture', '../assets/images/empty.png');
     this.load.atlas('fox', '../assets/sprites/fox.png', '../assets/json/fox.json');
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');

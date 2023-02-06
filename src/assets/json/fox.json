@@ -1,14 +1,6 @@
 {
   "frames": [
     {
-      "filename": "Dead_10",
-      "frame": {"x": 1,"y": 1,"w": 580,"h": 510},
-      "rotated": false,
-      "trimmed": false,
-      "spriteSourceSize": {"x": 0,"y": 0,"w": 580,"h": 510},
-      "sourceSize": {"w": 580,"h": 510}
-    },
-    {
       "filename": "Dead_01",
       "frame": {"x": 583,"y": 1,"w": 580,"h": 510},
       "rotated": false,
@@ -75,6 +67,14 @@
     {
       "filename": "Dead_09",
       "frame": {"x": 1165,"y": 513,"w": 580,"h": 510},
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {"x": 0,"y": 0,"w": 580,"h": 510},
+      "sourceSize": {"w": 580,"h": 510}
+    },
+    {
+      "filename": "Dead_10",
+      "frame": {"x": 1,"y": 1,"w": 580,"h": 510},
       "rotated": false,
       "trimmed": false,
       "spriteSourceSize": {"x": 0,"y": 0,"w": 580,"h": 510},

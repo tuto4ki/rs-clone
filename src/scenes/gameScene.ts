@@ -1,11 +1,16 @@
 import { HEIGHT_GAME, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
+import Water from '../game/water';
 import Player from '../game/player';
 
 export class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
+  private _isFinish: boolean;
+  private _levelNumber: number;
   constructor() {
     super('Game');
+    this._isFinish = false;
+    this._levelNumber = 1;
   }
 
   public create(): void {
@@ -29,9 +34,13 @@ export class GameScene extends Phaser.Scene {
     this._cursor?.space.on('down', () => this._player?.moveUp());
     this.cameras.main.setBounds(0, 0, widthWorld, HEIGHT_GAME);
     this.cameras.main.startFollow(this._player.sprite, true);
+    new Water(this, map);
   }
 
   public update(/* time: number, delta: number */): void {
+    if (this._isFinish) {
+      return;
+    }
     if (this._cursor && this._player) {
       if (this._cursor.left.isDown) {
         this._player.moveLeft();
@@ -41,5 +50,17 @@ export class GameScene extends Phaser.Scene {
         this._player.moveDown();
       }
     }
+  }
+
+  get player(): Player | null {
+    return this._player;
+  }
+
+  get isFinish(): boolean {
+    return this._isFinish;
+  }
+
+  set isFinish(value: boolean) {
+    this._isFinish = value;
   }
 }

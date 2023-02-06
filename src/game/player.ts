@@ -1,6 +1,7 @@
 import StateAnimation from './stateAnimationPlayer/stateAnimation';
 import { HEIGHT_PLAYER, MASS_PLAYER, SCALE_SIZE_PLAYER, WIDTH_PLAYER } from './constGame';
 import IdleAnimation from './stateAnimationPlayer/idleAnimation';
+import DeadAnimation from './stateAnimationPlayer/deadAnimation';
 
 export default class Player {
   private _sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
@@ -11,7 +12,6 @@ export default class Player {
     this.createAnimation(scene);
     this._sprite.setCollideWorldBounds(true);
     this._stateAnimation = new IdleAnimation(this);
-    this._stateAnimation.onEnter();
   }
 
   changeState(state: StateAnimation): void {
@@ -55,6 +55,17 @@ export default class Player {
       .setBodySize(WIDTH_PLAYER, HEIGHT_PLAYER)
       .setMass(MASS_PLAYER)
       .refreshBody();
+    // animation died
+    scene.anims.create({
+      key: 'deadPlayer',
+      frames: scene.anims.generateFrameNames('fox', { prefix: 'Dead_', start: 1, end: 10, zeroPad: 2 }),
+      repeat: 0,
+    });
+    this._sprite
+      .setScale(SCALE_SIZE_PLAYER)
+      .setBodySize(WIDTH_PLAYER, HEIGHT_PLAYER)
+      .setMass(MASS_PLAYER)
+      .refreshBody();
   }
 
   get sprite(): Phaser.Types.Physics.Arcade.SpriteWithDynamicBody {
@@ -75,5 +86,9 @@ export default class Player {
 
   moveRight(): void {
     this._stateAnimation.moveRight();
+  }
+
+  deadPlayer(): void {
+    this.changeState(new DeadAnimation(this));
   }
 }
