@@ -8,6 +8,9 @@ export default class Login {
   private _loginState: boolean;
   private _button: HTMLButtonElement;
   private _form: HTMLDivElement;
+  private _spanSign: HTMLSpanElement;
+  private _signToggleBtn: HTMLButtonElement;
+  private _wrapp: HTMLDivElement;
 
   constructor() {
     this._loginState = true;
@@ -20,10 +23,21 @@ export default class Login {
     this._button = elementGenerator.createButton({
       className: 'button',
     });
+    this._wrapp = elementGenerator.createDiv({ className: 'wrapp' });
+    this._spanSign = elementGenerator.createSpan({
+      className: 'spanSign',
+    });
+    this._signToggleBtn = elementGenerator.createButton({
+      className: 'toggleBtn',
+    });
+    this._wrapp.append(this._spanSign, this._signToggleBtn);
+
     this._form = elementGenerator.createDiv({ className: 'form' });
     this._button.addEventListener('click', () => {
-      //
       this.validateInputs();
+    });
+    this._signToggleBtn.addEventListener('click', () => {
+      this.changeFormState();
     });
   }
 
@@ -43,6 +57,8 @@ export default class Login {
   private setFieldText() {
     this._headline.innerText = `${this._loginState ? 'Login' : 'Register'}`;
     this._button.innerHTML = `${this._loginState ? 'Login' : 'Register'}`;
+    this._spanSign.innerText = `${this._loginState ? "You don't have an account?" : 'Already have an account?'}`;
+    this._signToggleBtn.innerText = `${this._loginState ? 'Register Now' : 'Login Now'}`;
   }
 
   setTranslation() {
@@ -59,8 +75,10 @@ export default class Login {
       this._headline,
       this._loginField.getInputField(),
       this._passwordField.getInputField(),
-      this._button
+      this._button,
+      this._wrapp
     );
+
     console.log('a');
     return this._form;
   }
@@ -127,13 +145,4 @@ class InputField {
   setTranslation() {
     // set translation for inputs TODO
   }
-
-  // validateInputs(): void {
-  //   //
-  //   if (this._inputField.value === '') {
-  //     this.setErrorMessage();
-  //   } else {
-  //     this.setSuccessMessage();
-  //   }
-  // }
 }
