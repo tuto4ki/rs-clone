@@ -22,7 +22,7 @@ export class GameScene extends Phaser.Scene {
     this._player.setScale(0.2).refreshBody();
     this.physics.add.collider(platforms, this._player);
     //settings modal
-    const gear = this.add.image(25, 25, 'gear').setInteractive().setScale(0.6);
+    const gear = this.add.image(25, 25, 'gear').setInteractive().setScale(0.4);
     gear.name = 'gear';
     const modal = new Modal(this, 400, 300, 300, 200);
     this.add.existing(modal);

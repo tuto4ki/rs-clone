@@ -16,6 +16,9 @@ body {
   background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
   font-family: 'Itim', sans-serif;
 }
+button {
+  font-family: 'Itim', sans-serif;
+}
 
 input:focus {
   outline: 0;
@@ -84,4 +87,10 @@ input:focus {
 .toggleBtn:hover {
   cursor: pointer;
   color: blue;
+}
+
+.headline {
+  font-size: 36px;
+  margin: 0;
+  padding: 0;
 }

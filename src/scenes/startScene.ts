@@ -19,8 +19,8 @@ export class StartScene extends Phaser.Scene {
     this.load.image('bgGame', '../assets/sprites/bg.png');
     this.load.image('groundMiddle', '../assets/sprites/ground.png');
     this.load.image('player', '../assets/sprites/dog.png');
-    this.load.image('gear', '../assets/sprites/gear.png');
-    const fonts = new WebFontFile(this.load, 'Audiowide');
+    this.load.image('gear', '../assets/sprites/play.svg');
+    const fonts = new WebFontFile(this.load, 'Itim');
     this.load.addFile(fonts);
   }
   public create(): void {

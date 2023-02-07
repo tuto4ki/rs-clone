@@ -33,6 +33,7 @@ export default class Modal extends Phaser.GameObjects.Container {
     this.add(this.header);
 
     this.content = scene.add.text(0, 0, 'Modal Content', { fontSize: '18px' }).setOrigin(0.5, 0.5);
+    // this.muteBtn = scene.add.image(25, 25, 'gear').setInteractive().setScale(0.6);
 
     this.add(this.content);
 
