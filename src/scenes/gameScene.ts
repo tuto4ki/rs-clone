@@ -1,5 +1,6 @@
 import { HEIGHT_GAME, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
-import Water from '../game/water';
+import Stump from '../game/obstacles/stump';
+import Water from '../game/obstacles/water';
 import Player from '../game/player';
 
 export class GameScene extends Phaser.Scene {
@@ -34,7 +35,8 @@ export class GameScene extends Phaser.Scene {
     this._cursor?.space.on('down', () => this._player?.moveUp());
     this.cameras.main.setBounds(0, 0, widthWorld, HEIGHT_GAME);
     this.cameras.main.startFollow(this._player.sprite, true);
-    new Water(this, map);
+    new Water(this, map, 'waterObj');
+    new Stump(this, map, 'stumpObj');
   }
 
   public update(/* time: number, delta: number */): void {
