@@ -91,4 +91,8 @@ export default class Player {
   deadPlayer(): void {
     this.changeState(new DeadAnimation(this));
   }
+
+  gameOver(): void {
+    this._stateAnimation.onExit();
+  }
 }

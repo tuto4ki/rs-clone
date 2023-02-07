@@ -17,6 +17,7 @@ export class StartScene extends Phaser.Scene {
     this.load.image('bgGame', '../assets/images/bg.png');
     this.load.image('emptyPicture', '../assets/images/empty.png');
     this.load.atlas('fox', '../assets/sprites/fox.png', '../assets/json/fox.json');
+    this.load.image('plate', '../assets/images/plateEndGame.png');
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
