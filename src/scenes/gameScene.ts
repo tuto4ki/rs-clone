@@ -22,11 +22,17 @@ export class GameScene extends Phaser.Scene {
     this._player.setScale(0.2).refreshBody();
     this.physics.add.collider(platforms, this._player);
     //settings modal
-    const gear = this.add.image(25, 25, 'gear').setInteractive().setScale(0.4);
-    gear.name = 'gear';
+    const gearBtn = this.add.image(25, 25, 'gearBtn').setInteractive().setScale(0.6);
+    // const playBtn = this.add.image(50, 75, 'playBtn').setInteractive().setScale(0.4);
+    // const exitBtn = this.add.image(50, 125, 'exitBtn').setInteractive().setScale(0.4);
+    // const helpBtn = this.add.image(50, 175, 'helpBtn').setInteractive().setScale(0.4);
+    // const homeBtn = this.add.image(50, 225, 'homeBtn').setInteractive().setScale(0.4);
+    // const infoBtn = this.add.image(50, 275, 'infoBtn').setInteractive().setScale(0.4);
+    // const menuBtn = this.add.image(50, 325, 'menuBtn').setInteractive().setScale(0.4);
+    gearBtn.name = 'gearBtn';
     const modal = new Modal(this, 400, 300, 300, 200);
     this.add.existing(modal);
-    gear.on('pointerdown', () => {
+    gearBtn.on('pointerdown', () => {
       if (!modal.isOpen) {
         modal.open();
       }

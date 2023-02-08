@@ -55,10 +55,10 @@ export default class Login {
   // }
 
   private setFieldText() {
-    this._headline.innerText = `${this._loginState ? 'Login' : 'Register'}`;
-    this._button.innerHTML = `${this._loginState ? 'Login' : 'Register'}`;
+    this._headline.innerText = `${this._loginState ? 'Login' : 'Registration'}`;
+    this._button.innerHTML = `${this._loginState ? 'Login' : 'Registration'}`;
     this._spanSign.innerText = `${this._loginState ? "You don't have an account?" : 'Already have an account?'}`;
-    this._signToggleBtn.innerText = `${this._loginState ? 'Register Now' : 'Login Now'}`;
+    this._signToggleBtn.innerText = `${this._loginState ? 'Registration' : 'Login Now'}`;
   }
 
   setTranslation() {
