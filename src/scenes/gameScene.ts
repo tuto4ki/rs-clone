@@ -30,7 +30,8 @@ export class GameScene extends Phaser.Scene {
     // const infoBtn = this.add.image(50, 275, 'infoBtn').setInteractive().setScale(0.4);
     // const menuBtn = this.add.image(50, 325, 'menuBtn').setInteractive().setScale(0.4);
     gearBtn.name = 'gearBtn';
-    const modal = new Modal(this, 400, 300, 300, 200);
+    const modal = new Modal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 300, 200);
+    modal.setScale(0);
     this.add.existing(modal);
     gearBtn.on('pointerdown', () => {
       if (!modal.isOpen) {

@@ -109,14 +109,36 @@ export default class Modal extends Phaser.GameObjects.Container {
 
   open() {
     console.log('open modal');
-    this.setVisible(true);
     this.background.setAlpha(0.4);
-    this.isOpen = true;
+    this.setVisible(true);
+    this.scene.tweens.add({
+      targets: this,
+      scaleX: 1,
+      scaleY: 1,
+      ease: 'Back',
+      duration: 1000,
+      repeat: 0,
+      yoyo: false,
+      onComplete: () => {
+        this.isOpen = true;
+      },
+    });
   }
 
   close() {
-    this.setVisible(false);
     this.background.setAlpha(0);
-    this.isOpen = false;
+    this.scene.tweens.add({
+      targets: this,
+      scaleX: 0,
+      scaleY: 0,
+      ease: 'none',
+      duration: 500,
+      repeat: 0,
+      yoyo: false,
+      onComplete: () => {
+        this.isOpen = false;
+        this.setVisible(false);
+      },
+    });
   }
 }
