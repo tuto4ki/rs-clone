@@ -30,6 +30,7 @@ export class StartScene extends Phaser.Scene {
     this.load.image('soundOffBtn', '../assets/sprites/buttons/soundOffBtn.svg');
     this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
     this.load.image('closeBtn', '../assets/sprites/buttons/closeBtn.svg');
+    this.load.image('howToPlay', '../assets/sprites/howToPlay.png');
     const fonts = new WebFontFile(this.load, 'Itim');
     this.load.addFile(fonts);
   }

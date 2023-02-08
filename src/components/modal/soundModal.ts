@@ -25,7 +25,7 @@ export default class Modal extends Phaser.GameObjects.Container {
     this.add(this.background);
 
     this.header = scene.add
-      .text(0, -(height / 2) + 20, 'Settings', {
+      .text(0, -(height / 2) + 20, 'Sound settings ', {
         fontFamily: 'Itim',
         fontSize: '30px',
         color: '#F5F901',
@@ -91,7 +91,7 @@ export default class Modal extends Phaser.GameObjects.Container {
     this.add(this.soundOnBtn);
 
     this.closeButton = scene.add
-      .image(130, -80, 'closeBtn')
+      .image(148, -96, 'closeBtn')
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
