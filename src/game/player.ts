@@ -25,7 +25,7 @@ export default class Player {
     // animation run
     scene.anims.create({
       key: 'runPlayer',
-      frames: scene.anims.generateFrameNames('fox', { prefix: 'Run_', end: 7, zeroPad: 2 }),
+      frames: scene.anims.generateFrameNames('fox', { prefix: 'Run_', start: 1, end: 8, zeroPad: 2 }),
       repeat: -1,
     });
     this._sprite
@@ -36,7 +36,7 @@ export default class Player {
     // animation jump
     scene.anims.create({
       key: 'jumpPlayer',
-      frames: scene.anims.generateFrameNames('fox', { prefix: 'Jump_', end: 7, zeroPad: 2 }),
+      frames: scene.anims.generateFrameNames('fox', { prefix: 'Jump_', start: 1, end: 8, zeroPad: 2 }),
       repeat: 0,
     });
     this._sprite
@@ -47,7 +47,7 @@ export default class Player {
     // animation stay
     scene.anims.create({
       key: 'stayPlayer',
-      frames: scene.anims.generateFrameNames('fox', { prefix: 'Idle_', end: 9, zeroPad: 2 }),
+      frames: scene.anims.generateFrameNames('fox', { prefix: 'Idle_', start: 1, end: 10, zeroPad: 2 }),
       repeat: -1,
     });
     this._sprite
