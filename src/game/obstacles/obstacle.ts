@@ -13,7 +13,9 @@ export default class Obstacles {
         obj.body.width = object.width * SCALE_SIZE_WORLD;
         obj.body.height = object.height * SCALE_SIZE_WORLD;
         if (pictureDefault === 'emptyPicture') {
-          obj.setScale(obj.body.width / EMPTY_PICTURE_WIDTH, obj.body.height / EMPTY_PICTURE_HEIGHT).setOrigin(0, 0);
+          obj.setScale(obj.body.width / EMPTY_PICTURE_WIDTH, obj.body.height / EMPTY_PICTURE_HEIGHT).setOrigin(0);
+        } else {
+          obj.setOrigin(1);
         }
         obj.setBodySize(obj.body.width, obj.body.height).refreshBody();
       }

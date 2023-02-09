@@ -6,11 +6,13 @@ export const GRAVITY = 500;
 
 export const SPEED_PLAYER = 200;
 
+export const SPEED_ENTITY = 30;
+
 export const SPEED_UP_PLAYER = 2.2;
 
 export const MASS_PLAYER = 10;
 
-export const WIDTH_PLAYER = 40;
+export const WIDTH_PLAYER = 80;
 
 export const HEIGHT_PLAYER = 330;
 
