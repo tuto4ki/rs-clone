@@ -51,6 +51,9 @@ input:focus {
 
   border-radius: 4px;
   font-size: 12px;
+  position: absolute;
+  left: 39%;
+  top: 20%;
 }
 
 .input-wrap {
@@ -104,6 +107,7 @@ input:focus {
 
 canvas {
   display: block;
+  visibility: hidden;
   margin: 0 auto;
 }
 

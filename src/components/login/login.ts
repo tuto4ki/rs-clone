@@ -34,6 +34,11 @@ export default class Login {
 
     this._form = elementGenerator.createDiv({ className: 'form' });
     this._button.addEventListener('click', () => {
+      const canvas = document.querySelector('canvas') as HTMLElement;
+      // если залогинился тогда, или если зарегистрировался тогда.... или если продолжить без регистрации то ->
+      canvas.style.visibility = 'visible';
+      // this._form.style.display = 'none';
+
       this.validateInputs();
     });
     this._signToggleBtn.addEventListener('click', () => {
