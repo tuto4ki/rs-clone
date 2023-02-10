@@ -31,6 +31,7 @@ export class StartScene extends Phaser.Scene {
     this.load.image('homeBtn', '../assets/sprites/buttons/homeBtn.svg');
     this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
     this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
+    this.load.image('backBtn', '../assets/sprites/buttons/backBtn.svg');
     this.load.image('soundOnBtn', '../assets/sprites/buttons/soundOnBtn.svg');
     this.load.image('soundOffBtn', '../assets/sprites/buttons/soundOffBtn.svg');
     this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
