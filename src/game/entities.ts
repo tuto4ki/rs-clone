@@ -1,5 +1,20 @@
 import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, SCALE_SIZE_WORLD } from './constGame';
 import Entity from './entity';
+import IAnimationKey from './type';
+
+const IZombieGirlAnimation = {
+  walk: 'walkZombie',
+  dead: 'deadZombie',
+  scale: 0.2,
+  bodySize: { width: 200, height: 360 },
+};
+
+const IZombieManAnimation = {
+  walk: 'walkZombieMan',
+  dead: 'deadZombieMan',
+  scale: 0.7,
+  bodySize: { width: 60, height: 130 },
+};
 
 export default class Entities {
   private _listEntities: Entity[];
@@ -9,14 +24,8 @@ export default class Entities {
     this._listEntities = [];
     this._listSpriteEntites = scene.physics.add.group();
     this._listBarrier = scene.physics.add.staticGroup();
-    const zombieList = map.filterObjects(type, (value) => value.name === 'zombie');
-    zombieList.forEach((object) => {
-      if (object.x && object.y) {
-        const item = new Entity(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, 'zombieGirl');
-        this._listSpriteEntites.add(item.sprite);
-        this._listEntities.push(item);
-      }
-    });
+    this.createEnemyList(map, scene, IZombieGirlAnimation, type, 'zombie', 'zombieGirl');
+    this.createEnemyList(map, scene, IZombieManAnimation, type, 'zombieMan', 'zombieMan');
     const barrierList = map.filterObjects(type, (value) => value.name === 'barier');
     barrierList.forEach((object) => {
       if (object.x && object.y && object.width && object.height) {
@@ -36,6 +45,24 @@ export default class Entities {
       undefined,
       scene
     );
+  }
+
+  private createEnemyList(
+    map: Phaser.Tilemaps.Tilemap,
+    scene: Phaser.Scene,
+    iAnim: IAnimationKey,
+    type: string,
+    typeEnemy: string,
+    picture: string
+  ) {
+    const zombieList = map.filterObjects(type, (value) => value.name === typeEnemy);
+    zombieList.forEach((object) => {
+      if (object.x && object.y) {
+        const item = new Entity(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
+        this._listSpriteEntites.add(item.sprite);
+        this._listEntities.push(item);
+      }
+    });
   }
 
   private changeDirection(

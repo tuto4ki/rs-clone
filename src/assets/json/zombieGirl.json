@@ -166,7 +166,7 @@
       "frame": {"x": 1120,"y": 600,"w": 465,"h": 211},
       "rotated": false,
       "trimmed": true,
-      "spriteSourceSize": {"x": 0,"y": 153,"w": 465,"h": 211},
+      "spriteSourceSize": {"x": 0,"y": 163,"w": 465,"h": 211},
       "sourceSize": {"x": 0,"y": 153, "w": 465,"h": 211}
     },
     {
@@ -174,8 +174,8 @@
       "frame": {"x": 1587,"y": 600,"w": 475,"h": 193},
       "rotated": false,
       "trimmed": true,
-      "spriteSourceSize": {"x": 0,"y": 171,"w": 475,"h": 193},
-      "sourceSize": {"x": 0,"y": 171, "w": 475,"h": 193}
+      "spriteSourceSize": {"x": 0,"y": 151,"w": 475,"h": 193},
+      "sourceSize": {"x": 0,"y": 0, "w": 475,"h": 193}
     },
     {
       "filename": "Hurt_01",

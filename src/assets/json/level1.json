@@ -529,6 +529,42 @@
                  "width":4,
                  "x":5952,
                  "y":448
+                }, 
+                {
+                 "class":"zombieMan",
+                 "height":0,
+                 "id":45,
+                 "name":"zombieMan",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"end",
+                         "type":"string",
+                         "value":""
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":2195.50096196537,
+                 "y":443.984016575403
+                }, 
+                {
+                 "class":"zombieMan",
+                 "height":0,
+                 "id":46,
+                 "name":"zombieMan",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"end",
+                         "type":"string",
+                         "value":""
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":449.163830102116,
+                 "y":461.743377238419
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -537,7 +573,7 @@
          "y":0
         }],
  "nextlayerid":16,
- "nextobjectid":45,
+ "nextobjectid":47,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

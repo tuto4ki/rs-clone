@@ -98,7 +98,7 @@ export class GameScene extends Phaser.Scene {
     if (entity.getData('isDead') || this._isFinish) {
       return;
     }
-    if (entity.body.top === player.body.bottom) {
+    if (entity.body.top >= player.body.bottom) {
       this._player?.deadEntity();
       this._entities?.destroyEntity(entity);
     } else {
