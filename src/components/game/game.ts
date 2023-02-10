@@ -27,7 +27,7 @@ export default class Game {
           debug: false,
         },
       },
-      backgroundColor: '#F0FFFF',
+      backgroundColor: '#2e2b2b',
       scene: [StartScene, GameScene],
     });
   }

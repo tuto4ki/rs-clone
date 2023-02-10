@@ -3,6 +3,8 @@ export default class helpModal extends Phaser.GameObjects.Container {
   header: Phaser.GameObjects.Text;
   closeButton: Phaser.GameObjects.Image;
   isOpen!: boolean;
+  howPlaySettings: Phaser.GameObjects.Text;
+  howControl: Phaser.GameObjects.Text;
 
   // isOpen: boolean;
 
@@ -33,6 +35,36 @@ export default class helpModal extends Phaser.GameObjects.Container {
 
     this.add(this.header);
 
+    this.howControl = scene.add
+      .text(40, -220, '- Press UP to JUMP\n\n- Press LEFT to move left\n\n- Press RIGHT to move right', {
+        fontFamily: 'Itim',
+        fontSize: '22px',
+        color: '#fff',
+        stroke: '#C83737',
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5, 0.5);
+    this.howControl.name = 'howControl';
+
+    this.add(this.howControl);
+
+    this.howPlaySettings = scene.add
+      .text(
+        40,
+        -40,
+        '1 - Collect coins\n2 - Jump to the islets\n3 - Avoid falling into water and touching enemies, otherwise death\n4 - Enemy can be killed by jumping on it\n5 - Collect coins from killed enemies\n6 - Get to the finish to pass the level!',
+        {
+          fontFamily: 'Itim',
+          fontSize: '24px',
+          color: '#000',
+          stroke: '#600808',
+          strokeThickness: 1,
+        }
+      )
+      .setOrigin(0.5, 0.5);
+    this.howPlaySettings.name = 'howPlaySettings';
+
+    this.add(this.howPlaySettings);
     this.closeButton = scene.add
       .image(466, -340, 'closeBtn')
       .setScale(0.2)

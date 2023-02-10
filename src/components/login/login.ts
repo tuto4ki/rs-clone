@@ -37,7 +37,7 @@ export default class Login {
       const canvas = document.querySelector('canvas') as HTMLElement;
       // если залогинился тогда, или если зарегистрировался тогда.... или если продолжить без регистрации то ->
       canvas.style.visibility = 'visible';
-      // this._form.style.display = 'none';
+      this._form.style.display = 'none';
 
       this.validateInputs();
     });

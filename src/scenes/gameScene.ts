@@ -47,6 +47,7 @@ export class GameScene extends Phaser.Scene {
     helpBtn.on('pointerdown', () => {
       if (!howToPlayModal.isOpen) {
         howToPlayModal.open();
+        howToPlayModal.setDepth(1);
       }
     });
   }

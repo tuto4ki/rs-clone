@@ -41,10 +41,9 @@ export default class Modal extends Phaser.GameObjects.Container {
       .text(10, 45, '- click to sound off', {
         fontFamily: 'Itim',
         fontSize: '22px',
-        color: '#EB230C',
-        stroke: '#EFAB0D',
-        strokeThickness: 3,
-        shadow: { color: '#F10808', fill: true, blur: 3, offsetX: 1, offsetY: 0 },
+        color: '#fff',
+        stroke: '#C83737',
+        strokeThickness: 2,
       })
       .setOrigin(0.5, 0.5);
 
@@ -52,10 +51,9 @@ export default class Modal extends Phaser.GameObjects.Container {
       .text(10, -20, '- click to sound on', {
         fontFamily: 'Itim',
         fontSize: '22px',
-        color: '#EB230C',
-        stroke: '#EFAB0D',
-        strokeThickness: 3,
-        shadow: { color: '#F10808', fill: true, blur: 3, offsetX: 1, offsetY: 0 },
+        color: '#fff',
+        stroke: '#C83737',
+        strokeThickness: 2,
       })
       .setOrigin(0.5, 0.5);
 
