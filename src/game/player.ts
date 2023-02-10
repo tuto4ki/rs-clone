@@ -51,7 +51,7 @@ export default class Player {
     this.changeState(new DeadAnimation(this));
   }
 
-  public deadEntity(): void {
+  public deadEnemy(): void {
     this.changeState(new JumpAnimation(this));
   }
 

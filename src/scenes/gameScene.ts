@@ -1,5 +1,5 @@
 import { HEIGHT_GAME, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
-import Entities from '../game/entities';
+import Enemies from '../game/enemies';
 import Plate from '../game/obstacles/plate';
 import Stump from '../game/obstacles/stump';
 import Water from '../game/obstacles/water';
@@ -9,7 +9,7 @@ import EndGameScene from './endGameScene';
 export class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
-  private _entities: Entities | null = null;
+  private _enemies: Enemies | null = null;
   private _isFinish: boolean;
   private _levelNumber: number;
   constructor() {
@@ -39,10 +39,10 @@ export class GameScene extends Phaser.Scene {
     this._player = new Player(this, 100, 480, 'fox');
     this.physics.add.collider(ground, this._player.sprite);
     ground.setCollisionBetween(0, 31);
-    // create entities
-    this._entities = new Entities(this, map, 'entityObj');
-    this.physics.add.collider(ground, this._entities.listEntities);
-    this.physics.add.collider(this._player?.sprite, this._entities.listEntities, this.checkCollision.bind(this));
+    // create enemies
+    this._enemies = new Enemies(this, map, 'entityObj');
+    this.physics.add.collider(ground, this._enemies.listEnemies);
+    this.physics.add.collider(this._player?.sprite, this._enemies.listEnemies, this.checkCollision.bind(this));
     // control player
     this._cursor?.up.on('down', () => this._player?.moveUp());
     this._cursor?.space.on('down', () => this._player?.moveUp());
@@ -58,7 +58,7 @@ export class GameScene extends Phaser.Scene {
   }
 
   public update(/* time: number, delta: number */): void {
-    this._entities?.update();
+    this._enemies?.update(this._player?.sprite.x, this._player?.sprite.y);
     if (this._isFinish) {
       return;
     }
@@ -93,14 +93,14 @@ export class GameScene extends Phaser.Scene {
 
   public checkCollision(
     player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
-    entity: Phaser.Types.Physics.Arcade.GameObjectWithBody
+    enemy: Phaser.Types.Physics.Arcade.GameObjectWithBody
   ): void {
-    if (entity.getData('isDead') || this._isFinish) {
+    if (enemy.getData('isDead') || this._isFinish) {
       return;
     }
-    if (entity.body.top >= player.body.bottom) {
-      this._player?.deadEntity();
-      this._entities?.destroyEntity(entity);
+    if (enemy.body.top >= player.body.bottom) {
+      this._player?.deadEnemy();
+      this._enemies?.destroyEntity(enemy);
     } else {
       player.removeInteractive();
       player.removeAllListeners();

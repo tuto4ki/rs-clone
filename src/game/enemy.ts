@@ -1,11 +1,12 @@
 import { MASS_PLAYER, SPEED_ENTITY } from './constGame';
 import IAnimationKey from './type';
 
-export default class Entity {
-  private _sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
-  private _directionEntity = 1;
+export default class Enemy {
+  protected _sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
+  protected _directionEnemy = 1;
   private _barrierCollision: Phaser.Types.Physics.Arcade.GameObjectWithBody | null;
-  private _animationKey: IAnimationKey;
+  protected _animationKey: IAnimationKey;
+  protected _speedRun = 1;
 
   constructor(scene: Phaser.Scene, x: number, y: number, key: string, animationKey: IAnimationKey) {
     this._barrierCollision = null;
@@ -23,22 +24,19 @@ export default class Entity {
     this._animationKey = animationKey;
   }
 
-  public update(): void {
+  public update(xPos?: number, yPos?: number): void {
     if (!this._sprite.getData('isDead')) {
-      this._sprite.body.setVelocityX(this._directionEntity * SPEED_ENTITY);
+      console.log('no implements', xPos, yPos);
+      this._sprite.body.setVelocityX(this._directionEnemy * SPEED_ENTITY * this._speedRun);
     }
   }
 
   public changeDirection() {
-    this._directionEntity *= -1;
-    // const dw = this._sprite.displayWidth / 2;
-    console.log(this._sprite.displayWidth, this._sprite.body.halfWidth, this._animationKey.bodySize.width);
-    // const dh = this._sprite.displayHeight / 2;
-    // dw - this.sprite.body.halfWidth, dh - this._sprite.body.halfHeight
+    this._directionEnemy *= -1;
     this._sprite
-      .setScale(this._directionEntity * this._animationKey.scale, this._animationKey.scale)
+      .setScale(this._directionEnemy * this._animationKey.scale, this._animationKey.scale)
       .setBodySize(this._animationKey.bodySize.width, this._animationKey.bodySize.height, true)
-      .setOffset(this._directionEntity < 0 ? this._animationKey.bodySize.width : 0, 0)
+      .setOffset(this._directionEnemy < 0 ? this._animationKey.bodySize.width : 0, 0)
       .refreshBody();
   }
 
@@ -54,7 +52,7 @@ export default class Entity {
     return this._sprite;
   }
 
-  public deadEntity() {
+  public deadEnemy() {
     this._sprite.setData('isDead', true);
     this._sprite.scene.physics.world.remove(this._sprite.body);
     this._sprite.play(this._animationKey.dead);

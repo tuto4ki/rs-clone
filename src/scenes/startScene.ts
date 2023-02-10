@@ -91,6 +91,13 @@ export class StartScene extends Phaser.Scene {
       frameRate: 10,
       repeat: 0,
     });
+    // animation run zombie
+    this.anims.create({
+      key: 'runZombie',
+      frames: this.anims.generateFrameNames('zombieGirl', { prefix: 'Run_', start: 1, end: 10, zeroPad: 2 }),
+      frameRate: 15,
+      repeat: -1,
+    });
   }
 
   private createAnimationZombieMan() {
@@ -112,7 +119,7 @@ export class StartScene extends Phaser.Scene {
     this.anims.create({
       key: 'runZombieMan',
       frames: this.anims.generateFrameNames('zombieMan', { prefix: 'Run_', start: 1, end: 10, zeroPad: 2 }),
-      frameRate: 10,
+      frameRate: 15,
       repeat: -1,
     });
   }

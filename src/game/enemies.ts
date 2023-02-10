@@ -1,10 +1,12 @@
+import ChaseEnemy from './chaseEnemy';
 import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, SCALE_SIZE_WORLD } from './constGame';
-import Entity from './entity';
+import Enemy from './enemy';
 import IAnimationKey from './type';
 
 const IZombieGirlAnimation = {
   walk: 'walkZombie',
   dead: 'deadZombie',
+  run: 'runZombie',
   scale: 0.2,
   bodySize: { width: 200, height: 360 },
 };
@@ -12,18 +14,20 @@ const IZombieGirlAnimation = {
 const IZombieManAnimation = {
   walk: 'walkZombieMan',
   dead: 'deadZombieMan',
+  run: 'runZombieMan',
   scale: 0.7,
   bodySize: { width: 60, height: 130 },
 };
 
-export default class Entities {
-  private _listEntities: Entity[];
+export default class Enemies {
+  private _listEnemies: Enemy[];
   private _listSpriteEntites: Phaser.Physics.Arcade.Group;
   private _listBarrier: Phaser.Physics.Arcade.StaticGroup;
   constructor(scene: Phaser.Scene, map: Phaser.Tilemaps.Tilemap, type: string) {
-    this._listEntities = [];
+    this._listEnemies = [];
     this._listSpriteEntites = scene.physics.add.group();
     this._listBarrier = scene.physics.add.staticGroup();
+    console.log(map);
     this.createEnemyList(map, scene, IZombieGirlAnimation, type, 'zombie', 'zombieGirl');
     this.createEnemyList(map, scene, IZombieManAnimation, type, 'zombieMan', 'zombieMan');
     const barrierList = map.filterObjects(type, (value) => value.name === 'barier');
@@ -38,7 +42,7 @@ export default class Entities {
           .refreshBody();
       }
     });
-    scene.physics.add.overlap(
+    scene.physics.add.collider(
       this._listSpriteEntites,
       this._listBarrier,
       this.changeDirection.bind(this),
@@ -58,9 +62,14 @@ export default class Entities {
     const zombieList = map.filterObjects(type, (value) => value.name === typeEnemy);
     zombieList.forEach((object) => {
       if (object.x && object.y) {
-        const item = new Entity(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
+        let item: Enemy;
+        if (typeEnemy === 'zombieMan') {
+          item = new ChaseEnemy(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
+        } else {
+          item = new Enemy(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
+        }
         this._listSpriteEntites.add(item.sprite);
-        this._listEntities.push(item);
+        this._listEnemies.push(item);
       }
     });
   }
@@ -69,27 +78,27 @@ export default class Entities {
     entity: Phaser.Types.Physics.Arcade.GameObjectWithBody,
     barrier: Phaser.Types.Physics.Arcade.GameObjectWithBody
   ) {
-    const entityObj: Entity | undefined = this._listEntities.find((value) => value.sprite === entity);
+    const entityObj: Enemy | undefined = this._listEnemies.find((value) => value.sprite === entity);
     if (entityObj?.isChangeDirection(barrier)) {
       entityObj.changeDirection();
     }
   }
 
-  get listEntities(): Phaser.Physics.Arcade.Group {
+  get listEnemies(): Phaser.Physics.Arcade.Group {
     return this._listSpriteEntites;
   }
 
-  public update(): void {
-    this._listEntities.forEach((entity) => {
-      entity.update();
+  public update(xPos = 0, yPos = 0): void {
+    this._listEnemies.forEach((entity) => {
+      entity.update(xPos, yPos);
     });
   }
 
   public destroyEntity(entity: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
-    const entityIndex: number = this._listEntities.findIndex((value) => value.sprite === entity);
+    const entityIndex: number = this._listEnemies.findIndex((value) => value.sprite === entity);
     if (entityIndex >= 0) {
-      this._listEntities[entityIndex].deadEntity();
-      this._listEntities.splice(entityIndex, 1);
+      this._listEnemies[entityIndex].deadEnemy();
+      this._listEnemies.splice(entityIndex, 1);
     }
   }
 }
