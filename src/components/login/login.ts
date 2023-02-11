@@ -111,14 +111,28 @@ export default class Login {
     if (this._canSendReg) {
       if (this._loginState) {
         await login(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
-          if (res.status === responseStatus.error) this.errorMsg('Wrong password');
-          if (res.status === responseStatus.ok) this.secondScene();
-          if (res.status === responseStatus.notFound) this.errorMsg('User Not found');
+          switch (res.status) {
+            case responseStatus.error:
+              this.errorMsg('Wrong password');
+              break;
+            case responseStatus.notFound:
+              this.errorMsg('User Not found');
+              break;
+            case responseStatus.ok:
+              this.secondScene();
+              break;
+          }
         });
       } else {
         await register(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
-          if (res.status === responseStatus.error) this.errorMsg('User already exist');
-          if (res.status === responseStatus.created) this.secondScene();
+          switch (res.status) {
+            case responseStatus.error:
+              this.errorMsg('User already exist');
+              break;
+            case responseStatus.created:
+              this.secondScene();
+              break;
+          }
         });
       }
     }

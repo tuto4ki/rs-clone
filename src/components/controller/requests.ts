@@ -36,10 +36,16 @@ export const addScore = (username: string, level: number, score: number, time: s
     }),
   });
 
-  // все филы одязательны!
+  // все филды обязательны!
   // await addScore('asdfa', 2, 123, '23:13:12').then((res) => {
-  //   if (res.status === responseStatus.error) console.log('error');
-  //   if (res.status === responseStatus.created) console.log('created');
+  // switch (res.status) {
+  //   case responseStatus.error:
+  //     console.log('error');
+  //     break;
+  //   case responseStatus.created:
+  //     console.log('created');
+  //     break;
+  // }
   // });
 };
 
@@ -47,26 +53,15 @@ export const getScore = (query: ISortQuery): Promise<OveralScore> => {
   let queryString = '';
   const symbol = ['?', '&'];
 
-  if (query.sort) {
-    queryString += queryString.length > 1 ? symbol[1] : symbol[0];
-    queryString += `sort=${query.sort}`;
-  }
-  if (query.order) {
-    queryString += queryString.length > 1 ? symbol[1] : symbol[0];
-    queryString += `order=${query.order}`;
-  }
-  if (query.level) {
-    queryString += queryString.length > 1 ? symbol[1] : symbol[0];
-    queryString += `level=${query.level}`;
-  }
-  if (query.page) {
-    queryString += queryString.length > 1 ? symbol[1] : symbol[0];
-    queryString += `page=${query.page}`;
-  }
-  if (query.limit) {
-    queryString += queryString.length > 1 ? symbol[1] : symbol[0];
-    queryString += `limit=${query.limit}`;
-  }
+  Object.keys(query).forEach((element, index) => {
+    if (index != 0) {
+      queryString += symbol[1];
+    } else {
+      queryString += symbol[0];
+    }
+    const el = element as keyof ISortQuery;
+    queryString += `${el}=${query[el]}`;
+  });
 
   return fetch(`${serverAdress}/score${queryString}`, {
     method: 'GET',
