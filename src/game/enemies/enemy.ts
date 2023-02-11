@@ -1,5 +1,5 @@
-import { MASS_PLAYER, SPEED_ENTITY } from './constGame';
-import IAnimationKey from './type';
+import { MASS_PLAYER, SPEED_ENTITY } from '../constGame';
+import IAnimationKey from '../type';
 
 export default class Enemy {
   protected _sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;

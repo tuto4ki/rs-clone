@@ -23,3 +23,19 @@ export const SCALE_SIZE_WORLD = 1.2;
 export const EMPTY_PICTURE_WIDTH = 300;
 
 export const EMPTY_PICTURE_HEIGHT = 150;
+
+export const enum PLAYER_TYPE {
+  FOX =  'fox',
+  CAT = 'cat',
+};
+
+export const PLAYER_ANIMATION = {
+  [PLAYER_TYPE.FOX]: {
+    'run': 'run',
+    'dead': 'dead',
+    'jump': 'jump',
+    'stay': 'stay'
+  }
+}
+
+export const MONEY = 'money';

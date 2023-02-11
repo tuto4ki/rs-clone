@@ -1,3 +1,5 @@
+import { MONEY } from "../game/constGame";
+
 enum Texts {
   title = 'Mario Clone',
   message = 'Click anywhere to start',
@@ -20,6 +22,7 @@ export class StartScene extends Phaser.Scene {
     this.load.atlas('zombieGirl', '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas('zombieMan', '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
     this.load.image('plate', '../assets/images/plateEndGame.png');
+    this.load.atlas(MONEY, '../assets/sprites/gold.png', '../assets/json/gold.png');
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
@@ -118,8 +121,17 @@ export class StartScene extends Phaser.Scene {
     // animation run zombie
     this.anims.create({
       key: 'runZombieMan',
-      frames: this.anims.generateFrameNames('zombieMan', { prefix: 'Run_', start: 1, end: 10, zeroPad: 2 }),
+      frames: this.anims.generateFrameNames('zombieMan', { prefix: 'Run_', start: 3, end: 10, zeroPad: 2 }),
       frameRate: 15,
+      repeat: -1,
+    });
+  }
+
+  private createAnimationMoney() {
+    this.anims.create({
+      key: MONEY,
+      frames: this.anims.generateFrameNames(MONEY, { prefix: 'gold_', start: 1, end: 10, zeroPad: 2 }),
+      frameRate: 10,
       repeat: -1,
     });
   }

@@ -1,5 +1,5 @@
 import { HEIGHT_GAME, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
-import Enemies from '../game/enemies';
+import Enemies from '../game/enemies/enemies';
 import Plate from '../game/obstacles/plate';
 import Stump from '../game/obstacles/stump';
 import Water from '../game/obstacles/water';

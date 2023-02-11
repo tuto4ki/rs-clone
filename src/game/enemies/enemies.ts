@@ -1,7 +1,7 @@
 import ChaseEnemy from './chaseEnemy';
-import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, SCALE_SIZE_WORLD } from './constGame';
+import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, SCALE_SIZE_WORLD } from '../constGame';
 import Enemy from './enemy';
-import IAnimationKey from './type';
+import IAnimationKey from '../type';
 
 const IZombieGirlAnimation = {
   walk: 'walkZombie',
