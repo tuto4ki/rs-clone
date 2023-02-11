@@ -1,4 +1,6 @@
 import { elementGenerator } from '../controller/taggenerator';
+import { login, register } from '../controller/requests';
+import { responseStatus } from '../../constGame';
 import './style.css';
 
 export default class Login {
@@ -11,6 +13,8 @@ export default class Login {
   private _spanSign: HTMLSpanElement;
   private _signToggleBtn: HTMLButtonElement;
   private _wrapp: HTMLDivElement;
+
+  private _canSendReg = false;
 
   constructor() {
     this._loginState = true;
@@ -33,14 +37,11 @@ export default class Login {
     this._wrapp.append(this._spanSign, this._signToggleBtn);
 
     this._form = elementGenerator.createDiv({ className: 'form' });
-    this._button.addEventListener('click', () => {
-      const canvas = document.querySelector('canvas') as HTMLElement;
-      // если залогинился тогда, или если зарегистрировался тогда.... или если продолжить без регистрации то ->
-      canvas.style.visibility = 'visible';
-      this._form.style.display = 'none';
 
+    this._button.addEventListener('click', () => {
       this.validateInputs();
     });
+
     this._signToggleBtn.addEventListener('click', () => {
       this.changeFormState();
     });
@@ -84,27 +85,70 @@ export default class Login {
       this._wrapp
     );
 
-    console.log('a');
     return this._form;
   }
 
-  private validateInputs() {
+  private async validateInputs() {
     //
     console.log('validate');
 
     if (this._loginField.getInputValue() === '') {
       this._loginField.setErrorMessage();
+      this._canSendReg = false;
     } else {
       this._loginField.setSuccessMessage();
+      this._canSendReg = true;
     }
 
-    if (this._passwordField.getInputValue() === '') {
+    if (this._passwordField.getInputValue() === '' || this._passwordField.getInputValue().length < 8) {
       this._passwordField.setErrorMessage();
-    } else if (this._passwordField.getInputValue().length < 8) {
-      this._passwordField.setErrorMessage();
+      this._canSendReg = false;
     } else {
       this._passwordField.setSuccessMessage();
+      this._canSendReg = true;
     }
+
+    if (this._canSendReg) {
+      if (this._loginState) {
+        await login(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
+          switch (res.status) {
+            case responseStatus.error:
+              this.errorMsg('Wrong password');
+              break;
+            case responseStatus.notFound:
+              this.errorMsg('User Not found');
+              break;
+            case responseStatus.ok:
+              this.secondScene();
+              break;
+          }
+        });
+      } else {
+        await register(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
+          switch (res.status) {
+            case responseStatus.error:
+              this.errorMsg('User already exist');
+              break;
+            case responseStatus.created:
+              this.secondScene();
+              break;
+          }
+        });
+      }
+    }
+  }
+  private secondScene() {
+    const canvas = document.querySelector('canvas') as HTMLElement;
+    // если залогинился тогда, или если зарегистрировался тогда.... или если продолжить без регистрации то ->
+    canvas.style.visibility = 'visible';
+    this._form.style.display = 'none';
+  }
+
+  private errorMsg(message: string) {
+    //todo make it preaty
+    this._loginField.setErrorMessage();
+    this._passwordField.setErrorMessage();
+    alert(message);
   }
 }
 
