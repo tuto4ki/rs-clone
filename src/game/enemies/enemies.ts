@@ -14,6 +14,7 @@ const IZombieGirlAnimation = {
   dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.zombieGirl}`,
   run: `${ENTITY_ANIMATION.run}${ENEMY_TYPE.zombieGirl}`,
   scale: 0.2,
+  score: 100,
   bodySize: { width: 200, height: 360 },
 };
 
@@ -22,6 +23,7 @@ const IZombieManAnimation = {
   dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.zombieMan}`,
   run: `${ENTITY_ANIMATION.run}${ENEMY_TYPE.zombieMan}`,
   scale: 0.7,
+  score: 200,
   bodySize: { width: 60, height: 130 },
 };
 
@@ -99,11 +101,14 @@ export default class Enemies {
     });
   }
 
-  public destroyEntity(entity: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
+  public destroyEntity(entity: Phaser.Types.Physics.Arcade.GameObjectWithBody): number {
     const entityIndex: number = this._listEnemies.findIndex((value) => value.sprite === entity);
     if (entityIndex >= 0) {
+      const score = this._listEnemies[entityIndex].addScore();
       this._listEnemies[entityIndex].deadEnemy();
       this._listEnemies.splice(entityIndex, 1);
+      return score;
     }
+    return 0;
   }
 }

@@ -20,14 +20,7 @@ export class Money {
     return this._listMoney;
   }
 
-  public collisionPlayer(
-    money: Phaser.Types.Physics.Arcade.GameObjectWithBody,
-    player: Phaser.Types.Physics.Arcade.GameObjectWithBody
-  ) {
-    if (money.name === MONEY) {
-      money.destroy();
-    } else {
-      player.destroy();
-    }
+  public collisionPlayer(money: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
+    money.destroy();
   }
 }

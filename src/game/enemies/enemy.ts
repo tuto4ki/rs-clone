@@ -62,4 +62,8 @@ export default class Enemy {
       }, 1000);
     });
   }
+
+  public addScore() {
+    return this._animationKey.score;
+  }
 }

@@ -22,7 +22,7 @@ export class StartScene extends Phaser.Scene {
     this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
-    this.load.atlas(MONEY, '../assets/sprites/spritesheet-4.png', '../assets/json/spritesheet-4.json');
+    this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');

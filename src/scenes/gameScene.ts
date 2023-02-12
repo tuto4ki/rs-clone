@@ -1,10 +1,11 @@
-import { COLLISION_PLAYER_ENEMY, IMAGES, MONEY, PLAYER_TYPE, SCALE_SIZE_WORLD } from '../game/constGame';
+import { COLLISION_PLAYER_ENEMY, IMAGES, MONEY, MONEY_SCORE, PLAYER_TYPE, SCALE_SIZE_WORLD } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import { Money } from '../game/money';
 import Plate from '../game/obstacles/plate';
 import Stump from '../game/obstacles/stump';
 import Water from '../game/obstacles/water';
 import Player from '../game/player';
+import Statistics from '../game/statistict';
 import EndGameScene from './endGameScene';
 
 export class GameScene extends Phaser.Scene {
@@ -13,6 +14,7 @@ export class GameScene extends Phaser.Scene {
   private _enemies: Enemies | null = null;
   private _isFinish: boolean;
   private _levelNumber: number;
+  private _statistics: Statistics | null = null;
   constructor() {
     super('Game');
     this._isFinish = false;
@@ -58,8 +60,12 @@ export class GameScene extends Phaser.Scene {
       waterObj.addPhysics(this, this.player);
       stumpObj.addPhysics(this, this.player);
       plateObj.addPhysics(this, this.player);
-      this.physics.add.overlap(this.player.sprite, moneyObj.listMoney, moneyObj.collisionPlayer);
+      this.physics.add.overlap(this.player.sprite, moneyObj.listMoney, this.checkCollisionMoney.bind(this));
     }
+    // score and time
+    const scoreSprite = [this.add.sprite(50, 50, MONEY)];
+    this._statistics = new Statistics(this, 50, 50, scoreSprite);
+    this._statistics.create(this);
   }
 
   public update(/* time: number, delta: number */): void {
@@ -96,7 +102,7 @@ export class GameScene extends Phaser.Scene {
     endGame.create(this, isDied ? 'You Died' : 'You Win!');
   }
 
-  public checkCollision(
+  private checkCollision(
     player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
     enemy: Phaser.Types.Physics.Arcade.GameObjectWithBody
   ): void {
@@ -105,7 +111,9 @@ export class GameScene extends Phaser.Scene {
     }
     if (enemy.body.top >= player.body.bottom) {
       this._player?.deadEnemy();
-      this._enemies?.destroyEntity(enemy);
+      if (this._statistics) {
+        this._statistics.score += this._enemies ? this._enemies.destroyEntity(enemy) : 0;
+      }
     } else {
       player.removeInteractive();
       player.removeAllListeners();
@@ -115,6 +123,20 @@ export class GameScene extends Phaser.Scene {
         ?.destroy();
       this._player?.deadPlayer();
       this.gameOver(true);
+    }
+  }
+
+  private checkCollisionMoney(
+    money: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+    player: Phaser.Types.Physics.Arcade.GameObjectWithBody
+  ) {
+    if (this._statistics) {
+      this._statistics.score += MONEY_SCORE;
+    }
+    if (money.name === MONEY) {
+      money.destroy();
+    } else {
+      player.destroy();
     }
   }
 }

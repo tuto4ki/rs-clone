@@ -214,7 +214,7 @@
 	"meta": {
 		"app": "http://www.codeandweb.com/texturepacker",
 		"version": "1.0",
-		"image": "spritesheet-4.png",
+		"image": "money.png",
 		"format": "RGBA8888",
 		"size": {
 			"w": 112,
