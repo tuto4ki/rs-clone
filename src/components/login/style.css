@@ -118,3 +118,10 @@ label {
 span {
   font-size: 16px;
 }
+
+.errLogin,
+.errPass {
+  font-size: 18px;
+  align-self: start;
+  color: red;
+}

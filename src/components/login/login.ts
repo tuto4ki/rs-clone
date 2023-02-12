@@ -15,6 +15,8 @@ export default class Login {
   private _wrapp: HTMLDivElement;
 
   private _canSendReg = false;
+  private _errLogin: HTMLSpanElement;
+  private _errPass: HTMLSpanElement;
 
   constructor() {
     this._loginState = true;
@@ -45,6 +47,8 @@ export default class Login {
     this._signToggleBtn.addEventListener('click', () => {
       this.changeFormState();
     });
+    this._errLogin = elementGenerator.createSpan({ className: 'errLogin' });
+    this._errPass = elementGenerator.createSpan({ className: 'errPass' });
   }
 
   private changeFormState() {
@@ -80,7 +84,9 @@ export default class Login {
     this._form.append(
       this._headline,
       this._loginField.getInputField(),
+      this._errLogin,
       this._passwordField.getInputField(),
+      this._errPass,
       this._button,
       this._wrapp
     );
@@ -94,17 +100,22 @@ export default class Login {
 
     if (this._loginField.getInputValue() === '') {
       this._loginField.setErrorMessage();
+      this._errLogin.innerText = 'Error: username field can`t be empty';
       this._canSendReg = false;
     } else {
       this._loginField.setSuccessMessage();
+      this._errLogin.innerText = '';
       this._canSendReg = true;
     }
 
     if (this._passwordField.getInputValue() === '' || this._passwordField.getInputValue().length < 8) {
       this._passwordField.setErrorMessage();
+      this._errPass.innerText = 'Error: password field can`t be empty and password must be at least 8 characters';
       this._canSendReg = false;
     } else {
       this._passwordField.setSuccessMessage();
+      this._errPass.innerText = '';
+
       this._canSendReg = true;
     }
 
