@@ -1,20 +1,41 @@
+import { MONEY } from './constGame';
+
 enum Styles {
   color = '#008080',
   font = 'Arial',
-  size = '52',
+  size = '36',
 }
 
-const POSITION_PANEL_Y = 50;
+const POS_TEXT = 40;
 
-export default class Statistics extends Phaser.GameObjects.Layer {
+const POS_TIME = 300;
+
+const MILLISECONDS = 1000;
+
+export default class Statistics {
   private _score = 0;
-  private _scoreSprite: Phaser.GameObjects.Text | null = null;
-  // private _time = 0;
+  private _scoreSprite: Phaser.GameObjects.Text;
+  private _time = 0;
+  private _timeSprite: Phaser.GameObjects.Text;
+  private _startTime: Date;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, children: Phaser.GameObjects.GameObject[]) {
-    super(scene, children);
-    // ...
-    scene.add.existing(this);
+  constructor(scene: Phaser.Scene, x: number, y: number) {
+    scene.add.sprite(x, y, MONEY).setOrigin(0).scrollFactorX = 0;
+    this._scoreSprite = scene.add
+      .text(x + POS_TEXT, y, this._score.toString(), {
+        font: `${Styles.size}px ${Styles.font}`,
+        color: Styles.color,
+      })
+      .setOrigin(0);
+    this._scoreSprite.scrollFactorX = 0;
+    this._timeSprite = scene.add
+      .text(x + POS_TIME, y, this._time.toString(), {
+        font: `${Styles.size}px ${Styles.font}`,
+        color: Styles.color,
+      })
+      .setOrigin(0);
+    this._timeSprite.scrollFactorX = 0;
+    this._startTime = new Date();
   }
 
   get score(): number {
@@ -23,31 +44,12 @@ export default class Statistics extends Phaser.GameObjects.Layer {
 
   set score(value: number) {
     this._score = value;
+    this._scoreSprite.setText(this._score.toString());
   }
 
-  public create(scene: Phaser.Scene): void {
-    this._scoreSprite = new Phaser.GameObjects.Text(
-      scene,
-      scene.cameras.main.centerX,
-      POSITION_PANEL_Y,
-      this._score.toString(),
-      {
-        font: `${Styles.size}px ${Styles.font}`,
-        color: Styles.color,
-      }
-    );
-    scene.add.layer(this._scoreSprite);
-  }
-
-  public preUpdate(): void {
-    if (this._scoreSprite) {
-      this._scoreSprite.text = this._score.toString();
-      /*
-      this._scoreSprite.setPosition(
-        this._scoreSprite.scene.cameras.main.worldView.x + this._scoreSprite?.scene.cameras.main.width / 2,
-        POSITION_PANEL_Y
-      );
-      */
-    }
+  public update() {
+    const currentTime = new Date();
+    this._time = Math.floor((currentTime.getTime() - this._startTime.getTime()) / MILLISECONDS);
+    this._timeSprite.setText(this._time.toString());
   }
 }

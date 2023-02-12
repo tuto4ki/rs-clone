@@ -63,12 +63,10 @@ export class GameScene extends Phaser.Scene {
       this.physics.add.overlap(this.player.sprite, moneyObj.listMoney, this.checkCollisionMoney.bind(this));
     }
     // score and time
-    const scoreSprite = [this.add.sprite(50, 50, MONEY)];
-    this._statistics = new Statistics(this, 50, 50, scoreSprite);
-    this._statistics.create(this);
+    this._statistics = new Statistics(this, 30, 30);
   }
 
-  public update(/* time: number, delta: number */): void {
+  public update(): void {
     this._enemies?.update(this._player?.sprite.x, this._player?.sprite.y);
     if (this._isFinish) {
       return;
@@ -82,6 +80,7 @@ export class GameScene extends Phaser.Scene {
         this._player.moveDown();
       }
     }
+    this._statistics?.update();
   }
 
   get player(): Player | null {
