@@ -27,7 +27,6 @@ export default class Enemies {
     this._listEnemies = [];
     this._listSpriteEntites = scene.physics.add.group();
     this._listBarrier = scene.physics.add.staticGroup();
-    console.log(map);
     this.createEnemyList(map, scene, IZombieGirlAnimation, type, 'zombie', 'zombieGirl');
     this.createEnemyList(map, scene, IZombieManAnimation, type, 'zombieMan', 'zombieMan');
     const barrierList = map.filterObjects(type, (value) => value.name === 'barier');

@@ -1,5 +1,6 @@
-import { HEIGHT_GAME, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
+import { COLLISION_PLAYER_ENEMY, HEIGHT_GAME, MONEY, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
+import { Money } from '../game/money';
 import Plate from '../game/obstacles/plate';
 import Stump from '../game/obstacles/stump';
 import Water from '../game/obstacles/water';
@@ -42,7 +43,10 @@ export class GameScene extends Phaser.Scene {
     // create enemies
     this._enemies = new Enemies(this, map, 'entityObj');
     this.physics.add.collider(ground, this._enemies.listEnemies);
-    this.physics.add.collider(this._player?.sprite, this._enemies.listEnemies, this.checkCollision.bind(this));
+    this.physics.add.collider(this._player?.sprite, this._enemies.listEnemies, this.checkCollision.bind(this)).name =
+      COLLISION_PLAYER_ENEMY;
+    // create money
+    const moneyObj = new Money(this, map, `${MONEY}Obj`);
     // control player
     this._cursor?.up.on('down', () => this._player?.moveUp());
     this._cursor?.space.on('down', () => this._player?.moveUp());
@@ -54,6 +58,7 @@ export class GameScene extends Phaser.Scene {
       waterObj.addPhysics(this, this.player);
       stumpObj.addPhysics(this, this.player);
       plateObj.addPhysics(this, this.player);
+      this.physics.add.overlap(this.player.sprite, moneyObj.listMoney, moneyObj.collisionPlayer);
     }
   }
 
@@ -104,6 +109,10 @@ export class GameScene extends Phaser.Scene {
     } else {
       player.removeInteractive();
       player.removeAllListeners();
+      this.physics.world.colliders
+        .getActive()
+        .find((collision) => collision.name == COLLISION_PLAYER_ENEMY)
+        ?.destroy();
       this._player?.deadPlayer();
       this.gameOver(true);
     }

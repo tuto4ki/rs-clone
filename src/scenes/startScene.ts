@@ -1,4 +1,4 @@
-import { MONEY } from "../game/constGame";
+import { MONEY } from '../game/constGame';
 
 enum Texts {
   title = 'Mario Clone',
@@ -22,7 +22,7 @@ export class StartScene extends Phaser.Scene {
     this.load.atlas('zombieGirl', '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas('zombieMan', '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
     this.load.image('plate', '../assets/images/plateEndGame.png');
-    this.load.atlas(MONEY, '../assets/sprites/gold.png', '../assets/json/gold.png');
+    this.load.atlas(MONEY, '../assets/sprites/spritesheet-4.png', '../assets/json/spritesheet-4.json');
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
@@ -31,6 +31,7 @@ export class StartScene extends Phaser.Scene {
     this.createAnimationPlayer();
     this.createAnimationZombie();
     this.createAnimationZombieMan();
+    this.createAnimationMoney();
     this.add
       .text(this.cameras.main.centerX, this.cameras.main.centerY - 100, Texts.title, {
         font: `${Styles.size}px ${Styles.font}`,

@@ -25,17 +25,19 @@ export const EMPTY_PICTURE_WIDTH = 300;
 export const EMPTY_PICTURE_HEIGHT = 150;
 
 export const enum PLAYER_TYPE {
-  FOX =  'fox',
+  FOX = 'fox',
   CAT = 'cat',
-};
+}
 
 export const PLAYER_ANIMATION = {
   [PLAYER_TYPE.FOX]: {
-    'run': 'run',
-    'dead': 'dead',
-    'jump': 'jump',
-    'stay': 'stay'
-  }
-}
+    run: 'run',
+    dead: 'dead',
+    jump: 'jump',
+    stay: 'stay',
+  },
+};
 
 export const MONEY = 'money';
+
+export const COLLISION_PLAYER_ENEMY = 'collisionPlayerEnemy';

@@ -26,7 +26,7 @@ export default class Enemy {
 
   public update(xPos?: number, yPos?: number): void {
     if (!this._sprite.getData('isDead')) {
-      console.log('no implements', xPos, yPos);
+      xPos = yPos; // this is change
       this._sprite.body.setVelocityX(this._directionEnemy * SPEED_ENTITY * this._speedRun);
     }
   }
