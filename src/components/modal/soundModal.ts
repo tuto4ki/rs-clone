@@ -9,7 +9,6 @@ export default class Modal extends Phaser.GameObjects.Container {
   soundOnText: Phaser.GameObjects.Text;
   soundOffIsClicked: boolean;
   soundOnIsClicked: boolean;
-  // isOpen: boolean;
 
   constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
     super(scene, x, y);

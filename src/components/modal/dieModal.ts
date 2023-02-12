@@ -1,32 +1,28 @@
 export default class DieModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
   header: Phaser.GameObjects.Text;
-  dieText: Phaser.GameObjects.Text;
+  restartText: Phaser.GameObjects.Text;
   closeButton: Phaser.GameObjects.Image;
   isOpen!: boolean;
-  soundOffBtn: Phaser.GameObjects.Image;
-  soundOnBtn: Phaser.GameObjects.Image;
-  soundOnText: Phaser.GameObjects.Text;
-  soundOffIsClicked: boolean;
-  soundOnIsClicked: boolean;
   homeBtn: Phaser.GameObjects.Image;
-  // isOpen: boolean;
+  reloadBtn: Phaser.GameObjects.Image;
+  homeText: Phaser.GameObjects.Text;
 
   constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
     super(scene, x, y);
 
     this.background = scene.add
-      .rectangle(0, 0, width, height, 0x2e2b2b, 0.8)
+      .rectangle(0, 0, width, height, 0xffffff, 0.8)
       .setOrigin(0.5, 0.5)
-      // .setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => {
-        // this.close();
-      });
+      .setInteractive({ useHandCursor: true });
+    // .on('pointerdown', () => {
+    //   // this.close();
+    // });
 
     this.add(this.background);
 
     this.header = scene.add
-      .text(0, -(height / 2) + 20, 'Unfortunally you died...', {
+      .text(0, -(height / 2) + 30, 'Unfortunally you died... ', {
         fontFamily: 'Itim',
         fontSize: '30px',
         color: '#F5F901',
@@ -38,8 +34,17 @@ export default class DieModal extends Phaser.GameObjects.Container {
 
     this.add(this.header);
 
-    this.dieText = scene.add
-      .text(10, 45, '- click to sound off', {
+    this.restartText = scene.add
+      .text(23, -20, ' Press RESTART to restart level', {
+        fontFamily: 'Itim',
+        fontSize: '22px',
+        color: '#fff',
+        stroke: '#C83737',
+        strokeThickness: 2,
+      })
+      .setOrigin(0.5, 0.5);
+    this.homeText = scene.add
+      .text(2, 65, ' Press HOME to home page', {
         fontFamily: 'Itim',
         fontSize: '22px',
         color: '#fff',
@@ -49,7 +54,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0.5);
 
     this.homeBtn = scene.add
-      .image(-111, 45, 'homeBtn')
+      .image(-161, 65, 'homeBtn')
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
@@ -57,26 +62,24 @@ export default class DieModal extends Phaser.GameObjects.Container {
         console.log('homeBtn');
       });
     this.homeBtn.name = 'homeBtn';
-    this.soundOnBtn = scene.add
-      .image(-111, -20, 'soundOnBtn')
+
+    this.reloadBtn = scene.add
+      .image(-161, -20, 'reloadBtn')
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
-      .setTint(0xa79999)
       .on('pointerdown', () => {
-        console.log('soundOn');
-        this.soundOnBtn.setTint(0xa79999);
-        this.soundOffBtn.setTint(0xffffff);
+        console.log('reloadBtn');
       });
-    this.soundOnBtn.name = 'soundOnBtn';
+    this.reloadBtn.name = 'reloadBtn';
 
-    this.add(this.dieText);
+    this.add(this.restartText);
+    this.add(this.homeText);
     this.add(this.homeBtn);
-    // this.add(this.soundOffBtn);
-    this.add(this.soundOnBtn);
+    this.add(this.reloadBtn);
 
     this.closeButton = scene.add
-      .image(148, -96, 'closeBtn')
+      .image(198, -146, 'closeBtn')
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -94,7 +97,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
 
   open() {
     console.log('open modal');
-    this.background.setAlpha(0.4);
+    this.background.setAlpha(0.8);
     this.setVisible(true);
     this.scene.tweens.add({
       targets: this,

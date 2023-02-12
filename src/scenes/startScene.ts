@@ -2,6 +2,7 @@ import WebFontFile from '../assets/fonts/webFontFile';
 import { HEIGHT_GAME, WIDTH_GAME } from '../constGame';
 import Modal from '../components/modal/soundModal';
 import helpModal from '../components/modal/helpModal';
+import DieModal from '../components/modal/dieModal';
 
 // enum Texts {
 //   title = 'Mario Clone',
@@ -31,7 +32,7 @@ export class StartScene extends Phaser.Scene {
     this.load.image('homeBtn', '../assets/sprites/buttons/homeBtn.svg');
     this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
     this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
-    this.load.image('backBtn', '../assets/sprites/buttons/backBtn.svg');
+    this.load.image('reloadBtn', '../assets/sprites/buttons/reloadBtn.svg');
     this.load.image('soundOnBtn', '../assets/sprites/buttons/soundOnBtn.svg');
     this.load.image('soundOffBtn', '../assets/sprites/buttons/soundOffBtn.svg');
     this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
@@ -108,6 +109,16 @@ export class StartScene extends Phaser.Scene {
         howToPlayModal.setDepth(1);
       }
     });
+    const dieModal = new DieModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 400, 300);
+    dieModal.setScale(0);
+    dieModal.name = 'dieModal';
+    this.add.existing(dieModal);
+    // to do  событие по которому будет открываться модалка DieModal
+    // ???.on('pointerdown', () => {
+    //   if (!dieModal.isOpen) {
+    //     dieModal.open();
+    //   }
+    // });
     // модалки end
     this.textBtn = this.add
       .text(WIDTH_GAME / 2, HEIGHT_GAME - 80, 'To start playing, select a character and press the Play button', {
