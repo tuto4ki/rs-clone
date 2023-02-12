@@ -38,6 +38,7 @@ export class StartScene extends Phaser.Scene {
     this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
     this.load.image('closeBtn', '../assets/sprites/buttons/closeBtn.svg');
     this.load.image('howToPlay', '../assets/sprites/howToPlay.png');
+    this.load.image('gravestone', '../assets/sprites/gravestone.svg');
     //
     this.load.image('catAvatar', '../assets/sprites/catAvatar.png');
     this.load.image('foxAvatar', '../assets/sprites/foxAvatar.png');

@@ -7,6 +7,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
   homeBtn: Phaser.GameObjects.Image;
   reloadBtn: Phaser.GameObjects.Image;
   homeText: Phaser.GameObjects.Text;
+  image: Phaser.GameObjects.Image;
 
   constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
     super(scene, x, y);
@@ -22,7 +23,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.add(this.background);
 
     this.header = scene.add
-      .text(0, -(height / 2) + 30, 'Unfortunally you died... ', {
+      .text(0, -(height / 2) + 30, 'Unfortunately you died... ', {
         fontFamily: 'Itim',
         fontSize: '30px',
         color: '#F5F901',
@@ -35,7 +36,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.add(this.header);
 
     this.restartText = scene.add
-      .text(23, -20, ' Press RESTART to restart level', {
+      .text(23, 0, ' Press RESTART to restart level', {
         fontFamily: 'Itim',
         fontSize: '22px',
         color: '#fff',
@@ -64,7 +65,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.homeBtn.name = 'homeBtn';
 
     this.reloadBtn = scene.add
-      .image(-161, -20, 'reloadBtn')
+      .image(-161, 0, 'reloadBtn')
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
@@ -73,6 +74,10 @@ export default class DieModal extends Phaser.GameObjects.Container {
       });
     this.reloadBtn.name = 'reloadBtn';
 
+    this.image = scene.add.image(0, -62, 'gravestone').setOrigin(0.5, 0.5);
+    this.image.name = 'gravestone';
+
+    this.add(this.image);
     this.add(this.restartText);
     this.add(this.homeText);
     this.add(this.homeBtn);
