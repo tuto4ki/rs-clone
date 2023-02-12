@@ -1,4 +1,4 @@
-import { SCALE_SIZE_PLAYER, SPEED_PLAYER, SPEED_UP_PLAYER } from '../constGame';
+import { ENTITY_ANIMATION, SCALE_SIZE_PLAYER, SPEED_PLAYER, SPEED_UP_PLAYER } from '../constGame';
 import Player from '../player';
 import IdleAnimation from './idleAnimation';
 import MoveLeftAnimation from './moveLeftAnimation';
@@ -12,7 +12,8 @@ export default class JumpAnimation extends StateAnimation {
   }
   onEnter(): void {
     this.player.sprite.body.setVelocityY(-SPEED_PLAYER * SPEED_UP_PLAYER);
-    this.player.sprite.play('jumpPlayer');
+    this.player.sprite.play(`${ENTITY_ANIMATION.jump}${this.player.sprite.name}`);
+    // 'jumpPlayer');
   }
   onExit(): void {
     this.player.changeState(new IdleAnimation(this.player));

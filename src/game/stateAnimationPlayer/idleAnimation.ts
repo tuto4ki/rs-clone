@@ -1,3 +1,4 @@
+import { ENTITY_ANIMATION } from '../constGame';
 import Player from '../player';
 import JumpAnimation from './jumpAnimation';
 import MoveLeftAnimation from './moveLeftAnimation';
@@ -11,7 +12,8 @@ export default class IdleAnimation extends StateAnimation {
   }
   onEnter(): void {
     this.player.sprite.body.setVelocityX(0);
-    this.player.sprite.play('stayPlayer');
+    this.player.sprite.play(`${ENTITY_ANIMATION.idle}${this.player.sprite.name}`);
+    // 'stayPlayer');
   }
   onExit(): void {
     console.log('no implement');

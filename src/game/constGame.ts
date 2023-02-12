@@ -24,19 +24,29 @@ export const EMPTY_PICTURE_WIDTH = 300;
 
 export const EMPTY_PICTURE_HEIGHT = 150;
 
-export const enum PLAYER_TYPE {
-  FOX = 'fox',
-  CAT = 'cat',
+export const enum ENEMY_TYPE {
+  zombieGirl = 'zombieGirl',
+  zombieMan = 'zombieMan',
 }
 
-export const PLAYER_ANIMATION = {
-  [PLAYER_TYPE.FOX]: {
-    run: 'run',
-    dead: 'dead',
-    jump: 'jump',
-    stay: 'stay',
-  },
-};
+export const enum PLAYER_TYPE {
+  fox = 'fox',
+  cat = 'cat',
+}
+
+export const enum ENTITY_ANIMATION {
+  run = 'run',
+  dead = 'dead',
+  jump = 'jump',
+  idle = 'idle',
+  walk = 'walk',
+}
+
+export const enum IMAGES {
+  bgLevel1 = 'bgGame',
+  emptyPicture = 'emptyPicture',
+  plate = 'plate',
+}
 
 export const MONEY = 'money';
 

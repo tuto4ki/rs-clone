@@ -9,7 +9,7 @@ export default class Player {
   private _stateAnimation: StateAnimation;
   constructor(scene: Phaser.Scene, x: number, y: number, key: string) {
     this._sprite = scene.physics.add.sprite(x, y, key);
-    this._sprite.name = 'player';
+    this._sprite.name = key;
     this._sprite
       .setScale(SCALE_SIZE_PLAYER)
       .setBodySize(WIDTH_PLAYER, HEIGHT_PLAYER)

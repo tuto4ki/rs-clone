@@ -1,4 +1,4 @@
-import { COLLISION_PLAYER_ENEMY, HEIGHT_GAME, MONEY, SCALE_SIZE_WORLD, WIDTH_GAME } from '../game/constGame';
+import { COLLISION_PLAYER_ENEMY, IMAGES, MONEY, PLAYER_TYPE, SCALE_SIZE_WORLD } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import { Money } from '../game/money';
 import Plate from '../game/obstacles/plate';
@@ -24,20 +24,20 @@ export class GameScene extends Phaser.Scene {
     const map = this.make.tilemap({ key: 'map', tileWidth: 64, tileHeight: 64 });
     const widthWorld = map.widthInPixels * SCALE_SIZE_WORLD;
     // create background
-    for (let n = 0; n < widthWorld / WIDTH_GAME; n += 1) {
-      this.add.image(WIDTH_GAME * n, 0, 'bgGame').setOrigin(0, 0);
+    for (let n = 0; n < widthWorld / +this.game.config.width; n += 1) {
+      this.add.image(+this.game.config.width * n, 0, IMAGES.bgLevel1).setOrigin(0, 0);
     }
     const waterObj = new Water(this, map, 'waterObj');
     const stumpObj = new Stump(this, map, 'stumpObj');
-    const plateObj = new Plate(this, map, 'endGame', 'plate');
+    const plateObj = new Plate(this, map, 'endGame', IMAGES.plate);
     const tileset = map.addTilesetImage('freeTiles', 'tiles');
     const ground = map.createLayer('ground', tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
     map.createLayer('background', tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
     map.createLayer('water', tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
-    this.physics.world.setBounds(0, 0, widthWorld, HEIGHT_GAME);
+    this.physics.world.setBounds(0, 0, widthWorld, +this.game.config.height);
     this._cursor = this.input.keyboard.createCursorKeys();
     // create player
-    this._player = new Player(this, 100, 480, 'fox');
+    this._player = new Player(this, 100, 480, PLAYER_TYPE.fox);
     this.physics.add.collider(ground, this._player.sprite);
     ground.setCollisionBetween(0, 31);
     // create enemies
@@ -51,7 +51,7 @@ export class GameScene extends Phaser.Scene {
     this._cursor?.up.on('down', () => this._player?.moveUp());
     this._cursor?.space.on('down', () => this._player?.moveUp());
     // camera
-    this.cameras.main.setBounds(0, 0, widthWorld, HEIGHT_GAME);
+    this.cameras.main.setBounds(0, 0, widthWorld, +this.game.config.height);
     this.cameras.main.startFollow(this._player.sprite, true);
     // collision with player
     if (this.player) {

@@ -1,20 +1,26 @@
 import ChaseEnemy from './chaseEnemy';
-import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, SCALE_SIZE_WORLD } from '../constGame';
+import {
+  EMPTY_PICTURE_HEIGHT,
+  EMPTY_PICTURE_WIDTH,
+  ENEMY_TYPE,
+  ENTITY_ANIMATION,
+  SCALE_SIZE_WORLD,
+} from '../constGame';
 import Enemy from './enemy';
 import IAnimationKey from '../type';
 
 const IZombieGirlAnimation = {
-  walk: 'walkZombie',
-  dead: 'deadZombie',
-  run: 'runZombie',
+  walk: `${ENTITY_ANIMATION.walk}${ENEMY_TYPE.zombieGirl}`,
+  dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.zombieGirl}`,
+  run: `${ENTITY_ANIMATION.run}${ENEMY_TYPE.zombieGirl}`,
   scale: 0.2,
   bodySize: { width: 200, height: 360 },
 };
 
 const IZombieManAnimation = {
-  walk: 'walkZombieMan',
-  dead: 'deadZombieMan',
-  run: 'runZombieMan',
+  walk: `${ENTITY_ANIMATION.walk}${ENEMY_TYPE.zombieMan}`,
+  dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.zombieMan}`,
+  run: `${ENTITY_ANIMATION.run}${ENEMY_TYPE.zombieMan}`,
   scale: 0.7,
   bodySize: { width: 60, height: 130 },
 };
@@ -62,7 +68,7 @@ export default class Enemies {
     zombieList.forEach((object) => {
       if (object.x && object.y) {
         let item: Enemy;
-        if (typeEnemy === 'zombieMan') {
+        if (typeEnemy === ENEMY_TYPE.zombieMan) {
           item = new ChaseEnemy(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
         } else {
           item = new Enemy(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);

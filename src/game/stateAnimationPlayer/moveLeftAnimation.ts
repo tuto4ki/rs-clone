@@ -1,4 +1,4 @@
-import { SCALE_SIZE_PLAYER, SPEED_PLAYER } from '../constGame';
+import { ENTITY_ANIMATION, SCALE_SIZE_PLAYER, SPEED_PLAYER } from '../constGame';
 import Player from '../player';
 import FallLeftAnimation from './fallLeftAnimation';
 import IdleAnimation from './idleAnimation';
@@ -12,7 +12,8 @@ export default class MoveLeftAnimation extends StateAnimation {
     this.onEnter();
   }
   onEnter(): void {
-    this.player.sprite.play('runPlayer');
+    this.player.sprite.play(`${ENTITY_ANIMATION.run}${this.player.sprite.name}`);
+    // 'runPlayer');
     this.player.sprite.setScale(-SCALE_SIZE_PLAYER, SCALE_SIZE_PLAYER).body.setVelocityX(-SPEED_PLAYER);
   }
   onExit(): void {
