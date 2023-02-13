@@ -108,7 +108,7 @@ export class GameScene extends Phaser.Scene {
     if (enemy.getData('isDead') || this._isFinish) {
       return;
     }
-    if (enemy.body.top >= player.body.bottom) {
+    if (Math.ceil(enemy.body.top) >= Math.ceil(player.body.bottom)) {
       this._player?.deadEnemy();
       if (this._statistics) {
         this._statistics.score += this._enemies ? this._enemies.destroyEntity(enemy) : 0;

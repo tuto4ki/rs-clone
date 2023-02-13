@@ -1,6 +1,7 @@
 import { MASS_PLAYER, SPEED_ENTITY } from '../constGame';
 import IAnimationKey from '../type';
 
+const TIMEOUT_DESTROY = 1000;
 export default class Enemy {
   protected _sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   protected _directionEnemy = 1;
@@ -59,7 +60,7 @@ export default class Enemy {
     this._sprite.on(`animationcomplete-${this._animationKey.dead}`, () => {
       setTimeout(() => {
         this._sprite.destroy();
-      }, 1000);
+      }, TIMEOUT_DESTROY);
     });
   }
 

@@ -12,9 +12,9 @@ export const SPEED_UP_PLAYER = 2.2;
 
 export const MASS_PLAYER = 10;
 
-export const WIDTH_PLAYER = 80;
+export const WIDTH_PLAYER = 180;
 
-export const HEIGHT_PLAYER = 330;
+export const HEIGHT_PLAYER = 360;
 
 export const SCALE_SIZE_PLAYER = 0.2;
 

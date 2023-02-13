@@ -11,9 +11,8 @@ export default class IdleAnimation extends StateAnimation {
     this.onEnter();
   }
   onEnter(): void {
-    this.player.sprite.body.setVelocityX(0);
     this.player.sprite.play(`${ENTITY_ANIMATION.idle}${this.player.sprite.name}`);
-    // 'stayPlayer');
+    this.player.sprite.body.setVelocityX(0);
   }
   onExit(): void {
     console.log('no implement');

@@ -12,6 +12,7 @@ export default class Player {
     this._sprite.name = key;
     this._sprite
       .setScale(SCALE_SIZE_PLAYER)
+      .setOffset(0)
       .setBodySize(WIDTH_PLAYER, HEIGHT_PLAYER)
       .setMass(MASS_PLAYER)
       .refreshBody();
