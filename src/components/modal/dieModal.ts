@@ -16,6 +16,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .rectangle(0, 0, width, height, 0xffffff, 0.8)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true });
+    //
     // .on('pointerdown', () => {
     //   // this.close();
     // });
