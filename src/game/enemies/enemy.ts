@@ -1,6 +1,7 @@
-import { MASS_PLAYER, SPEED_ENTITY } from './constGame';
-import IAnimationKey from './type';
+import { MASS_PLAYER, SPEED_ENTITY } from '../constGame';
+import IAnimationKey from '../type';
 
+const TIMEOUT_DESTROY = 1000;
 export default class Enemy {
   protected _sprite: Phaser.Types.Physics.Arcade.SpriteWithDynamicBody;
   protected _directionEnemy = 1;
@@ -26,7 +27,7 @@ export default class Enemy {
 
   public update(xPos?: number, yPos?: number): void {
     if (!this._sprite.getData('isDead')) {
-      console.log('no implements', xPos, yPos);
+      xPos = yPos; // this is change
       this._sprite.body.setVelocityX(this._directionEnemy * SPEED_ENTITY * this._speedRun);
     }
   }
@@ -59,7 +60,11 @@ export default class Enemy {
     this._sprite.on(`animationcomplete-${this._animationKey.dead}`, () => {
       setTimeout(() => {
         this._sprite.destroy();
-      }, 1000);
+      }, TIMEOUT_DESTROY);
     });
+  }
+
+  public addScore() {
+    return this._animationKey.score;
   }
 }

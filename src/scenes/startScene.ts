@@ -1,3 +1,5 @@
+import { ENEMY_TYPE, ENTITY_ANIMATION, IMAGES, MONEY, PLAYER_TYPE } from '../game/constGame';
+
 enum Texts {
   title = 'Mario Clone',
   message = 'Click anywhere to start',
@@ -14,20 +16,22 @@ export class StartScene extends Phaser.Scene {
     super('Start');
   }
   public preload(): void {
-    this.load.image('bgGame', '../assets/images/bg.png');
-    this.load.image('emptyPicture', '../assets/images/empty.png');
-    this.load.atlas('fox', '../assets/sprites/fox.png', '../assets/json/fox.json');
-    this.load.atlas('zombieGirl', '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
-    this.load.atlas('zombieMan', '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
-    this.load.image('plate', '../assets/images/plateEndGame.png');
+    this.load.image(IMAGES.bgLevel1, '../assets/images/bg.png');
+    this.load.image(IMAGES.emptyPicture, '../assets/images/empty.png');
+    this.load.atlas(PLAYER_TYPE.fox, '../assets/sprites/fox.png', '../assets/json/fox.json');
+    this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
+    this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
+    this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
+    this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
   }
   public create(): void {
-    this.createAnimationPlayer();
-    this.createAnimationZombie();
-    this.createAnimationZombieMan();
+    this.createAnimationPlayer(PLAYER_TYPE.fox);
+    this.createAnimationZombie(ENEMY_TYPE.zombieGirl);
+    this.createAnimationZombie(ENEMY_TYPE.zombieMan);
+    this.createAnimationMoney();
     this.add
       .text(this.cameras.main.centerX, this.cameras.main.centerY - 100, Texts.title, {
         font: `${Styles.size}px ${Styles.font}`,
@@ -46,81 +50,38 @@ export class StartScene extends Phaser.Scene {
     });
   }
 
-  private createAnimationPlayer(): void {
-    // animation run player
-    this.anims.create({
-      key: 'runPlayer',
-      frames: this.anims.generateFrameNames('fox', { prefix: 'Run_', start: 1, end: 8, zeroPad: 2 }),
-      frameRate: 15,
-      repeat: -1,
-    });
-    // animation jump
-    this.anims.create({
-      key: 'jumpPlayer',
-      frames: this.anims.generateFrameNames('fox', { prefix: 'Jump_', start: 1, end: 8, zeroPad: 2 }),
-      frameRate: 15,
-      repeat: 0,
-    });
-    this.anims.create({
-      key: 'stayPlayer',
-      frames: this.anims.generateFrameNames('fox', { prefix: 'Idle_', start: 1, end: 10, zeroPad: 2 }),
-      frameRate: 15,
-      repeat: -1,
-    });
-    // animation died player
-    this.anims.create({
-      key: 'deadPlayer',
-      frames: this.anims.generateFrameNames('fox', { prefix: 'Dead_', start: 1, end: 10, zeroPad: 2 }),
-      frameRate: 15,
-      repeat: 0,
-    });
+  private createAnimationPlayer(type: string): void {
+    this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 1, 8, 2, 15, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.jump}${type}`, type, 'Jump_', 1, 8, 2, 15, 0);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.idle}${type}`, type, 'Idle_', 1, 10, 2, 15, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 10, 2, 15, 0);
   }
 
-  private createAnimationZombie() {
-    // animation walk zombie
-    this.anims.create({
-      key: 'walkZombie',
-      frames: this.anims.generateFrameNames('zombieGirl', { prefix: 'Walk_', start: 1, end: 6, zeroPad: 2 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    // animation died zombie
-    this.anims.create({
-      key: 'deadZombie',
-      frames: this.anims.generateFrameNames('zombieGirl', { prefix: 'Dead_', start: 1, end: 8, zeroPad: 2 }),
-      frameRate: 10,
-      repeat: 0,
-    });
-    // animation run zombie
-    this.anims.create({
-      key: 'runZombie',
-      frames: this.anims.generateFrameNames('zombieGirl', { prefix: 'Run_', start: 1, end: 10, zeroPad: 2 }),
-      frameRate: 15,
-      repeat: -1,
-    });
+  private createAnimationZombie(type: string) {
+    this.addAnimationToManager(`${ENTITY_ANIMATION.walk}${type}`, type, 'Walk_', 1, 6, 2, 10, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 8, 2, 10, 0);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 3, 10, 2, 15, -1);
   }
 
-  private createAnimationZombieMan() {
-    // animation walk zombie
+  private createAnimationMoney() {
+    this.addAnimationToManager(MONEY, MONEY, 'gold_', 1, 10, 2, 10, -1);
+  }
+
+  private addAnimationToManager(
+    key: string,
+    type: string,
+    prefix: string,
+    start: number,
+    end: number,
+    zeroPad: number,
+    frameRate: number,
+    repeat: number
+  ) {
     this.anims.create({
-      key: 'walkZombieMan',
-      frames: this.anims.generateFrameNames('zombieMan', { prefix: 'Walk_', start: 1, end: 6, zeroPad: 2 }),
-      frameRate: 10,
-      repeat: -1,
-    });
-    // animation died zombie
-    this.anims.create({
-      key: 'deadZombieMan',
-      frames: this.anims.generateFrameNames('zombieMan', { prefix: 'Dead_', start: 1, end: 8, zeroPad: 2 }),
-      frameRate: 10,
-      repeat: 0,
-    });
-    // animation run zombie
-    this.anims.create({
-      key: 'runZombieMan',
-      frames: this.anims.generateFrameNames('zombieMan', { prefix: 'Run_', start: 1, end: 10, zeroPad: 2 }),
-      frameRate: 15,
-      repeat: -1,
+      key: key,
+      frames: this.anims.generateFrameNames(type, { prefix: prefix, start: start, end: end, zeroPad: zeroPad }),
+      frameRate: frameRate,
+      repeat: repeat,
     });
   }
 }

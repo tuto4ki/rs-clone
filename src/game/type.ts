@@ -4,6 +4,7 @@ export default interface IAnimationKey {
   dead: string;
   run: string,
   scale: number;
+  score: number;
   bodySize: {
     width: number;
     height: number;

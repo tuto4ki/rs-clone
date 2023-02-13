@@ -1,21 +1,29 @@
 import ChaseEnemy from './chaseEnemy';
-import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, SCALE_SIZE_WORLD } from './constGame';
+import {
+  EMPTY_PICTURE_HEIGHT,
+  EMPTY_PICTURE_WIDTH,
+  ENEMY_TYPE,
+  ENTITY_ANIMATION,
+  SCALE_SIZE_WORLD,
+} from '../constGame';
 import Enemy from './enemy';
-import IAnimationKey from './type';
+import IAnimationKey from '../type';
 
 const IZombieGirlAnimation = {
-  walk: 'walkZombie',
-  dead: 'deadZombie',
-  run: 'runZombie',
+  walk: `${ENTITY_ANIMATION.walk}${ENEMY_TYPE.zombieGirl}`,
+  dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.zombieGirl}`,
+  run: `${ENTITY_ANIMATION.run}${ENEMY_TYPE.zombieGirl}`,
   scale: 0.2,
+  score: 100,
   bodySize: { width: 200, height: 360 },
 };
 
 const IZombieManAnimation = {
-  walk: 'walkZombieMan',
-  dead: 'deadZombieMan',
-  run: 'runZombieMan',
+  walk: `${ENTITY_ANIMATION.walk}${ENEMY_TYPE.zombieMan}`,
+  dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.zombieMan}`,
+  run: `${ENTITY_ANIMATION.run}${ENEMY_TYPE.zombieMan}`,
   scale: 0.7,
+  score: 200,
   bodySize: { width: 60, height: 130 },
 };
 
@@ -27,7 +35,6 @@ export default class Enemies {
     this._listEnemies = [];
     this._listSpriteEntites = scene.physics.add.group();
     this._listBarrier = scene.physics.add.staticGroup();
-    console.log(map);
     this.createEnemyList(map, scene, IZombieGirlAnimation, type, 'zombie', 'zombieGirl');
     this.createEnemyList(map, scene, IZombieManAnimation, type, 'zombieMan', 'zombieMan');
     const barrierList = map.filterObjects(type, (value) => value.name === 'barier');
@@ -63,7 +70,7 @@ export default class Enemies {
     zombieList.forEach((object) => {
       if (object.x && object.y) {
         let item: Enemy;
-        if (typeEnemy === 'zombieMan') {
+        if (typeEnemy === ENEMY_TYPE.zombieMan) {
           item = new ChaseEnemy(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
         } else {
           item = new Enemy(scene, object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, picture, iAnim);
@@ -94,11 +101,14 @@ export default class Enemies {
     });
   }
 
-  public destroyEntity(entity: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
+  public destroyEntity(entity: Phaser.Types.Physics.Arcade.GameObjectWithBody): number {
     const entityIndex: number = this._listEnemies.findIndex((value) => value.sprite === entity);
     if (entityIndex >= 0) {
+      const score = this._listEnemies[entityIndex].addScore();
       this._listEnemies[entityIndex].deadEnemy();
       this._listEnemies.splice(entityIndex, 1);
+      return score;
     }
+    return 0;
   }
 }
