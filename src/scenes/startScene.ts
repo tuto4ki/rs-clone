@@ -1,19 +1,8 @@
 import WebFontFile from '../assets/fonts/webFontFile';
-import { HEIGHT_GAME, WIDTH_GAME } from '../constGame';
 import Modal from '../components/modal/soundModal';
 import helpModal from '../components/modal/helpModal';
 import DieModal from '../components/modal/dieModal';
-
-// enum Texts {
-//   title = 'Mario Clone',
-//   message = 'Click anywhere to start',
-// }
-
-// enum Styles {
-//   color = '#008080',
-//   font = 'Arial',
-//   size = '52',
-// }
+import { ENEMY_TYPE, ENTITY_ANIMATION, IMAGES, MONEY, PLAYER_TYPE, HEIGHT_GAME, WIDTH_GAME } from '../game/constGame';
 
 export class StartScene extends Phaser.Scene {
   selectedCharacter: unknown;
@@ -22,9 +11,16 @@ export class StartScene extends Phaser.Scene {
     super('Start');
   }
   public preload(): void {
-    this.load.image('bgGame', '../assets/sprites/bg.png');
-    this.load.image('groundMiddle', '../assets/sprites/ground.png');
-    this.load.image('player', '../assets/sprites/dog.png');
+    this.load.image(IMAGES.bgLevel1, '../assets/images/bg.png');
+    this.load.image(IMAGES.emptyPicture, '../assets/images/empty.png');
+    this.load.atlas(PLAYER_TYPE.fox, '../assets/sprites/fox.png', '../assets/json/fox.json');
+    this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
+    this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
+    this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
+    this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
+    // load level 1
+    this.load.image('tiles', '../assets/sprites/freeTiles.png');
+    this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
     this.load.image('gearBtn', '../assets/sprites/gear.png');
     this.load.image('helpBtn', '../assets/sprites/buttons/helpBtn.svg');
     this.load.image('playBtn', '../assets/sprites/buttons/playBtn.svg');
@@ -46,6 +42,11 @@ export class StartScene extends Phaser.Scene {
     this.load.addFile(fonts);
   }
   public create(): void {
+    this.createAnimationPlayer(PLAYER_TYPE.fox);
+    this.createAnimationZombie(ENEMY_TYPE.zombieGirl);
+    this.createAnimationZombie(ENEMY_TYPE.zombieMan);
+    this.createAnimationMoney();
+
     const chooseTitle = this.add
       .text(WIDTH_GAME / 2, 30, 'Choose Your Character ', {
         fontFamily: 'Itim',
@@ -87,7 +88,6 @@ export class StartScene extends Phaser.Scene {
       player1.setTint(0xa79999);
       playBtn.setTint(0xffffff).setInteractive();
     });
-
     // модалки start
     const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.name = 'gearBtn';
@@ -146,5 +146,39 @@ export class StartScene extends Phaser.Scene {
     });
     playBtn.setTint(0xa79999);
     playBtn.disableInteractive();
+  }
+  private createAnimationPlayer(type: string): void {
+    this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 1, 8, 2, 15, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.jump}${type}`, type, 'Jump_', 1, 8, 2, 15, 0);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.idle}${type}`, type, 'Idle_', 1, 10, 2, 15, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 10, 2, 15, 0);
+  }
+
+  private createAnimationZombie(type: string) {
+    this.addAnimationToManager(`${ENTITY_ANIMATION.walk}${type}`, type, 'Walk_', 1, 6, 2, 10, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 8, 2, 10, 0);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 3, 10, 2, 15, -1);
+  }
+
+  private createAnimationMoney() {
+    this.addAnimationToManager(MONEY, MONEY, 'gold_', 1, 10, 2, 10, -1);
+  }
+
+  private addAnimationToManager(
+    key: string,
+    type: string,
+    prefix: string,
+    start: number,
+    end: number,
+    zeroPad: number,
+    frameRate: number,
+    repeat: number
+  ) {
+    this.anims.create({
+      key: key,
+      frames: this.anims.generateFrameNames(type, { prefix: prefix, start: start, end: end, zeroPad: zeroPad }),
+      frameRate: frameRate,
+      repeat: repeat,
+    });
   }
 }

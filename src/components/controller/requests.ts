@@ -1,4 +1,4 @@
-import { serverAdress } from '../../constGame';
+import { serverAdress } from '../../game/constGame';
 import { ISortQuery, OveralScore } from '../types';
 
 export const register = (username: string, password: string, avatar = 1) => {

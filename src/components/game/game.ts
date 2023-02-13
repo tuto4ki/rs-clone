@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { WIDTH_GAME, HEIGHT_GAME, GRAVITY } from '../../constGame';
+import { WIDTH_GAME, HEIGHT_GAME, GRAVITY } from '../../game/constGame';
 import { GameScene } from '../../scenes/gameScene';
 import { StartScene } from '../../scenes/startScene';
 import './game.scss';
@@ -24,7 +24,7 @@ export default class Game {
           gravity: {
             y: GRAVITY,
           },
-          debug: false,
+          debug: true,
         },
       },
       backgroundColor: '#2e2b2b',
