@@ -53,3 +53,12 @@ export const MONEY = 'money';
 export const MONEY_SCORE = 50;
 
 export const COLLISION_PLAYER_ENEMY = 'collisionPlayerEnemy';
+
+export const enum EMUSIC {
+  soundBg = 'soundBg',
+  jump = 'jump',
+  coin = 'coin',
+  dieEnemy = 'deadEnemy',
+  diePlayer = 'diePlayer',
+  win = 'win',
+}

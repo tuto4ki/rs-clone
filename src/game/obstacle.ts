@@ -1,6 +1,6 @@
-import { GameScene } from '../../scenes/gameScene';
-import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, IMAGES, SCALE_SIZE_WORLD } from '../constGame';
-import Player from '../player';
+import { GameScene } from '../scenes/gameScene';
+import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, IMAGES, SCALE_SIZE_WORLD } from './constGame';
+import Player from './player';
 
 export default class Obstacles {
   fakeObjects: Phaser.Physics.Arcade.StaticGroup;
@@ -29,5 +29,9 @@ export default class Obstacles {
 
   addPhysics(scene: GameScene, player: Player) {
     scene.physics.add.collider(player.sprite, this.fakeObjects);
+  }
+
+  addPhysicsCallBack(scene: GameScene, player: Player, callback: () => void): void {
+    scene.physics.add.overlap(player.sprite, this.fakeObjects, callback);
   }
 }

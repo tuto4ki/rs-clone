@@ -1,4 +1,4 @@
-import { ENEMY_TYPE, ENTITY_ANIMATION, IMAGES, MONEY, PLAYER_TYPE } from '../game/constGame';
+import { EMUSIC, ENEMY_TYPE, ENTITY_ANIMATION, IMAGES, MONEY, PLAYER_TYPE } from '../game/constGame';
 
 enum Texts {
   title = 'Mario Clone',
@@ -26,6 +26,12 @@ export class StartScene extends Phaser.Scene {
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
+    this.load.audio(EMUSIC.soundBg, '../assets/sound/soundBg.mp3');
+    this.load.audio(EMUSIC.jump, '../assets/sound/soundJump.ogg');
+    this.load.audio(EMUSIC.coin, '../assets/sound/soundCoin.ogg');
+    this.load.audio(EMUSIC.dieEnemy, '../assets/sound/soundDieEnemy.ogg');
+    this.load.audio(EMUSIC.diePlayer, '../assets/sound/soundDiePlayer.ogg');
+    this.load.audio(EMUSIC.win, '../assets/sound/soundWin.mp3');
   }
   public create(): void {
     this.createAnimationPlayer(PLAYER_TYPE.fox);
