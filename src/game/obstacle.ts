@@ -1,4 +1,4 @@
-import { GameScene } from '../scenes/gameScene';
+import GameScene from '../scenes/gameScene';
 import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, IMAGES, SCALE_SIZE_WORLD } from './constGame';
 import Player from './player';
 

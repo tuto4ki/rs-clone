@@ -1,7 +1,10 @@
 import * as Phaser from 'phaser';
 import { WIDTH_GAME, HEIGHT_GAME, GRAVITY } from '../../game/constGame';
-import { GameScene } from '../../scenes/gameScene';
-import { StartScene } from '../../scenes/startScene';
+import EndGameScene from '../../scenes/endGameScene';
+import GameScene from '../../scenes/gameScene';
+import HelpScene from '../../scenes/helpScene';
+import SettingsScene from '../../scenes/settingsScene';
+import StartScene from '../../scenes/startScene';
 import './game.scss';
 
 export default class Game {
@@ -28,7 +31,7 @@ export default class Game {
         },
       },
       backgroundColor: '#2e2b2b',
-      scene: [StartScene, GameScene],
+      scene: [StartScene, GameScene, SettingsScene, HelpScene, EndGameScene],
     });
   }
 }

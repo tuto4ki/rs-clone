@@ -43,4 +43,8 @@ export default class Music {
   public stop(key: string): void {
     this._mapSounds.get(key)?.stop();
   }
+
+  public pause() {
+    this._mapSounds.forEach((value) => value.pause());
+  }
 }

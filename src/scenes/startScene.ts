@@ -1,6 +1,4 @@
 import WebFontFile from '../assets/fonts/webFontFile';
-import Modal from '../components/modal/soundModal';
-import HelpModal from '../components/modal/helpModal';
 import DieModal from '../components/modal/dieModal';
 import {
   ENEMY_TYPE,
@@ -11,13 +9,14 @@ import {
   HEIGHT_GAME,
   WIDTH_GAME,
   EMUSIC,
+  ESCENE,
 } from '../game/constGame';
 
-export class StartScene extends Phaser.Scene {
+export default class StartScene extends Phaser.Scene {
   selectedCharacter: unknown;
   textBtn: Phaser.GameObjects.Text | undefined;
   constructor() {
-    super('Start');
+    super(ESCENE.start);
   }
   public preload(): void {
     this.load.image(IMAGES.bgLevel1, '../assets/images/bg.png');
@@ -106,25 +105,12 @@ export class StartScene extends Phaser.Scene {
     // модалки start
     const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.name = 'gearBtn';
+    gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
+
     const helpBtn = this.add.image(976, 29, 'helpBtn').setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'helpBtn';
-    const modal = new Modal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 300, 200);
-    modal.setScale(0);
-    this.add.existing(modal);
-    gearBtn.on('pointerdown', () => {
-      if (!modal.isOpen) {
-        modal.open();
-      }
-    });
-    const howToPlayModal = new HelpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
-    howToPlayModal.setScale(0);
-    this.add.existing(howToPlayModal);
-    helpBtn.on('pointerdown', () => {
-      if (!howToPlayModal.isOpen) {
-        howToPlayModal.open();
-        howToPlayModal.setDepth(1);
-      }
-    });
+    helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
+
     const dieModal = new DieModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 400, 300);
     dieModal.setScale(0);
     dieModal.name = 'dieModal';
@@ -195,5 +181,10 @@ export class StartScene extends Phaser.Scene {
       frameRate: frameRate,
       repeat: repeat,
     });
+  }
+
+  private changeScene(nameScene: string) {
+    this.scene.pause();
+    this.scene.launch(nameScene, { scene: ESCENE.start });
   }
 }

@@ -5,11 +5,13 @@ export default class HelpModal extends Phaser.GameObjects.Container {
   isOpen!: boolean;
   howPlaySettings: Phaser.GameObjects.Text;
   howControl: Phaser.GameObjects.Text;
+  private _typeScene: string;
 
   // isOpen: boolean;
 
-  constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, typeScene: string) {
     super(scene, x, y);
+    this._typeScene = typeScene;
 
     this.background = scene.add
       .image(0, 0, 'howToPlay')
@@ -113,6 +115,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       repeat: 0,
       yoyo: false,
       onComplete: () => {
+        this.scene.scene.resume(this._typeScene);
         this.isOpen = false;
         this.setVisible(false);
       },

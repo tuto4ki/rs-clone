@@ -9,9 +9,11 @@ export default class Modal extends Phaser.GameObjects.Container {
   soundOnText: Phaser.GameObjects.Text;
   soundOffIsClicked: boolean;
   soundOnIsClicked: boolean;
+  private _typeScene: string;
 
-  constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, typeScene: string) {
     super(scene, x, y);
+    this._typeScene = typeScene;
 
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x000000, 0.7)
@@ -102,8 +104,6 @@ export default class Modal extends Phaser.GameObjects.Container {
     this.setSize(width, height);
 
     this.setVisible(false);
-
-    this.setScrollElements(0);
   }
 
   open() {
@@ -135,16 +135,10 @@ export default class Modal extends Phaser.GameObjects.Container {
       repeat: 0,
       yoyo: false,
       onComplete: () => {
+        this.scene.scene.resume(this._typeScene);
         this.isOpen = false;
         this.setVisible(false);
       },
     });
-  }
-
-  private setScrollElements(value: number) {
-    this.setScrollFactor(value);
-    this.closeButton.setScrollFactor(value);
-    this.soundOnBtn.setScrollFactor(value);
-    this.soundOffBtn.setScrollFactor(value);
   }
 }

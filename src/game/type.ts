@@ -9,3 +9,7 @@ export default interface IAnimationKey {
     height: number;
   };
 }
+
+export interface IPassScene {
+  scene: string;
+}
