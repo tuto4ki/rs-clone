@@ -1,6 +1,6 @@
 import { MONEY, SCALE_SIZE_WORLD } from './constGame';
 
-export class Money {
+export default class Money {
   private _listMoney: Phaser.Physics.Arcade.StaticGroup;
 
   constructor(scene: Phaser.Scene, map: Phaser.Tilemaps.Tilemap, type: string) {

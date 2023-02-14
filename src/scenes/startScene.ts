@@ -2,7 +2,16 @@ import WebFontFile from '../assets/fonts/webFontFile';
 import Modal from '../components/modal/soundModal';
 import helpModal from '../components/modal/helpModal';
 import DieModal from '../components/modal/dieModal';
-import { ENEMY_TYPE, ENTITY_ANIMATION, IMAGES, MONEY, PLAYER_TYPE, HEIGHT_GAME, WIDTH_GAME } from '../game/constGame';
+import {
+  ENEMY_TYPE,
+  ENTITY_ANIMATION,
+  IMAGES,
+  MONEY,
+  PLAYER_TYPE,
+  HEIGHT_GAME,
+  WIDTH_GAME,
+  EMUSIC,
+} from '../game/constGame';
 
 export class StartScene extends Phaser.Scene {
   selectedCharacter: unknown;
@@ -21,6 +30,12 @@ export class StartScene extends Phaser.Scene {
     // load level 1
     this.load.image('tiles', '../assets/sprites/freeTiles.png');
     this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
+    this.load.audio(EMUSIC.soundBg, '../assets/sound/soundBg.mp3');
+    this.load.audio(EMUSIC.jump, '../assets/sound/soundJump.ogg');
+    this.load.audio(EMUSIC.coin, '../assets/sound/soundCoin.ogg');
+    this.load.audio(EMUSIC.dieEnemy, '../assets/sound/soundDieEnemy.ogg');
+    this.load.audio(EMUSIC.diePlayer, '../assets/sound/soundDiePlayer.ogg');
+    this.load.audio(EMUSIC.win, '../assets/sound/soundWin.mp3');
     this.load.image('gearBtn', '../assets/sprites/gear.png');
     this.load.image('helpBtn', '../assets/sprites/buttons/helpBtn.svg');
     this.load.image('playBtn', '../assets/sprites/buttons/playBtn.svg');
