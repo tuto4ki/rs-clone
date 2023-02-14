@@ -1,0 +1,105 @@
+{
+  "ru":{
+    "lang": "Русский",
+    "loading": "Загрузка...",
+    "btnStartGame": "НАЧАТЬ ИГРУ",
+    "login": "Войти",
+    "registration": "Зарегистрироваться",
+    "time": "время",
+    "balance": "Баланс",
+    "continue": "Продолжить",
+    "ChooseCharacter": "Выбрать персонажа",
+
+    "errorRegister": "Чтобы продолжить игру Вам необходимо зарегистрироваться",
+    "errorUnknown": "Произошла неизвестная ошибка",
+    "errorBase": "Произошла непредвиденная ошибка",
+
+    "on": "вкл",
+    "off": "выкл",
+    "mainMenu": "Главное Меню",
+    "sound": "Звук",
+    "soundDesc": "включить/выключить музыку и эффекты",
+    "language": "Язык",
+    "languageDesc": "нажмите, чтобы изменить язык"
+  },
+  "eng":{
+    "lang": "English",
+    "loading": "Loading...",
+    "btnStartGame": "START GAME",
+    "login": "Login",
+    "registration": "Registration",
+    "time": "time",
+    "balance": "Balance",
+    "continue": "Continue",
+    "ChooseCharacter": "Choose a character",
+
+    "errorRegister": "To continue the game you need to register",
+    "errorUnknown": "An unknown error has occurred",
+    "errorBase": "An unexpected error has occurred",
+
+    "on": "on",
+    "off": "off",
+    "mainMenu": "Main Menu",
+    "sound": "Sound",
+    "soundDesc": "turn on/off music & sound effects",
+    "language": "Language",
+    "languageDesc": "tap to change language"
+  },
+  "lv":{
+    "lang": "English",
+    "loading": "Loading...",
+    "btnStartGame": "START GAME",
+    "login": "Login",
+    "registration": "Registration",
+    "time": "time",
+    "balance": "Balance",
+    "continue": "Continue",
+    "ChooseCharacter": "Choose a character",
+
+    "errorRegister": "To continue the game you need to register",
+    "errorUnknown": "An unknown error has occurred",
+    "errorBase": "An unexpected error has occurred",
+
+    "on": "on",
+    "off": "off",
+    "mainMenu": "Main Menu",
+    "sound": "Sound",
+    "soundDesc": "turn on/off music & sound effects",
+    "language": "Language",
+    "languageDesc": "tap to change language"
+  }
+
+}
+
+
+{
+  "lang": {
+    "eng": "English" , 
+    "ru": "Русский", 
+    "lv": "Latvian"
+  },
+  "loading": {
+    "eng": "Loading...", 
+    "ru": "Загрузка...", 
+    "lv": ""
+  },
+  "btnStartGame": "START GAME",
+  "login": "Login",
+  "registration": "Registration",
+  "time": "time",
+  "balance": "Balance",
+  "continue": "Continue",
+  "ChooseCharacter": "Choose a character",
+
+  "errorRegister": "To continue the game you need to register",
+  "errorUnknown": "An unknown error has occurred",
+  "errorBase": "An unexpected error has occurred",
+
+  "on": "on",
+  "off": "off",
+  "mainMenu": "Main Menu",
+  "sound": "Sound",
+  "soundDesc": "turn on/off music & sound effects",
+  "language": "Language",
+  "languageDesc": "tap to change language"
+}

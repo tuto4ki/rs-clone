@@ -53,3 +53,12 @@ export const MONEY = 'money';
 export const MONEY_SCORE = 50;
 
 export const COLLISION_PLAYER_ENEMY = 'collisionPlayerEnemy';
+
+export const serverAdress = 'http://localhost:3000';
+
+export const responseStatus = {
+  error: 500,
+  created: 201,
+  ok: 200,
+  notFound: 404,
+};

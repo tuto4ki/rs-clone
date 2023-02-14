@@ -1,4 +1,15 @@
-import { COLLISION_PLAYER_ENEMY, IMAGES, MONEY, MONEY_SCORE, PLAYER_TYPE, SCALE_SIZE_WORLD } from '../game/constGame';
+import helpModal from '../components/modal/helpModal';
+import Modal from '../components/modal/soundModal';
+import {
+  COLLISION_PLAYER_ENEMY,
+  IMAGES,
+  MONEY,
+  MONEY_SCORE,
+  PLAYER_TYPE,
+  SCALE_SIZE_WORLD,
+  HEIGHT_GAME,
+  WIDTH_GAME,
+} from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import { Money } from '../game/money';
 import Plate from '../game/obstacles/plate';
@@ -7,7 +18,6 @@ import Water from '../game/obstacles/water';
 import Player from '../game/player';
 import Statistics from '../game/statistict';
 import EndGameScene from './endGameScene';
-
 export class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
@@ -15,6 +25,7 @@ export class GameScene extends Phaser.Scene {
   private _isFinish: boolean;
   private _levelNumber: number;
   private _statistics: Statistics | null = null;
+
   constructor() {
     super('Game');
     this._isFinish = false;
@@ -64,6 +75,34 @@ export class GameScene extends Phaser.Scene {
     }
     // score and time
     this._statistics = new Statistics(this, 30, 30);
+    //settings modal
+    const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
+    gearBtn.name = 'gearBtn';
+    const helpBtn = this.add.image(976, 29, 'helpBtn').setInteractive({ useHandCursor: true }).setScale(0.25);
+    helpBtn.name = 'helpBtn';
+    // const playBtn = this.add.image(50, 75, 'playBtn').setInteractive().setScale(0.4);
+    // const exitBtn = this.add.image(50, 125, 'exitBtn').setInteractive().setScale(0.4);
+    // const homeBtn = this.add.image(50, 225, 'homeBtn').setInteractive().setScale(0.4);
+    // const infoBtn = this.add.image(50, 275, 'infoBtn').setInteractive().setScale(0.4);
+    // const menuBtn = this.add.image(50, 325, 'menuBtn').setInteractive().setScale(0.4);
+    const modal = new Modal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 300, 200);
+    modal.setScale(0);
+    this.add.existing(modal);
+    gearBtn.on('pointerdown', () => {
+      if (!modal.isOpen) {
+        modal.open();
+      }
+    });
+    //
+    const howToPlayModal = new helpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
+    howToPlayModal.setScale(0);
+    this.add.existing(howToPlayModal);
+    helpBtn.on('pointerdown', () => {
+      if (!howToPlayModal.isOpen) {
+        howToPlayModal.open();
+        howToPlayModal.setDepth(1);
+      }
+    });
   }
 
   public update(): void {
