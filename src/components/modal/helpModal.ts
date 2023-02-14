@@ -1,4 +1,4 @@
-export default class helpModal extends Phaser.GameObjects.Container {
+export default class HelpModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Image;
   header: Phaser.GameObjects.Text;
   closeButton: Phaser.GameObjects.Image;
@@ -80,9 +80,11 @@ export default class helpModal extends Phaser.GameObjects.Container {
     this.setSize(width, height);
 
     this.setVisible(false);
+
+    this.setScrollElements(0);
   }
 
-  open() {
+  public open(): void {
     console.log('open modal');
     this.background.setAlpha(1);
     this.setVisible(true);
@@ -100,7 +102,7 @@ export default class helpModal extends Phaser.GameObjects.Container {
     });
   }
 
-  close() {
+  public close(): void {
     this.background.setAlpha(0);
     this.scene.tweens.add({
       targets: this,
@@ -115,5 +117,11 @@ export default class helpModal extends Phaser.GameObjects.Container {
         this.setVisible(false);
       },
     });
+  }
+
+  private setScrollElements(value: number) {
+    this.setScrollFactor(value);
+    this.closeButton.setScrollFactor(value);
+    this.background.setScrollFactor(value);
   }
 }

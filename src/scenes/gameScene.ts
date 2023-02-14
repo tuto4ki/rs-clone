@@ -97,8 +97,10 @@ export class GameScene extends Phaser.Scene {
     //settings modal
     const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.name = 'gearBtn';
+    gearBtn.scrollFactorX = 0;
     const helpBtn = this.add.image(976, 29, 'helpBtn').setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'helpBtn';
+    helpBtn.scrollFactorX = 0;
     // const playBtn = this.add.image(50, 75, 'playBtn').setInteractive().setScale(0.4);
     // const exitBtn = this.add.image(50, 125, 'exitBtn').setInteractive().setScale(0.4);
     // const homeBtn = this.add.image(50, 225, 'homeBtn').setInteractive().setScale(0.4);

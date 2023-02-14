@@ -1,6 +1,6 @@
 import WebFontFile from '../assets/fonts/webFontFile';
 import Modal from '../components/modal/soundModal';
-import helpModal from '../components/modal/helpModal';
+import HelpModal from '../components/modal/helpModal';
 import DieModal from '../components/modal/dieModal';
 import {
   ENEMY_TYPE,
@@ -116,7 +116,7 @@ export class StartScene extends Phaser.Scene {
         modal.open();
       }
     });
-    const howToPlayModal = new helpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
+    const howToPlayModal = new HelpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
     howToPlayModal.setScale(0);
     this.add.existing(howToPlayModal);
     helpBtn.on('pointerdown', () => {

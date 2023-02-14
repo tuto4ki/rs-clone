@@ -102,6 +102,8 @@ export default class Modal extends Phaser.GameObjects.Container {
     this.setSize(width, height);
 
     this.setVisible(false);
+
+    this.setScrollElements(0);
   }
 
   open() {
@@ -137,5 +139,12 @@ export default class Modal extends Phaser.GameObjects.Container {
         this.setVisible(false);
       },
     });
+  }
+
+  private setScrollElements(value: number) {
+    this.setScrollFactor(value);
+    this.closeButton.setScrollFactor(value);
+    this.soundOnBtn.setScrollFactor(value);
+    this.soundOffBtn.setScrollFactor(value);
   }
 }
