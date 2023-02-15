@@ -26,11 +26,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
       .setStrokeStyle(3, 0x00ff00);
-    //
-    // .on('pointerdown', () => {
-    //   // this.close();
-    // });
-
+    this.background.scrollFactorX = 0;
     this.add(this.background);
 
     this.header = scene.add
@@ -43,7 +39,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
         shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
       })
       .setOrigin(0.5, 0.5);
-
+    this.header.scrollFactorX = 0;
     this.add(this.header);
 
     this.restartText = scene.add
@@ -55,6 +51,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
         strokeThickness: 2,
       })
       .setOrigin(0.5, 0.5);
+    this.restartText.scrollFactorX = 0;
     this.homeText = scene.add
       .text(2, 111, ' Press HOME to home page', {
         fontFamily: 'Itim',
@@ -64,7 +61,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
         strokeThickness: 2,
       })
       .setOrigin(0.5, 0.5);
-
+    this.homeText.scrollFactorX = 0;
     this.homeBtn = scene.add
       .image(-161, 111, END_MODAL.homeBtn)
       .setInteractive({ useHandCursor: true })
@@ -74,6 +71,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
         console.log('homeBtn');
       });
     this.homeBtn.name = 'homeBtn';
+    this.homeBtn.scrollFactorX = 0;
 
     this.reloadBtn = scene.add
       .image(-161, 46, END_MODAL.reloadBtn)
@@ -84,6 +82,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
         console.log('reloadBtn');
       });
     this.reloadBtn.name = 'reloadBtn';
+    this.reloadBtn.scrollFactorX = 0;
 
     this.image = scene.add.image(0, -42, isDied ? END_MODAL.gravestone : END_MODAL.winCup).setOrigin(0.5, 0.5);
     this.image.name = isDied ? END_MODAL.gravestone : END_MODAL.winCup;
@@ -103,6 +102,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
         this.close();
       });
     this.closeButton.name = 'closeButton';
+    this.closeButton.scrollFactorX = 0;
 
     this.add(this.closeButton);
 

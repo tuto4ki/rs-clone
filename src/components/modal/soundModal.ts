@@ -18,12 +18,9 @@ export default class SoundModal extends Phaser.GameObjects.Container {
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x2b2b2b, 1)
       .setOrigin(0.5, 0.5)
-      // .setInteractive({ useHandCursor: true })
-      // .on('pointerdown', () => {
-      // this.close();
-      // })
+      .setInteractive({ useHandCursor: true })
       .setStrokeStyle(3, 0x00ff00);
-
+    this.background.scrollFactorX = 0;
     this.add(this.background);
 
     this.header = scene.add
@@ -36,7 +33,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
       })
       .setOrigin(0.5, 0.5);
-
+    this.header.scrollFactorX = 0;
     this.add(this.header);
 
     this.soundOnOffText = scene.add
@@ -48,7 +45,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         strokeThickness: 2,
       })
       .setOrigin(0.5, 0.5);
-
+    this.soundOnOffText.scrollFactorX = 0;
     this.musicOnOffText = scene.add
       .text(20, -20, '- click to ON/OFF music', {
         fontFamily: 'Itim',
@@ -58,7 +55,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         strokeThickness: 2,
       })
       .setOrigin(0.5, 0.5);
-
+    this.musicOnOffText.scrollFactorX = 0;
     this.musicOffBtn = scene.add
       .image(-125, -20, SOUND_BTNS.musicOffBtn)
       .setInteractive({ useHandCursor: true })
@@ -71,6 +68,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.musicOffBtn.setAlpha(0);
       });
     this.musicOffBtn.name = 'musicOffBtn';
+    this.musicOffBtn.scrollFactorX = 0;
     this.musicOnBtn = scene.add
       .image(-125, -20, SOUND_BTNS.musicOnBtn)
       .setInteractive({ useHandCursor: true })
@@ -83,6 +81,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.musicOffBtn.setAlpha(1);
       });
     this.musicOnBtn.name = 'musicOnBtn';
+    this.musicOnBtn.scrollFactorX = 0;
     this.soundOffBtn = scene.add
       .image(-125, 45, SOUND_BTNS.soundOffBtn)
       .setInteractive({ useHandCursor: true })
@@ -95,6 +94,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.soundOffBtn.setAlpha(0);
       });
     this.soundOffBtn.name = 'soundOffBtn';
+    this.soundOffBtn.scrollFactorX = 0;
     this.soundOnBtn = scene.add
       .image(-125, 45, SOUND_BTNS.soundOnBtn)
       .setInteractive({ useHandCursor: true })
@@ -107,6 +107,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.soundOnBtn.setAlpha(0);
       });
     this.soundOnBtn.name = 'soundOnBtn';
+    this.soundOnBtn.scrollFactorX = 0;
 
     this.add(this.soundOnOffText);
     this.add(this.musicOnOffText);
@@ -124,6 +125,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.close();
       });
     this.closeButton.name = 'closeButton';
+    this.closeButton.scrollFactorX = 0;
 
     this.add(this.closeButton);
 

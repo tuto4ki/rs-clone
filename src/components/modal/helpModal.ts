@@ -34,6 +34,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
         shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
       })
       .setOrigin(0.5, 0.5);
+    this.header.scrollFactorX = 0;
 
     this.add(this.header);
 
@@ -47,6 +48,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       })
       .setOrigin(0.5, 0.5);
     this.howControl.name = 'howControl';
+    this.howControl.scrollFactorX = 0;
 
     this.add(this.howControl);
 
@@ -65,6 +67,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       )
       .setOrigin(0.5, 0.5);
     this.howPlaySettings.name = 'howPlaySettings';
+    this.howPlaySettings.scrollFactorX = 0;
 
     this.add(this.howPlaySettings);
     this.closeButton = scene.add
@@ -76,6 +79,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
         this.close();
       });
     this.closeButton.name = 'closeButton';
+    this.closeButton.scrollFactorX = 0;
 
     this.add(this.closeButton);
 
