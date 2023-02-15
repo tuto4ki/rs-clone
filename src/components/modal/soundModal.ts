@@ -1,25 +1,28 @@
-export default class Modal extends Phaser.GameObjects.Container {
+import { CLOSE_BTN, SOUND_BTNS } from '../../game/constGame';
+
+export default class SoundModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
   header: Phaser.GameObjects.Text;
-  soundOffText: Phaser.GameObjects.Text;
+  soundOnOffText: Phaser.GameObjects.Text;
   closeButton: Phaser.GameObjects.Image;
   isOpen!: boolean;
+  musicOffBtn: Phaser.GameObjects.Image;
+  musicOnBtn: Phaser.GameObjects.Image;
+  musicOnOffText: Phaser.GameObjects.Text;
   soundOffBtn: Phaser.GameObjects.Image;
   soundOnBtn: Phaser.GameObjects.Image;
-  soundOnText: Phaser.GameObjects.Text;
-  soundOffIsClicked: boolean;
-  soundOnIsClicked: boolean;
 
   constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
     super(scene, x, y);
 
     this.background = scene.add
-      .rectangle(0, 0, width, height, 0x000000, 0.7)
+      .rectangle(0, 0, width, height, 0x2b2b2b, 1)
       .setOrigin(0.5, 0.5)
       // .setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => {
-        // this.close();
-      });
+      // .on('pointerdown', () => {
+      // this.close();
+      // })
+      .setStrokeStyle(3, 0x00ff00);
 
     this.add(this.background);
 
@@ -36,8 +39,8 @@ export default class Modal extends Phaser.GameObjects.Container {
 
     this.add(this.header);
 
-    this.soundOffText = scene.add
-      .text(10, 45, '- click to sound off', {
+    this.soundOnOffText = scene.add
+      .text(20, 45, '- click to ON/OFF sound', {
         fontFamily: 'Itim',
         fontSize: '22px',
         color: '#fff',
@@ -46,8 +49,8 @@ export default class Modal extends Phaser.GameObjects.Container {
       })
       .setOrigin(0.5, 0.5);
 
-    this.soundOnText = scene.add
-      .text(10, -20, '- click to sound on', {
+    this.musicOnOffText = scene.add
+      .text(20, -20, '- click to ON/OFF music', {
         fontFamily: 'Itim',
         fontSize: '22px',
         color: '#fff',
@@ -56,39 +59,64 @@ export default class Modal extends Phaser.GameObjects.Container {
       })
       .setOrigin(0.5, 0.5);
 
-    this.soundOffBtn = scene.add
-      .image(-111, 45, 'soundOffBtn')
+    this.musicOffBtn = scene.add
+      .image(-125, -20, SOUND_BTNS.musicOffBtn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
-        console.log('soundOff');
-        this.soundOnBtn.setTint(0xffffff);
-        this.soundOffBtn.setTint(0xa79999);
+        console.log('musicOffBtn');
+        this.musicOnBtn.setDepth(2);
+        this.musicOnBtn.setAlpha(1);
+        this.musicOffBtn.setAlpha(0);
+      });
+    this.musicOffBtn.name = 'musicOffBtn';
+    this.musicOnBtn = scene.add
+      .image(-125, -20, SOUND_BTNS.musicOnBtn)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.3)
+      .setOrigin(0.5, 0.5)
+      .on('pointerdown', () => {
+        console.log('musicOnBtn');
+        this.musicOffBtn.setDepth(2);
+        this.musicOnBtn.setAlpha(0);
+        this.musicOffBtn.setAlpha(1);
+      });
+    this.musicOnBtn.name = 'musicOnBtn';
+    this.soundOffBtn = scene.add
+      .image(-125, 45, SOUND_BTNS.soundOffBtn)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.3)
+      .setOrigin(0.5, 0.5)
+      .on('pointerdown', () => {
+        console.log('soundOffBtn');
+        this.soundOnBtn.setDepth(2);
+        this.soundOnBtn.setAlpha(1);
+        this.soundOffBtn.setAlpha(0);
       });
     this.soundOffBtn.name = 'soundOffBtn';
-    this.soundOffIsClicked = false;
-    this.soundOnIsClicked = true;
     this.soundOnBtn = scene.add
-      .image(-111, -20, 'soundOnBtn')
+      .image(-125, 45, SOUND_BTNS.soundOnBtn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
-      .setTint(0xa79999)
       .on('pointerdown', () => {
-        console.log('soundOn');
-        this.soundOnBtn.setTint(0xa79999);
-        this.soundOffBtn.setTint(0xffffff);
+        console.log('soundOnBtn');
+        this.soundOffBtn.setDepth(2);
+        this.soundOffBtn.setAlpha(1);
+        this.soundOnBtn.setAlpha(0);
       });
     this.soundOnBtn.name = 'soundOnBtn';
 
-    this.add(this.soundOffText);
-    this.add(this.soundOnText);
+    this.add(this.soundOnOffText);
+    this.add(this.musicOnOffText);
+    this.add(this.musicOffBtn);
+    this.add(this.musicOnBtn);
     this.add(this.soundOffBtn);
     this.add(this.soundOnBtn);
 
     this.closeButton = scene.add
-      .image(148, -96, 'closeBtn')
+      .image(168, -98, CLOSE_BTN)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -106,7 +134,7 @@ export default class Modal extends Phaser.GameObjects.Container {
 
   open() {
     console.log('open modal');
-    this.background.setAlpha(0.4);
+    this.background.setAlpha(1);
     this.setVisible(true);
     this.scene.tweens.add({
       targets: this,

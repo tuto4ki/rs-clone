@@ -1,4 +1,6 @@
-export default class helpModal extends Phaser.GameObjects.Container {
+import { CLOSE_BTN, HOW_TO_PLAY } from '../../game/constGame';
+
+export default class HelpModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Image;
   header: Phaser.GameObjects.Text;
   closeButton: Phaser.GameObjects.Image;
@@ -12,7 +14,7 @@ export default class helpModal extends Phaser.GameObjects.Container {
     super(scene, x, y);
 
     this.background = scene.add
-      .image(0, 0, 'howToPlay')
+      .image(0, 0, HOW_TO_PLAY)
       .setDisplaySize(width, height)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -66,7 +68,7 @@ export default class helpModal extends Phaser.GameObjects.Container {
 
     this.add(this.howPlaySettings);
     this.closeButton = scene.add
-      .image(466, -340, 'closeBtn')
+      .image(466, -340, CLOSE_BTN)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })

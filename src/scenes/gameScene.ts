@@ -1,5 +1,6 @@
-import helpModal from '../components/modal/helpModal';
-import Modal from '../components/modal/soundModal';
+import DieModal from '../components/modal/dieModal';
+import HelpModal from '../components/modal/helpModal';
+import SoundModal from '../components/modal/soundModal';
 import {
   COLLISION_PLAYER_ENEMY,
   IMAGES,
@@ -10,6 +11,8 @@ import {
   HEIGHT_GAME,
   WIDTH_GAME,
   EMUSIC,
+  GEAR_BTN,
+  HELP_BTN,
 } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import Money from '../game/money';
@@ -17,7 +20,7 @@ import Music from '../game/music';
 import Obstacles from '../game/obstacle';
 import Player from '../game/player';
 import Statistics from '../game/statistict';
-import EndGameScene from './endGameScene';
+// import EndGameScene from './endGameScene';
 export class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
@@ -95,25 +98,25 @@ export class GameScene extends Phaser.Scene {
     // score and time
     this._statistics = new Statistics(this, 30, 30);
     //settings modal
-    const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.name = 'gearBtn';
-    const helpBtn = this.add.image(976, 29, 'helpBtn').setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'helpBtn';
     // const playBtn = this.add.image(50, 75, 'playBtn').setInteractive().setScale(0.4);
     // const exitBtn = this.add.image(50, 125, 'exitBtn').setInteractive().setScale(0.4);
     // const homeBtn = this.add.image(50, 225, 'homeBtn').setInteractive().setScale(0.4);
     // const infoBtn = this.add.image(50, 275, 'infoBtn').setInteractive().setScale(0.4);
     // const menuBtn = this.add.image(50, 325, 'menuBtn').setInteractive().setScale(0.4);
-    const modal = new Modal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 300, 200);
-    modal.setScale(0);
-    this.add.existing(modal);
+    const soundModal = new SoundModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 340, 200);
+    soundModal.setScale(0);
+    this.add.existing(soundModal);
     gearBtn.on('pointerdown', () => {
-      if (!modal.isOpen) {
-        modal.open();
+      if (!soundModal.isOpen) {
+        soundModal.open();
       }
     });
     //
-    const howToPlayModal = new helpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
+    const howToPlayModal = new HelpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
     howToPlayModal.setScale(0);
     this.add.existing(howToPlayModal);
     helpBtn.on('pointerdown', () => {
@@ -156,8 +159,21 @@ export class GameScene extends Phaser.Scene {
 
   public gameOver(isDied: boolean) {
     this._isFinish = true;
-    const endGame = new EndGameScene();
-    endGame.create(this, isDied ? 'You Died' : 'You Win!');
+    if (isDied) {
+      const dieModal = new DieModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 400, 300, true);
+      dieModal.setScale(0);
+      dieModal.name = 'DIE';
+      this.add.existing(dieModal);
+      dieModal.open();
+    } else {
+      const dieModal = new DieModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 400, 300, false);
+      dieModal.setScale(0);
+      dieModal.name = 'WIN';
+      this.add.existing(dieModal);
+      dieModal.open();
+    }
+    // const endGame = new EndGameScene();
+    // endGame.create(this, isDied ? 'You Died' : 'You Win!');
   }
 
   private checkCollision(

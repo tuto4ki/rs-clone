@@ -70,3 +70,24 @@ export const responseStatus = {
   ok: 200,
   notFound: 404,
 };
+
+export const GEAR_BTN = 'GEAR_BTN';
+export const HELP_BTN = 'HELP_BTN';
+export const PLAY_BTN = 'PLAY_BTN';
+export const CLOSE_BTN = 'CLOSE_BTN';
+export const HOW_TO_PLAY = 'HOW_TO_PLAY';
+export const CAT_AVATAR = 'catAvatar';
+export const FOX_AVATAR = 'foxAvatar';
+
+export const enum END_MODAL {
+  homeBtn = 'homeBtn',
+  reloadBtn = 'reloadBtn',
+  gravestone = 'gravestone',
+  winCup = 'winCup',
+}
+export const enum SOUND_BTNS {
+  musicOnBtn = 'musicOnBtn',
+  musicOffBtn = 'musicOffBtn',
+  soundOnBtn = 'soundOnBtn',
+  soundOffBtn = 'soundOffBtn',
+}
