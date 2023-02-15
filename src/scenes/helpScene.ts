@@ -21,6 +21,7 @@ export default class HelpScene extends Phaser.Scene {
     howToPlayModal.setScale(0);
     this.add.existing(howToPlayModal);
     howToPlayModal.open();
+    howToPlayModal.setDepth(1);
   }
 
   public init(data: IPassScene): void {

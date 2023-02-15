@@ -1,3 +1,5 @@
+import { CLOSE_BTN, HOW_TO_PLAY } from '../../game/constGame';
+
 export default class HelpModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Image;
   header: Phaser.GameObjects.Text;
@@ -14,7 +16,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     this._typeScene = typeScene;
 
     this.background = scene.add
-      .image(0, 0, 'howToPlay')
+      .image(0, 0, HOW_TO_PLAY)
       .setDisplaySize(width, height)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -34,6 +36,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
         shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
       })
       .setOrigin(0.5, 0.5);
+    this.header.scrollFactorX = 0;
 
     this.add(this.header);
 
@@ -47,6 +50,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       })
       .setOrigin(0.5, 0.5);
     this.howControl.name = 'howControl';
+    this.howControl.scrollFactorX = 0;
 
     this.add(this.howControl);
 
@@ -65,10 +69,11 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       )
       .setOrigin(0.5, 0.5);
     this.howPlaySettings.name = 'howPlaySettings';
+    this.howPlaySettings.scrollFactorX = 0;
 
     this.add(this.howPlaySettings);
     this.closeButton = scene.add
-      .image(466, -340, 'closeBtn')
+      .image(466, -340, CLOSE_BTN)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -76,6 +81,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
         this.close();
       });
     this.closeButton.name = 'closeButton';
+    this.closeButton.scrollFactorX = 0;
 
     this.add(this.closeButton);
 
@@ -115,9 +121,9 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       repeat: 0,
       yoyo: false,
       onComplete: () => {
-        this.scene.scene.resume(this._typeScene);
         this.isOpen = false;
         this.setVisible(false);
+        this.scene.scene.resume(this._typeScene);
       },
     });
   }

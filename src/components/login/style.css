@@ -55,6 +55,7 @@ input:focus {
   position: absolute;
   left: 39%;
   top: 20%;
+  display: none;
 }
 
 .input-wrap {
@@ -108,7 +109,7 @@ input:focus {
 
 canvas {
   display: block;
-  /*visibility: hidden;*/
+  /* visibility: hidden; */
   margin: 0 auto;
 }
 

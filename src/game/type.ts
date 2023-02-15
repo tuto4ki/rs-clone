@@ -12,4 +12,5 @@ export default interface IAnimationKey {
 
 export interface IPassScene {
   scene: string;
+  isDied?: boolean;
 }
