@@ -27,7 +27,7 @@ export default class Game {
           gravity: {
             y: GRAVITY,
           },
-          debug: true,
+          debug: false,
         },
       },
       backgroundColor: '#2e2b2b',
