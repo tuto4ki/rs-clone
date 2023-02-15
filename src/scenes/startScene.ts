@@ -1,6 +1,4 @@
 import WebFontFile from '../assets/fonts/webFontFile';
-import SoundModal from '../components/modal/soundModal';
-import HelpModal from '../components/modal/helpModal';
 import {
   ENEMY_TYPE,
   ENTITY_ANIMATION,
@@ -10,6 +8,7 @@ import {
   HEIGHT_GAME,
   WIDTH_GAME,
   EMUSIC,
+  ESCENE,
   GEAR_BTN,
   HELP_BTN,
   PLAY_BTN,
@@ -21,11 +20,11 @@ import {
   FOX_AVATAR,
 } from '../game/constGame';
 
-export class StartScene extends Phaser.Scene {
-  SELECTED_CHARACTER: unknown;
+export default class StartScene extends Phaser.Scene {
+  selectedCharacter: unknown;
   textBtn: Phaser.GameObjects.Text | undefined;
   constructor() {
-    super('Start');
+    super(ESCENE.start);
   }
   public preload(): void {
     this.load.image(IMAGES.bgLevel1, '../assets/images/bg.png');
@@ -114,28 +113,14 @@ export class StartScene extends Phaser.Scene {
       play_btn.setTint(0xffffff).setInteractive();
     });
     // модалки start
-    const gear_btn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
-    gear_btn.name = 'GEAR_BTN';
-    const help_btn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
-    help_btn.name = 'help_btn';
-    const soundModal = new SoundModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 340, 200);
-    soundModal.setScale(0);
-    this.add.existing(soundModal);
-    gear_btn.on('pointerdown', () => {
-      if (!soundModal.isOpen) {
-        soundModal.open();
-      }
-    });
-    const howToPlayModal = new HelpModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, WIDTH_GAME - 60, HEIGHT_GAME - 60);
-    howToPlayModal.setScale(0);
-    this.add.existing(howToPlayModal);
-    help_btn.on('pointerdown', () => {
-      if (!howToPlayModal.isOpen) {
-        howToPlayModal.open();
-        howToPlayModal.setDepth(1);
-      }
-    });
-    // модалки end
+    const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
+    gearBtn.name = 'GEAR_BTN';
+    gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
+
+    const helpBtn = this.add.image(976, 29, 'helpBtn').setInteractive({ useHandCursor: true }).setScale(0.25);
+    helpBtn.name = 'help_btn';
+    helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
+
     this.textBtn = this.add
       .text(WIDTH_GAME / 2, HEIGHT_GAME - 80, 'To start playing, select a character and press the Play button', {
         fontFamily: 'Itim',
@@ -195,5 +180,10 @@ export class StartScene extends Phaser.Scene {
       frameRate: frameRate,
       repeat: repeat,
     });
+  }
+
+  private changeScene(nameScene: string) {
+    this.scene.pause();
+    this.scene.launch(nameScene, { scene: ESCENE.start });
   }
 }

@@ -62,6 +62,7 @@ export const enum EMUSIC {
   diePlayer = 'diePlayer',
   win = 'win',
 }
+
 export const serverAdress = 'http://localhost:3000';
 
 export const responseStatus = {
@@ -70,6 +71,14 @@ export const responseStatus = {
   ok: 200,
   notFound: 404,
 };
+
+export const enum ESCENE {
+  start = 'Start',
+  game = 'Game',
+  settings = 'SettingsScene',
+  help = 'HelpScene',
+  end = 'EndGameScene',
+}
 
 export const GEAR_BTN = 'GEAR_BTN';
 export const HELP_BTN = 'HELP_BTN';

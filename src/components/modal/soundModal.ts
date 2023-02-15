@@ -11,9 +11,11 @@ export default class SoundModal extends Phaser.GameObjects.Container {
   musicOnOffText: Phaser.GameObjects.Text;
   soundOffBtn: Phaser.GameObjects.Image;
   soundOnBtn: Phaser.GameObjects.Image;
+  private _typeScene: string;
 
-  constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, typeScene: string) {
     super(scene, x, y);
+    this._typeScene = typeScene;
 
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x2b2b2b, 1)
@@ -163,6 +165,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
       repeat: 0,
       yoyo: false,
       onComplete: () => {
+        this.scene.scene.resume(this._typeScene);
         this.isOpen = false;
         this.setVisible(false);
       },

@@ -7,11 +7,13 @@ export default class HelpModal extends Phaser.GameObjects.Container {
   isOpen!: boolean;
   howPlaySettings: Phaser.GameObjects.Text;
   howControl: Phaser.GameObjects.Text;
+  private _typeScene: string;
 
   // isOpen: boolean;
 
-  constructor(scene: Phaser.Scene, x: number | undefined, y: number | undefined, width: number, height: number) {
+  constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, typeScene: string) {
     super(scene, x, y);
+    this._typeScene = typeScene;
 
     this.background = scene.add
       .image(0, 0, HOW_TO_PLAY)
@@ -86,9 +88,11 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     this.setSize(width, height);
 
     this.setVisible(false);
+
+    this.setScrollElements(0);
   }
 
-  open() {
+  public open(): void {
     console.log('open modal');
     this.background.setAlpha(1);
     this.setVisible(true);
@@ -106,7 +110,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     });
   }
 
-  close() {
+  public close(): void {
     this.background.setAlpha(0);
     this.scene.tweens.add({
       targets: this,
@@ -119,7 +123,14 @@ export default class HelpModal extends Phaser.GameObjects.Container {
       onComplete: () => {
         this.isOpen = false;
         this.setVisible(false);
+        this.scene.scene.resume(this._typeScene);
       },
     });
+  }
+
+  private setScrollElements(value: number) {
+    this.setScrollFactor(value);
+    this.closeButton.setScrollFactor(value);
+    this.background.setScrollFactor(value);
   }
 }
