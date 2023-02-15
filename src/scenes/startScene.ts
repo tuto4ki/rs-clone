@@ -113,11 +113,11 @@ export default class StartScene extends Phaser.Scene {
       play_btn.setTint(0xffffff).setInteractive();
     });
     // модалки start
-    const gearBtn = this.add.image(977, 71, 'gearBtn').setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.name = 'GEAR_BTN';
     gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
 
-    const helpBtn = this.add.image(976, 29, 'helpBtn').setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'help_btn';
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
 

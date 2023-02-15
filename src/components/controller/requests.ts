@@ -16,7 +16,7 @@ export const register = (username: string, password: string, avatar = 1) => {
 };
 
 export const login = (username: string, password: string) => {
-  return fetch(`${serverAdress}/login?username=${username}&password=${password}`, {
+  return fetch(`${serverAdress}/user?username=${username}&password=${password}`, {
     method: 'GET',
   });
 };
