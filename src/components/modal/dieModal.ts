@@ -1,10 +1,9 @@
-import { CLOSE_BTN, END_MODAL } from '../../game/constGame';
+import { END_MODAL } from '../../game/constGame';
 
 export default class DieModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
   header: Phaser.GameObjects.Text;
   restartText: Phaser.GameObjects.Text;
-  closeButton: Phaser.GameObjects.Image;
   isOpen!: boolean;
   homeBtn: Phaser.GameObjects.Image;
   reloadBtn: Phaser.GameObjects.Image;
@@ -27,7 +26,6 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x2b2b2b, 1)
       .setOrigin(0.5, 0.5)
-      .setInteractive({ useHandCursor: true })
       .setStrokeStyle(3, 0x00ff00);
     this.background.scrollFactorX = 0;
     this.add(this.background);
@@ -96,25 +94,12 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.add(this.homeBtn);
     this.add(this.reloadBtn);
 
-    this.closeButton = scene.add
-      .image(198, -146, CLOSE_BTN)
-      .setScale(0.2)
-      .setOrigin(0.5, 0.5)
-      .setInteractive({ useHandCursor: true })
-      .on('pointerdown', () => {
-        this.close();
-      });
-    this.closeButton.name = 'closeButton';
-    this.closeButton.scrollFactorX = 0;
-
-    this.add(this.closeButton);
-
     this.setSize(width, height);
 
     this.setVisible(false);
   }
 
-  open() {
+  public open(): void {
     console.log('open modal');
     this.background.setAlpha(1);
     this.setVisible(true);
@@ -131,8 +116,8 @@ export default class DieModal extends Phaser.GameObjects.Container {
       },
     });
   }
-
-  close() {
+  /*
+  private close(): void {
     this.background.setAlpha(0);
     this.scene.tweens.add({
       targets: this,
@@ -149,4 +134,5 @@ export default class DieModal extends Phaser.GameObjects.Container {
       },
     });
   }
+  */
 }
