@@ -18,6 +18,8 @@ import {
   SOUND_BTNS,
   CAT_AVATAR,
   FOX_AVATAR,
+  TITLE_STYLE,
+  MODAL_TEXT_STYLE,
 } from '../game/constGame';
 
 export default class StartScene extends Phaser.Scene {
@@ -71,16 +73,7 @@ export default class StartScene extends Phaser.Scene {
     this.createAnimationZombie(ENEMY_TYPE.zombieMan);
     this.createAnimationMoney();
 
-    const choose_title = this.add
-      .text(WIDTH_GAME / 2, 30, 'Choose Your Character ', {
-        fontFamily: 'Itim',
-        fontSize: '30px',
-        color: '#F5F901',
-        stroke: '#E52121',
-        strokeThickness: 6,
-        shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
-      })
-      .setOrigin(0.5, 0.5);
+    const choose_title = this.add.text(WIDTH_GAME / 2, 30, 'Choose Your Character ', TITLE_STYLE).setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 
     const player_1 = this.add
@@ -122,13 +115,12 @@ export default class StartScene extends Phaser.Scene {
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
 
     this.textBtn = this.add
-      .text(WIDTH_GAME / 2, HEIGHT_GAME - 80, 'To start playing, select a character and press the Play button', {
-        fontFamily: 'Itim',
-        fontSize: '24px',
-        color: '#fff',
-        stroke: '#C83737',
-        strokeThickness: 2,
-      })
+      .text(
+        WIDTH_GAME / 2,
+        HEIGHT_GAME - 80,
+        'To start playing, select a character and press the Play button',
+        MODAL_TEXT_STYLE
+      )
       .setOrigin(0.5, 0.5);
 
     const play_btn = this.add

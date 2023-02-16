@@ -1,4 +1,4 @@
-import { END_MODAL } from '../../game/constGame';
+import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE } from '../../game/constGame';
 
 export default class DieModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
@@ -31,37 +31,14 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.add(this.background);
 
     this.header = scene.add
-      .text(0, -(height / 2) + 30, isDied ? 'Unfortunately you died... ' : 'Congratulations! You won ', {
-        fontFamily: 'Itim',
-        fontSize: '30px',
-        color: '#F5F901',
-        stroke: '#E52121',
-        strokeThickness: 6,
-        shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
-      })
+      .text(0, -(height / 2) + 30, isDied ? 'Unfortunately you died... ' : 'Congratulations! You won ', TITLE_STYLE)
       .setOrigin(0.5, 0.5);
     this.header.scrollFactorX = 0;
     this.add(this.header);
 
-    this.restartText = scene.add
-      .text(23, 46, ' Press RESTART to restart level', {
-        fontFamily: 'Itim',
-        fontSize: '22px',
-        color: '#fff',
-        stroke: '#C83737',
-        strokeThickness: 2,
-      })
-      .setOrigin(0.5, 0.5);
+    this.restartText = scene.add.text(23, 46, ' Press RESTART to restart level', MODAL_TEXT_STYLE).setOrigin(0.5, 0.5);
     this.restartText.scrollFactorX = 0;
-    this.homeText = scene.add
-      .text(2, 111, ' Press HOME to home page', {
-        fontFamily: 'Itim',
-        fontSize: '22px',
-        color: '#fff',
-        stroke: '#C83737',
-        strokeThickness: 2,
-      })
-      .setOrigin(0.5, 0.5);
+    this.homeText = scene.add.text(2, 111, ' Press HOME to home page', MODAL_TEXT_STYLE).setOrigin(0.5, 0.5);
     this.homeText.scrollFactorX = 0;
     this.homeBtn = scene.add
       .image(-161, 111, END_MODAL.homeBtn)
