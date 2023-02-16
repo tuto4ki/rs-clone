@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/tuto4ki/rs-clone#readme",
   "dependencies": {
+    "hotkeys-js": "^3.10.1",
     "phaser": "^3.55.2",
     "webfontloader": "^1.6.28"
   },

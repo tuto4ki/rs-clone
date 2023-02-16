@@ -1,3 +1,4 @@
+import hotkeys from 'hotkeys-js';
 import {
   COLLISION_PLAYER_ENEMY,
   IMAGES,
@@ -18,6 +19,12 @@ import Player from '../game/player';
 import Statistics from '../game/statistict';
 // import EndGameScene from './endGameScene';
 const END_GAME_TIMEOUT = 1500;
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'F1' || event.key === 'F2') {
+    event.preventDefault();
+  }
+});
 export default class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
@@ -105,6 +112,12 @@ export default class GameScene extends Phaser.Scene {
     gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
     this.events.on('resume', () => this._music.play(EMUSIC.soundBg));
+    hotkeys('f1', () => {
+      this.changeScene('HelpScene');
+    });
+    hotkeys('f2', () => {
+      this.changeScene('SettingsScene');
+    });
   }
 
   public update(): void {

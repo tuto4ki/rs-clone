@@ -1,3 +1,4 @@
+import hotkeys from 'hotkeys-js';
 import WebFontFile from '../assets/fonts/webFontFile';
 import {
   ENEMY_TYPE,
@@ -22,6 +23,11 @@ import {
   MODAL_TEXT_STYLE,
 } from '../game/constGame';
 
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'F1' || event.key === 'F2') {
+    event.preventDefault();
+  }
+});
 export default class StartScene extends Phaser.Scene {
   selectedCharacter: unknown;
   textBtn: Phaser.GameObjects.Text | undefined;
@@ -113,7 +119,12 @@ export default class StartScene extends Phaser.Scene {
     const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'help_btn';
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
-
+    hotkeys('f1', () => {
+      this.changeScene('HelpScene');
+    });
+    hotkeys('f2', () => {
+      this.changeScene('SettingsScene');
+    });
     this.textBtn = this.add
       .text(
         WIDTH_GAME / 2,
