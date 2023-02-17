@@ -17,4 +17,5 @@ export interface IPassScene {
   scene: string;
   isDied?: boolean;
   playerType?: PLAYER_TYPE;
+  isStart?: boolean;
 }

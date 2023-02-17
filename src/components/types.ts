@@ -13,4 +13,5 @@ export interface IWinner {
   level: number;
   score: number;
   time: string;
+  isStart?: boolean;
 }

@@ -11,13 +11,6 @@ export default class EndGameScene extends Phaser.Scene {
   }
 
   public create(): void {
-    console.log('endGameScene');
-    /*
-    const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
-    const screenCenterY = this.cameras.main.worldView.y + this.cameras.main.height / 2;
-    this.add.rectangle(screenCenterX, screenCenterY, WIDTH_GAME / 2 - 150, HEIGHT_GAME / 2 - 200, 0xff00f);
-    this.add.text(screenCenterX, screenCenterY, this._text).setOrigin(0.5);
-    */
     const dieModal = new DieModal(
       this,
       +this.game.config.width / 2,
@@ -39,5 +32,9 @@ export default class EndGameScene extends Phaser.Scene {
     if (data.isDied) {
       this._isWin = data.isDied;
     }
+  }
+
+  update(/*time: number, delta: number*/): void {
+    console.log('dieModal');
   }
 }

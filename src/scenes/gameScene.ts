@@ -23,7 +23,7 @@ export default class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
   private _enemies: Enemies | null = null;
-  private _isFinish: boolean;
+  private _isFinish = false;
   private _levelNumber: number;
   private _statistics: Statistics | null = null;
   private _music: Music;
@@ -31,7 +31,6 @@ export default class GameScene extends Phaser.Scene {
 
   constructor() {
     super(ESCENE.game);
-    this._isFinish = false;
     this._levelNumber = 1;
     this._music = new Music(this);
   }
@@ -40,6 +39,7 @@ export default class GameScene extends Phaser.Scene {
     if (data.playerType) {
       this._playerType = data.playerType;
     }
+    this._isFinish = false;
   }
 
   public create(): void {
@@ -206,6 +206,6 @@ export default class GameScene extends Phaser.Scene {
     this._music.stop(EMUSIC.soundBg);
     this._statistics?.pause();
     this.scene.pause();
-    this.scene.launch(nameScene, { scene: ESCENE.game, isDied });
+    this.scene.run(nameScene, { scene: ESCENE.game, isDied });
   }
 }
