@@ -46,6 +46,8 @@ export default class Login {
 
     this._signToggleBtn.addEventListener('click', () => {
       this.changeFormState();
+      this._loginField.clearInputValue();
+      this._passwordField.clearInputValue();
     });
     this._errLogin = elementGenerator.createSpan({ className: 'errLogin' });
     this._errPass = elementGenerator.createSpan({ className: 'errPass' });
@@ -190,6 +192,10 @@ class InputField {
 
   getInputValue(): string {
     return this._inputField.value;
+  }
+
+  clearInputValue(): void {
+    this._inputField.value = '';
   }
 
   setErrorMessage() {

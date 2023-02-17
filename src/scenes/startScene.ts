@@ -1,3 +1,4 @@
+import hotkeys from 'hotkeys-js';
 import {
   PLAYER_TYPE,
   HEIGHT_GAME,
@@ -9,8 +10,15 @@ import {
   CAT_AVATAR,
   FOX_AVATAR,
   GAME_BACKGROUND,
+  TITLE_STYLE,
+  MODAL_TEXT_STYLE,
 } from '../game/constGame';
 
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'F1' || event.key === 'F2') {
+    event.preventDefault();
+  }
+});
 export default class StartScene extends Phaser.Scene {
   selectedCharacter: unknown;
   textBtn: Phaser.GameObjects.Text | undefined;
@@ -20,16 +28,7 @@ export default class StartScene extends Phaser.Scene {
   }
   public create(): void {
     this.cameras.main.backgroundColor = Phaser.Display.Color.HexStringToColor(GAME_BACKGROUND);
-    const choose_title = this.add
-      .text(WIDTH_GAME / 2, 30, 'Choose Your Character ', {
-        fontFamily: 'Itim',
-        fontSize: '30px',
-        color: '#F5F901',
-        stroke: '#E52121',
-        strokeThickness: 6,
-        shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
-      })
-      .setOrigin(0.5, 0.5);
+    const choose_title = this.add.text(WIDTH_GAME / 2, 30, 'Choose Your Character ', TITLE_STYLE).setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 
     const playerCat = this.add
@@ -67,15 +66,19 @@ export default class StartScene extends Phaser.Scene {
     const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'help_btn';
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
-
+    hotkeys('f1', () => {
+      this.changeScene('HelpScene');
+    });
+    hotkeys('f2', () => {
+      this.changeScene('SettingsScene');
+    });
     this.textBtn = this.add
-      .text(WIDTH_GAME / 2, HEIGHT_GAME - 80, 'To start playing, select a character and press the Play button', {
-        fontFamily: 'Itim',
-        fontSize: '24px',
-        color: '#fff',
-        stroke: '#C83737',
-        strokeThickness: 2,
-      })
+      .text(
+        WIDTH_GAME / 2,
+        HEIGHT_GAME - 80,
+        'To start playing, select a character and press the Play button',
+        MODAL_TEXT_STYLE
+      )
       .setOrigin(0.5, 0.5);
 
     const play_btn = this.add

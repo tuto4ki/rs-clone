@@ -104,3 +104,36 @@ export const enum SOUND_BTNS {
   soundOnBtn = 'soundOnBtn',
   soundOffBtn = 'soundOffBtn',
 }
+
+export const TITLE_STYLE = {
+  fontFamily: 'Itim',
+  fontSize: '30px',
+  color: '#F5F901',
+  stroke: '#E52121',
+  strokeThickness: 6,
+  shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
+};
+
+export const MODAL_TEXT_STYLE = {
+  fontFamily: 'Itim',
+  fontSize: '22px',
+  color: '#fff',
+  stroke: '#C83737',
+  strokeThickness: 2,
+};
+
+export const MODAL_TEXT_STYLE_000 = {
+  fontFamily: 'Itim',
+  fontSize: '24px',
+  color: '#000',
+  stroke: '#600808',
+  strokeThickness: 1,
+};
+
+export const STATISTICS_TEXT_STYLE = {
+  fontFamily: 'Itim',
+  fontSize: '30px',
+  color: '#F5F901',
+  stroke: '#E52121',
+  strokeThickness: 6,
+};

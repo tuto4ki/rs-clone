@@ -1,4 +1,4 @@
-import { CLOSE_BTN, SOUND_BTNS } from '../../game/constGame';
+import { CLOSE_BTN, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../../game/constGame';
 
 export default class SoundModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
@@ -25,38 +25,13 @@ export default class SoundModal extends Phaser.GameObjects.Container {
     this.background.scrollFactorX = 0;
     this.add(this.background);
 
-    this.header = scene.add
-      .text(0, -(height / 2) + 20, 'Sound settings ', {
-        fontFamily: 'Itim',
-        fontSize: '30px',
-        color: '#F5F901',
-        stroke: '#E52121',
-        strokeThickness: 6,
-        shadow: { color: '#010101', fill: true, blur: 4, offsetX: 6, offsetY: 0 },
-      })
-      .setOrigin(0.5, 0.5);
+    this.header = scene.add.text(0, -(height / 2) + 20, 'Sound settings ', TITLE_STYLE).setOrigin(0.5, 0.5);
     this.header.scrollFactorX = 0;
     this.add(this.header);
 
-    this.soundOnOffText = scene.add
-      .text(20, 45, '- click to ON/OFF sound', {
-        fontFamily: 'Itim',
-        fontSize: '22px',
-        color: '#fff',
-        stroke: '#C83737',
-        strokeThickness: 2,
-      })
-      .setOrigin(0.5, 0.5);
+    this.soundOnOffText = scene.add.text(20, 45, '- click to ON/OFF sound', MODAL_TEXT_STYLE).setOrigin(0.5, 0.5);
     this.soundOnOffText.scrollFactorX = 0;
-    this.musicOnOffText = scene.add
-      .text(20, -20, '- click to ON/OFF music', {
-        fontFamily: 'Itim',
-        fontSize: '22px',
-        color: '#fff',
-        stroke: '#C83737',
-        strokeThickness: 2,
-      })
-      .setOrigin(0.5, 0.5);
+    this.musicOnOffText = scene.add.text(20, -20, '- click to ON/OFF music', MODAL_TEXT_STYLE).setOrigin(0.5, 0.5);
     this.musicOnOffText.scrollFactorX = 0;
     this.musicOffBtn = scene.add
       .image(-125, -20, SOUND_BTNS.musicOffBtn)

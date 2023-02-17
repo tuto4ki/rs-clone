@@ -1,3 +1,4 @@
+import hotkeys from 'hotkeys-js';
 import {
   COLLISION_PLAYER_ENEMY,
   IMAGES,
@@ -19,6 +20,12 @@ import Statistics from '../game/statistict';
 import { IPassScene } from '../game/type';
 // import EndGameScene from './endGameScene';
 const END_GAME_TIMEOUT = 1500;
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'F1' || event.key === 'F2') {
+    event.preventDefault();
+  }
+});
 export default class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
@@ -28,6 +35,8 @@ export default class GameScene extends Phaser.Scene {
   private _statistics: Statistics | null = null;
   private _music: Music;
   private _playerType = PLAYER_TYPE.fox;
+  private soundMuted = false;
+  private previousVolume: number | undefined;
 
   constructor() {
     super(ESCENE.game);
@@ -43,6 +52,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
+    console.log(this._music);
+
     // create music
     this._music.create();
     // load level 1
@@ -115,6 +126,23 @@ export default class GameScene extends Phaser.Scene {
     this.events.on('resume', () => {
       this._statistics?.play();
       this._music.play(EMUSIC.soundBg);
+    });
+    hotkeys('f1', () => {
+      this.changeScene('HelpScene');
+    });
+    hotkeys('f2', () => {
+      this.changeScene('SettingsScene');
+    });
+    hotkeys('m', () => {
+      if (!this.soundMuted) {
+        // Включаем звук и устанавливаем предыдущую громкость
+        this.soundMuted = true;
+        this._music.mute();
+      } else {
+        this.soundMuted = false;
+        // Выключаем звук и сохраняем текущую громкость
+        this._music.unMute();
+      }
     });
   }
 
