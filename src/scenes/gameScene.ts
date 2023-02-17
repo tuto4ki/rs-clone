@@ -33,6 +33,8 @@ export default class GameScene extends Phaser.Scene {
   private _levelNumber: number;
   private _statistics: Statistics | null = null;
   private _music: Music;
+  private soundMuted = false;
+  private previousVolume: number | undefined;
 
   constructor() {
     super(ESCENE.game);
@@ -42,6 +44,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   public create(): void {
+    console.log(this._music);
+
     // create music
     this._music.create();
     // load level 1
@@ -117,6 +121,17 @@ export default class GameScene extends Phaser.Scene {
     });
     hotkeys('f2', () => {
       this.changeScene('SettingsScene');
+    });
+    hotkeys('m', () => {
+      if (!this.soundMuted) {
+        // Включаем звук и устанавливаем предыдущую громкость
+        this.soundMuted = true;
+        this._music.mute();
+      } else {
+        this.soundMuted = false;
+        // Выключаем звук и сохраняем текущую громкость
+        this._music.unMute();
+      }
     });
   }
 

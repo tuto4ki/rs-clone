@@ -1,5 +1,5 @@
 import { EMUSIC } from './constGame';
-
+import Phaser from 'phaser';
 export default class Music {
   public isPlayMusic = true;
   public isPlaySoundEffect = true;
@@ -46,5 +46,13 @@ export default class Music {
 
   public pause() {
     this._mapSounds.forEach((value) => value.pause());
+  }
+
+  public mute() {
+    this._mapSounds.forEach((value) => value, (this._scene.sound.volume = 0));
+  }
+
+  public unMute() {
+    this._mapSounds.forEach((value) => value, (this._scene.sound.volume = 1));
   }
 }
