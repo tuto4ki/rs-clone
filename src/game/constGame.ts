@@ -27,6 +27,7 @@ export const EMPTY_PICTURE_HEIGHT = 150;
 export const enum ENEMY_TYPE {
   zombieGirl = 'zombieGirl',
   zombieMan = 'zombieMan',
+  wraith = 'wraith',
 }
 
 export const enum PLAYER_TYPE {

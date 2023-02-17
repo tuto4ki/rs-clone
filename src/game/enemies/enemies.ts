@@ -4,6 +4,7 @@ import {
   EMPTY_PICTURE_WIDTH,
   ENEMY_TYPE,
   ENTITY_ANIMATION,
+  MASS_PLAYER,
   SCALE_SIZE_WORLD,
 } from '../constGame';
 import Enemy from './enemy';
@@ -16,6 +17,7 @@ const IZombieGirlAnimation = {
   scale: 0.2,
   score: 100,
   bodySize: { width: 200, height: 360 },
+  mass: MASS_PLAYER,
 };
 
 const IZombieManAnimation = {
@@ -25,8 +27,19 @@ const IZombieManAnimation = {
   scale: 0.7,
   score: 200,
   bodySize: { width: 60, height: 130 },
+  mass: MASS_PLAYER,
 };
-
+/*
+const IWraithAnimation = {
+  walk: `${ENTITY_ANIMATION.walk}${ENEMY_TYPE.wraith}`,
+  dead: `${ENTITY_ANIMATION.dead}${ENEMY_TYPE.wraith}`,
+  run: '',
+  scale: 0.7,
+  score: 150,
+  bodySize: { width: 60, height: 130 },
+  mass: 0,
+};
+*/
 export default class Enemies {
   private _listEnemies: Enemy[];
   private _listSpriteEntites: Phaser.Physics.Arcade.Group;
@@ -35,8 +48,9 @@ export default class Enemies {
     this._listEnemies = [];
     this._listSpriteEntites = scene.physics.add.group();
     this._listBarrier = scene.physics.add.staticGroup();
-    this.createEnemyList(map, scene, IZombieGirlAnimation, type, 'zombie', 'zombieGirl');
-    this.createEnemyList(map, scene, IZombieManAnimation, type, 'zombieMan', 'zombieMan');
+    this.createEnemyList(map, scene, IZombieGirlAnimation, type, 'zombie', ENEMY_TYPE.zombieGirl);
+    this.createEnemyList(map, scene, IZombieManAnimation, type, ENEMY_TYPE.zombieMan, ENEMY_TYPE.zombieMan);
+    // this.createEnemyList(map, scene, IWraithAnimation, type, ENEMY_TYPE.wraith, ENEMY_TYPE.wraith);
     const barrierList = map.filterObjects(type, (value) => value.name === 'barier');
     barrierList.forEach((object) => {
       if (object.x && object.y && object.width && object.height) {

@@ -8,6 +8,7 @@ export default interface IAnimationKey {
     width: number;
     height: number;
   };
+  mass: number;
 }
 
 export interface IPassScene {

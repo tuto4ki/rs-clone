@@ -32,6 +32,7 @@ export default class StartScene extends Phaser.Scene {
     this.load.atlas(PLAYER_TYPE.fox, '../assets/sprites/fox.png', '../assets/json/fox.json');
     this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
+    this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
     this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level 1
@@ -69,6 +70,7 @@ export default class StartScene extends Phaser.Scene {
     this.createAnimationPlayer(PLAYER_TYPE.fox);
     this.createAnimationZombie(ENEMY_TYPE.zombieGirl);
     this.createAnimationZombie(ENEMY_TYPE.zombieMan);
+    this.createAnimationWraith(ENEMY_TYPE.wraith);
     this.createAnimationMoney();
 
     const choose_title = this.add
@@ -154,13 +156,18 @@ export default class StartScene extends Phaser.Scene {
     this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 10, 2, 15, 0);
   }
 
-  private createAnimationZombie(type: string) {
+  private createAnimationZombie(type: string): void {
     this.addAnimationToManager(`${ENTITY_ANIMATION.walk}${type}`, type, 'Walk_', 1, 6, 2, 10, -1);
     this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 8, 2, 10, 0);
     this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 3, 10, 2, 15, -1);
   }
 
-  private createAnimationMoney() {
+  private createAnimationWraith(type: string): void {
+    this.addAnimationToManager(`${ENTITY_ANIMATION.walk}${type}`, type, 'Walk_', 0, 11, 2, 10, -1);
+    this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 0, 14, 2, 10, 0);
+  }
+
+  private createAnimationMoney(): void {
     this.addAnimationToManager(MONEY, MONEY, 'gold_', 1, 10, 2, 10, -1);
   }
 
@@ -173,7 +180,7 @@ export default class StartScene extends Phaser.Scene {
     zeroPad: number,
     frameRate: number,
     repeat: number
-  ) {
+  ): void {
     this.anims.create({
       key: key,
       frames: this.anims.generateFrameNames(type, { prefix: prefix, start: start, end: end, zeroPad: zeroPad }),
@@ -182,7 +189,7 @@ export default class StartScene extends Phaser.Scene {
     });
   }
 
-  private changeScene(nameScene: string) {
+  private changeScene(nameScene: string): void {
     this.scene.pause();
     this.scene.launch(nameScene, { scene: ESCENE.start });
   }
