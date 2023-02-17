@@ -16,6 +16,7 @@ import Music from '../game/music';
 import Obstacles from '../game/obstacle';
 import Player from '../game/player';
 import Statistics from '../game/statistict';
+import { IPassScene } from '../game/type';
 // import EndGameScene from './endGameScene';
 const END_GAME_TIMEOUT = 1500;
 export default class GameScene extends Phaser.Scene {
@@ -26,12 +27,19 @@ export default class GameScene extends Phaser.Scene {
   private _levelNumber: number;
   private _statistics: Statistics | null = null;
   private _music: Music;
+  private _playerType = PLAYER_TYPE.fox;
 
   constructor() {
     super(ESCENE.game);
     this._isFinish = false;
     this._levelNumber = 1;
     this._music = new Music(this);
+  }
+
+  public init(data: IPassScene): void {
+    if (data.playerType) {
+      this._playerType = data.playerType;
+    }
   }
 
   public create(): void {
@@ -54,7 +62,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, widthWorld, +this.game.config.height);
     this._cursor = this.input.keyboard.createCursorKeys();
     // create player
-    this._player = new Player(this, 100, 480, PLAYER_TYPE.fox);
+    this._player = new Player(this, 100, 480, this._playerType); // PLAYER_TYPE.fox);
     this.physics.add.collider(ground, this._player.sprite);
     ground.setCollisionBetween(0, 31);
     // create enemies

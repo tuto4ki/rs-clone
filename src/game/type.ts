@@ -1,3 +1,5 @@
+import { PLAYER_TYPE } from "./constGame";
+
 export default interface IAnimationKey {
   walk: string;
   dead: string;
@@ -14,4 +16,5 @@ export default interface IAnimationKey {
 export interface IPassScene {
   scene: string;
   isDied?: boolean;
+  playerType?: PLAYER_TYPE;
 }

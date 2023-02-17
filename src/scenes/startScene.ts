@@ -23,6 +23,7 @@ import {
 export default class StartScene extends Phaser.Scene {
   selectedCharacter: unknown;
   textBtn: Phaser.GameObjects.Text | undefined;
+
   constructor() {
     super(ESCENE.start);
   }
@@ -30,6 +31,7 @@ export default class StartScene extends Phaser.Scene {
     this.load.image(IMAGES.bgLevel1, '../assets/images/bg.png');
     this.load.image(IMAGES.emptyPicture, '../assets/images/empty.png');
     this.load.atlas(PLAYER_TYPE.fox, '../assets/sprites/fox.png', '../assets/json/fox.json');
+    this.load.atlas(PLAYER_TYPE.cat, '../assets/sprites/cat.png', '../assets/json/cat.json');
     this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
     this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
@@ -66,8 +68,10 @@ export default class StartScene extends Phaser.Scene {
     const fonts = new WebFontFile(this.load, 'Itim');
     this.load.addFile(fonts);
   }
+
   public create(): void {
     this.createAnimationPlayer(PLAYER_TYPE.fox);
+    this.createAnimationPlayer(PLAYER_TYPE.cat);
     this.createAnimationZombie(ENEMY_TYPE.zombieGirl);
     this.createAnimationZombie(ENEMY_TYPE.zombieMan);
     this.createAnimationWraith(ENEMY_TYPE.wraith);
@@ -85,33 +89,31 @@ export default class StartScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 
-    const player_1 = this.add
+    const playerCat = this.add
       .image(WIDTH_GAME / 2 - 100, HEIGHT_GAME / 2 - 200, CAT_AVATAR)
       .setInteractive({ useHandCursor: true })
       .setScale(0.2);
-    const player_2 = this.add
+    const playerFox = this.add
       .image(WIDTH_GAME / 2 + 100, HEIGHT_GAME / 2 - 200, FOX_AVATAR)
       .setInteractive({ useHandCursor: true })
       .setScale(0.2);
-    player_1.name = 'catAvatar';
-    player_2.name = 'foxAvatar';
-    player_1.setTint(0xa79999);
-    player_2.setTint(0xa79999);
+    playerCat.name = PLAYER_TYPE.cat;
+    playerFox.name = PLAYER_TYPE.fox;
+    playerCat.setTint(0xa79999);
+    playerFox.setTint(0xa79999);
 
     let SELECTED_CHARACTER: Phaser.GameObjects.Image | null = null;
 
-    player_1.on('pointerdown', () => {
-      console.log('cat');
-      SELECTED_CHARACTER = player_1;
-      player_1.setTint(0xffffff);
-      player_2.setTint(0xa79999);
+    playerCat.on('pointerdown', () => {
+      SELECTED_CHARACTER = playerCat;
+      playerCat.setTint(0xffffff);
+      playerFox.setTint(0xa79999);
       play_btn.setTint(0xffffff).setInteractive();
     });
-    player_2.on('pointerdown', () => {
-      console.log('fox');
-      SELECTED_CHARACTER = player_2;
-      player_2.setTint(0xffffff);
-      player_1.setTint(0xa79999);
+    playerFox.on('pointerdown', () => {
+      SELECTED_CHARACTER = playerFox;
+      playerFox.setTint(0xffffff);
+      playerCat.setTint(0xa79999);
       play_btn.setTint(0xffffff).setInteractive();
     });
     // модалки start
@@ -142,8 +144,7 @@ export default class StartScene extends Phaser.Scene {
       if (SELECTED_CHARACTER === null) {
         return;
       } else {
-        this.scene.start('Game');
-        console.log('Selected character: ', SELECTED_CHARACTER);
+        this.scene.start('Game', { scene: ESCENE.start, playerType: SELECTED_CHARACTER.name });
       }
     });
     play_btn.setTint(0xa79999);
