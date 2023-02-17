@@ -4,6 +4,8 @@ export const HEIGHT_GAME = 750;
 
 export const GRAVITY = 500;
 
+export const GAME_BACKGROUND = '#2e2b2b';
+
 export const SPEED_PLAYER = 200;
 
 export const SPEED_ENTITY = 30;
@@ -27,6 +29,7 @@ export const EMPTY_PICTURE_HEIGHT = 150;
 export const enum ENEMY_TYPE {
   zombieGirl = 'zombieGirl',
   zombieMan = 'zombieMan',
+  wraith = 'wraith',
 }
 
 export const enum PLAYER_TYPE {
@@ -73,6 +76,7 @@ export const responseStatus = {
 };
 
 export const enum ESCENE {
+  preload = 'Preload',
   start = 'Start',
   game = 'Game',
   settings = 'SettingsScene',

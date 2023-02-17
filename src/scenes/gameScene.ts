@@ -17,6 +17,7 @@ import Music from '../game/music';
 import Obstacles from '../game/obstacle';
 import Player from '../game/player';
 import Statistics from '../game/statistict';
+import { IPassScene } from '../game/type';
 // import EndGameScene from './endGameScene';
 const END_GAME_TIMEOUT = 1500;
 
@@ -29,18 +30,25 @@ export default class GameScene extends Phaser.Scene {
   private _cursor: Phaser.Types.Input.Keyboard.CursorKeys | null = null;
   private _player: Player | null = null;
   private _enemies: Enemies | null = null;
-  private _isFinish: boolean;
+  private _isFinish = false;
   private _levelNumber: number;
   private _statistics: Statistics | null = null;
   private _music: Music;
+  private _playerType = PLAYER_TYPE.fox;
   private soundMuted = false;
   private previousVolume: number | undefined;
 
   constructor() {
     super(ESCENE.game);
-    this._isFinish = false;
     this._levelNumber = 1;
     this._music = new Music(this);
+  }
+
+  public init(data: IPassScene): void {
+    if (data.playerType) {
+      this._playerType = data.playerType;
+    }
+    this._isFinish = false;
   }
 
   public create(): void {
@@ -65,7 +73,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.world.setBounds(0, 0, widthWorld, +this.game.config.height);
     this._cursor = this.input.keyboard.createCursorKeys();
     // create player
-    this._player = new Player(this, 100, 480, PLAYER_TYPE.fox);
+    this._player = new Player(this, 100, 480, this._playerType); // PLAYER_TYPE.fox);
     this.physics.add.collider(ground, this._player.sprite);
     ground.setCollisionBetween(0, 31);
     // create enemies
@@ -115,7 +123,10 @@ export default class GameScene extends Phaser.Scene {
     helpBtn.scrollFactorX = 0;
     gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
-    this.events.on('resume', () => this._music.play(EMUSIC.soundBg));
+    this.events.on('resume', () => {
+      this._statistics?.play();
+      this._music.play(EMUSIC.soundBg);
+    });
     hotkeys('f1', () => {
       this.changeScene('HelpScene');
     });
@@ -166,27 +177,12 @@ export default class GameScene extends Phaser.Scene {
   }
 
   public gameOver(isDied: boolean) {
-    console.log(isDied);
     this._isFinish = true;
     setTimeout(() => {
       this.changeScene('EndGameScene', isDied);
     }, END_GAME_TIMEOUT);
-    /*
-    const endGame = new EndGameScene();
-    endGame.create(this, isDied ? 'You Died' : 'You Win!');
-    */
-    // isDied ? this.createEndGameModal(true) : this.createEndGameModal(false);
   }
-  /*
-  private createEndGameModal(die: boolean): void {
-    const dieModal = new DieModal(this, +this.game.config.width / 2, +this.game.config.height / 2, 400, 300, die);
-    dieModal.scrollFactorX = 0;
-    dieModal.setScale(0);
-    dieModal.name = 'WIN';
-    this.add.existing(dieModal);
-    dieModal.open();
-  }
-  */
+
   private checkCollision(
     player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
     enemy: Phaser.Types.Physics.Arcade.GameObjectWithBody
@@ -236,7 +232,8 @@ export default class GameScene extends Phaser.Scene {
 
   private changeScene(nameScene: string, isDied?: boolean) {
     this._music.stop(EMUSIC.soundBg);
+    this._statistics?.pause();
     this.scene.pause();
-    this.scene.launch(nameScene, { scene: ESCENE.game, isDied });
+    this.scene.run(nameScene, { scene: ESCENE.game, isDied });
   }
 }

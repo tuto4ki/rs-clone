@@ -15,6 +15,7 @@ const MILLISECONDS = 1000;
 export default class Statistics {
   private _score = 0;
   private _scoreSprite: Phaser.GameObjects.Text;
+  private _pauseTime = 0;
   private _time = 0;
   private _timeSprite: Phaser.GameObjects.Text;
   private _startTime: Date;
@@ -37,9 +38,21 @@ export default class Statistics {
     this._scoreSprite.setText(this._score.toString());
   }
 
+  public pause(): void {
+    this._pauseTime += this._time;
+  }
+
+  public play(): void {
+    this._startTime = new Date();
+  }
+
   public update() {
     const currentTime = new Date();
     this._time = Math.floor((currentTime.getTime() - this._startTime.getTime()) / MILLISECONDS);
-    this._timeSprite.setText(this._time.toString());
+    this._timeSprite.setText((this._pauseTime + this._time).toString());
+  }
+
+  public gameTime(): number {
+    return this._time + this._pauseTime;
   }
 }

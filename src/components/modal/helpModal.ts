@@ -9,8 +9,6 @@ export default class HelpModal extends Phaser.GameObjects.Container {
   howControl: Phaser.GameObjects.Text;
   private _typeScene: string;
 
-  // isOpen: boolean;
-
   constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, typeScene: string) {
     super(scene, x, y);
     this._typeScene = typeScene;

@@ -165,7 +165,6 @@
          "class":"entity",
          "draworder":"topdown",
          "id":15,
-         "locked":true,
          "name":"entityObj",
          "objects":[
                 {
@@ -206,25 +205,25 @@
                 }, 
                 {
                  "class":"barier",
-                 "height":64,
+                 "height":342.544843318526,
                  "id":20,
                  "name":"barier",
                  "rotation":0,
                  "visible":true,
                  "width":4,
                  "x":502.677649832817,
-                 "y":446.523088001739
+                 "y":167.978244683213
                 }, 
                 {
                  "class":"barier",
-                 "height":64,
+                 "height":367.757954136151,
                  "id":21,
                  "name":"barier",
                  "rotation":0,
                  "visible":true,
                  "width":4,
                  "x":30,
-                 "y":446.70584351271
+                 "y":142.947889376559
                 }, 
                 {
                  "class":"barier",
@@ -430,8 +429,8 @@
                  "rotation":0,
                  "visible":true,
                  "width":4,
-                 "x":3916.58085057994,
-                 "y":331.884466681828
+                 "x":3915.38022625529,
+                 "y":313.875101812096
                 }, 
                 {
                  "class":"barier",
@@ -566,6 +565,104 @@
                  "width":0,
                  "x":449.163830102116,
                  "y":461.743377238419
+                }, 
+                {
+                 "class":"barier",
+                 "height":64,
+                 "id":85,
+                 "name":"barier",
+                 "rotation":0,
+                 "visible":true,
+                 "width":4,
+                 "x":4607.61596613245,
+                 "y":240.754762624735
+                }, 
+                {
+                 "class":"barier",
+                 "height":64,
+                 "id":86,
+                 "name":"barier",
+                 "rotation":0,
+                 "visible":true,
+                 "width":4,
+                 "x":4287.17206520965,
+                 "y":242.791770484801
+                }, 
+                {
+                 "class":"wraith",
+                 "height":0,
+                 "id":88,
+                 "name":"wraith",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"end",
+                         "type":"string",
+                         "value":""
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":4415.17761799673,
+                 "y":272.656083149427
+                }, 
+                {
+                 "class":"wraith",
+                 "height":0,
+                 "id":89,
+                 "name":"wraith",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"end",
+                         "type":"string",
+                         "value":""
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3744.29279228235,
+                 "y":256.421521712715
+                }, 
+                {
+                 "class":"barier",
+                 "height":64,
+                 "id":90,
+                 "name":"barier",
+                 "rotation":0,
+                 "visible":true,
+                 "width":4,
+                 "x":3901.22967943331,
+                 "y":215.328610877656
+                }, 
+                {
+                 "class":"barier",
+                 "height":64,
+                 "id":91,
+                 "name":"barier",
+                 "rotation":0,
+                 "visible":true,
+                 "width":4,
+                 "x":3410.17433065194,
+                 "y":212.927362228359
+                }, 
+                {
+                 "class":"wraith",
+                 "height":0,
+                 "id":100,
+                 "name":"wraith",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"end",
+                         "type":"string",
+                         "value":""
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":271.341097370633,
+                 "y":345.779805498859
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -576,6 +673,7 @@
         {
          "draworder":"topdown",
          "id":17,
+         "locked":true,
          "name":"moneyObj",
          "objects":[
                 {
@@ -649,6 +747,210 @@
                  "width":0,
                  "x":925.774209405211,
                  "y":290.021300999508
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":67,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1892.44245263801,
+                 "y":471.58280708902
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":68,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":1979.01812996537,
+                 "y":467.508657567733
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":69,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":2174.57730698717,
+                 "y":450.193522102261
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":70,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":2431.24872682827,
+                 "y":448.156447341617
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":71,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":2757.18068853127,
+                 "y":486.860867793848
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":72,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":2946.62864127113,
+                 "y":483.805255652883
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":73,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3262.37522917091,
+                 "y":469.545732328376
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":74,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3416.17437359951,
+                 "y":361.580770014259
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":75,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3479.32369117947,
+                 "y":362.599307394581
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":76,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3551.63984518232,
+                 "y":362.599307394581
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":77,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3677.93848034223,
+                 "y":300.468527194948
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":78,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":3610.71501324099,
+                 "y":320.839274801385
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":79,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":4354.24730087594,
+                 "y":224.078223670809
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":80,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":4448.97127724587,
+                 "y":225.096761051131
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":81,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":4545.73232837645,
+                 "y":223.059686290487
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":82,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":4672.03096353636,
+                 "y":446.119372580974
+                }, 
+                {
+                 "class":"money",
+                 "height":0,
+                 "id":83,
+                 "name":"money",
+                 "point":true,
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":4579.34406192707,
+                 "y":361.580770014259
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -657,7 +959,7 @@
          "y":0
         }],
  "nextlayerid":18,
- "nextobjectid":67,
+ "nextobjectid":101,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.2",

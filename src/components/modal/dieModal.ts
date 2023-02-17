@@ -1,4 +1,4 @@
-import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE } from '../../game/constGame';
+import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE } from '../../game/constGame';
 
 export default class DieModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
@@ -46,7 +46,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
-        console.log('homeBtn');
+        this.close(ESCENE.start);
       });
     this.homeBtn.name = 'homeBtn';
     this.homeBtn.scrollFactorX = 0;
@@ -57,7 +57,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
-        console.log('reloadBtn');
+        this.close(ESCENE.game);
       });
     this.reloadBtn.name = 'reloadBtn';
     this.reloadBtn.scrollFactorX = 0;
@@ -93,8 +93,8 @@ export default class DieModal extends Phaser.GameObjects.Container {
       },
     });
   }
-  /*
-  private close(): void {
+
+  private close(typeScene: ESCENE): void {
     this.background.setAlpha(0);
     this.scene.tweens.add({
       targets: this,
@@ -107,9 +107,8 @@ export default class DieModal extends Phaser.GameObjects.Container {
       onComplete: () => {
         this.isOpen = false;
         this.setVisible(false);
-        this.scene.scene.resume(this._typeScene);
+        this.scene.scene.start(typeScene, { scene: ESCENE.end });
       },
     });
   }
-  */
 }

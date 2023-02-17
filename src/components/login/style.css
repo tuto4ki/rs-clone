@@ -40,8 +40,8 @@ input:focus {
 }
 
 .form {
-  display: flex;
-  /*display: none;*/
+  /*display: flex;*/
+  display: none;
   flex-direction: column;
   align-items: center;
   width: 300px;
@@ -108,7 +108,7 @@ input:focus {
 
 canvas {
   display: block;
-  visibility: hidden;
+  /*visibility: hidden;*/
   margin: 0 auto;
 }
 
