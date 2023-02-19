@@ -1,5 +1,5 @@
-import { serverAdress } from '../../game/constGame';
-import { ISortQuery, OveralScore } from '../types';
+import { serverAdress } from './const';
+import { ISortQuery, IOveralScore } from '../types';
 
 export const register = (username: string, password: string, avatar = 1) => {
   return fetch(`${serverAdress}/user`, {
@@ -16,12 +16,19 @@ export const register = (username: string, password: string, avatar = 1) => {
 };
 
 export const login = (username: string, password: string) => {
-  return fetch(`${serverAdress}/user?username=${username}&password=${password}`, {
-    method: 'GET',
+  return fetch(`${serverAdress}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      username: username,
+      password: password,
+    }),
   });
 };
 
-export const addScore = (username: string, level: number, score: number, time: string) => {
+export const addScore = (username: string, level: number, score: number, time: number) => {
   // time shoudl be string?
   return fetch(`${serverAdress}/score`, {
     method: 'POST',
@@ -36,8 +43,8 @@ export const addScore = (username: string, level: number, score: number, time: s
     }),
   });
 
-  // все филды обязательны!
-  // await addScore('asdfa', 2, 123, '23:13:12').then((res) => {
+  // все филды обязательны! время в секундах
+  // await addScore('asdfa', 2, 123, 1234).then((res) => {
   // switch (res.status) {
   //   case responseStatus.error:
   //     console.log('error');
@@ -49,7 +56,7 @@ export const addScore = (username: string, level: number, score: number, time: s
   // });
 };
 
-export const getScore = (query: ISortQuery): Promise<OveralScore> => {
+export const getScores = (query: ISortQuery): Promise<IOveralScore> => {
   let queryString = '';
   const symbol = ['?', '&'];
 
@@ -62,7 +69,6 @@ export const getScore = (query: ISortQuery): Promise<OveralScore> => {
     const el = element as keyof ISortQuery;
     queryString += `${el}=${query[el]}`;
   });
-
   return fetch(`${serverAdress}/score${queryString}`, {
     method: 'GET',
   })
