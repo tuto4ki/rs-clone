@@ -2,6 +2,8 @@ import DieModal from '../components/modal/dieModal';
 import { ESCENE } from '../game/constGame';
 import { IPassScene } from '../game/type';
 
+const WIDTH_MODAL = 400;
+const HEIGHT_MODAL = 350;
 export default class EndGameScene extends Phaser.Scene {
   private _typeScene = '';
   private _isWin = false;
@@ -15,8 +17,8 @@ export default class EndGameScene extends Phaser.Scene {
       this,
       +this.game.config.width / 2,
       +this.game.config.height / 2,
-      400,
-      300,
+      WIDTH_MODAL,
+      HEIGHT_MODAL,
       this._isWin,
       this._typeScene
     );
@@ -29,12 +31,8 @@ export default class EndGameScene extends Phaser.Scene {
 
   public init(data: IPassScene): void {
     this._typeScene = data.scene;
-    if (data.isDied) {
+    if (data.isDied !== undefined) {
       this._isWin = data.isDied;
     }
-  }
-
-  update(/*time: number, delta: number*/): void {
-    console.log('dieModal');
   }
 }

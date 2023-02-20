@@ -27,7 +27,7 @@ export default class StartScene extends Phaser.Scene {
     super('Start');
   }
   public create(): void {
-    this.cameras.main.backgroundColor = Phaser.Display.Color.HexStringToColor(GAME_BACKGROUND);
+    this.cameras.main.setBackgroundColor(GAME_BACKGROUND);
     const choose_title = this.add.text(WIDTH_GAME / 2, 30, 'Choose Your Character ', TITLE_STYLE).setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 

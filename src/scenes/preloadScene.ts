@@ -18,6 +18,8 @@ import {
   FOX_AVATAR,
   WIDTH_GAME,
   HEIGHT_GAME,
+  EGAME_SETTINGS,
+  EBUTTON,
 } from '../game/constGame';
 
 const COLOR_PRELOAD = 0x222222;
@@ -48,7 +50,6 @@ export default class PreloadScene extends Phaser.Scene {
       progressBox.destroy();
       this.scene.start(ESCENE.start);
     });
-    this.load.image(IMAGES.bgLevel1, '../assets/images/bg.png');
     this.load.image(IMAGES.emptyPicture, '../assets/images/empty.png');
     this.load.atlas(PLAYER_TYPE.fox, '../assets/sprites/fox.png', '../assets/json/fox.json');
     this.load.atlas(PLAYER_TYPE.cat, '../assets/sprites/cat.png', '../assets/json/cat.json');
@@ -57,15 +58,17 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
     this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
-    // load level 1
-    this.load.image('tiles', '../assets/sprites/freeTiles.png');
-    this.load.tilemapTiledJSON('map', '../assets/json/level1.json');
+    // load level
+    this.loadLevel(EGAME_SETTINGS.maxLevel);
+    // load music
     this.load.audio(EMUSIC.soundBg, '../assets/sound/soundBg.mp3');
     this.load.audio(EMUSIC.jump, '../assets/sound/soundJump.ogg');
     this.load.audio(EMUSIC.coin, '../assets/sound/soundCoin.ogg');
     this.load.audio(EMUSIC.dieEnemy, '../assets/sound/soundDieEnemy.ogg');
     this.load.audio(EMUSIC.diePlayer, '../assets/sound/soundDiePlayer.ogg');
     this.load.audio(EMUSIC.win, '../assets/sound/soundWin.mp3');
+    // load button
+    this.load.image(EBUTTON.nextLevel, '../assets/sprites/buttons/backBtn.svg');
     this.load.image(GEAR_BTN, '../assets/sprites/gear.png');
     this.load.image(HELP_BTN, '../assets/sprites/buttons/helpBtn.svg');
     this.load.image(PLAY_BTN, '../assets/sprites/buttons/playBtn.svg');
@@ -135,5 +138,13 @@ export default class PreloadScene extends Phaser.Scene {
       frameRate: frameRate,
       repeat: repeat,
     });
+  }
+
+  loadLevel(numLevel: number): void {
+    for (let i = 1; i <= numLevel; i++) {
+      this.load.image(`levelTiles${i}`, `../assets/sprites/level${i}.png`);
+      this.load.tilemapTiledJSON(`levelMap${i}`, `../assets/json/level${i}.json`);
+      this.load.image(`${IMAGES.bgLevel}${i}`, `../assets/images/bgLevel${i}.png`);
+    }
   }
 }
