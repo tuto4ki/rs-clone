@@ -1,8 +1,8 @@
 import { EMUSIC } from './constGame';
 import Phaser from 'phaser';
 export default class Music {
-  public isPlayMusic = true;
-  public isPlaySoundEffect = true;
+  public isPlayMusic!: boolean;
+  public isPlaySoundEffect!: boolean;
   private _scene: Phaser.Scene;
   public soundBg: Phaser.Sound.BaseSound | null = null;
   public jump: Phaser.Sound.BaseSound | null = null;
@@ -18,20 +18,13 @@ export default class Music {
   }
 
   public create() {
-    this.soundBg = this._scene.sound.add(EMUSIC.soundBg, { loop: true });
-    this.soundBg.play();
-    /*
-    this.jump = this._scene.sound.add(EMUSIC.jump, { loop: false });
-    this.coin = this._scene.sound.add(EMUSIC.coin, { loop: false });
-    this.dieEnemy = this._scene.sound.add(EMUSIC.dieEnemy, { loop: false });
-    this.diePlayer = this._scene.sound.add(EMUSIC.diePlayer, { loop: false });
-    */
-    this._mapSounds.set(EMUSIC.soundBg, this.soundBg);
+    this._mapSounds.set(EMUSIC.soundBg, this._scene.sound.add(EMUSIC.soundBg, { loop: true }));
     this._mapSounds.set(EMUSIC.jump, this._scene.sound.add(EMUSIC.jump, { loop: false }));
     this._mapSounds.set(EMUSIC.coin, this._scene.sound.add(EMUSIC.coin, { loop: false }));
     this._mapSounds.set(EMUSIC.dieEnemy, this._scene.sound.add(EMUSIC.dieEnemy, { loop: false }));
     this._mapSounds.set(EMUSIC.diePlayer, this._scene.sound.add(EMUSIC.diePlayer, { loop: false }));
     this._mapSounds.set(EMUSIC.win, this._scene.sound.add(EMUSIC.win, { loop: false }));
+    this.playBg(EMUSIC.soundBg);
   }
 
   public play(key: string): void {
@@ -56,7 +49,17 @@ export default class Music {
     this._mapSounds.forEach((value) => value, (this._scene.sound.volume = 1));
   }
 
-  // public muteMusic() {
+  public playBg(key: string): void {
+    this.checkStorage();
+    if (this.isPlayMusic) {
+      console.log('play soundBg');
+      this._mapSounds.get(key)?.play();
+    }
+  }
 
-  // }
+  public checkStorage() {
+    console.log('change isPlaymusic || isPlaySoundEffect');
+    this.isPlayMusic = JSON.parse(localStorage.getItem('isPlayMusic') || 'true');
+    this.isPlaySoundEffect = JSON.parse(localStorage.getItem('isPlaySoundEffect') || 'true');
+  }
 }

@@ -52,11 +52,9 @@ export default class SoundModal extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
         console.log('musicOffBtn');
-        this.musicOnBtn.setDepth(2);
-        this.musicOnBtn.setAlpha(1);
-        this.musicOffBtn.setAlpha(0);
         this.isPlayMusic = true;
-        localStorage.setItem('isPlayMusic', JSON.stringify(this.isPlayMusic));
+        this.setDepthBtnsMusic();
+        localStorage.setItem('isPlayMusic', JSON.stringify(true));
       });
     this.musicOffBtn.name = 'musicOffBtn';
     this.musicOffBtn.scrollFactorX = 0;
@@ -67,11 +65,9 @@ export default class SoundModal extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
         console.log('musicOnBtn');
-        this.musicOffBtn.setDepth(2);
-        this.musicOnBtn.setAlpha(0);
-        this.musicOffBtn.setAlpha(1);
         this.isPlayMusic = false;
-        localStorage.setItem('isPlayMusic', JSON.stringify(this.isPlayMusic));
+        this.setDepthBtnsMusic();
+        localStorage.setItem('isPlayMusic', JSON.stringify(false));
       });
     this.musicOnBtn.name = 'musicOnBtn';
     this.musicOnBtn.scrollFactorX = 0;
@@ -82,11 +78,9 @@ export default class SoundModal extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
         console.log('soundOffBtn');
-        this.soundOnBtn.setDepth(2);
-        this.soundOnBtn.setAlpha(1);
-        this.soundOffBtn.setAlpha(0);
         this.isPlaySoundEffect = true;
-        localStorage.setItem('isPlaySoundEffect', JSON.stringify(this.isPlaySoundEffect));
+        this.setDepthBtnsEffect();
+        localStorage.setItem('isPlaySoundEffect', JSON.stringify(true));
       });
     this.soundOffBtn.name = 'soundOffBtn';
     this.soundOffBtn.scrollFactorX = 0;
@@ -97,11 +91,9 @@ export default class SoundModal extends Phaser.GameObjects.Container {
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
         console.log('soundOnBtn');
-        this.soundOffBtn.setDepth(2);
-        this.soundOffBtn.setAlpha(1);
-        this.soundOnBtn.setAlpha(0);
         this.isPlaySoundEffect = false;
-        localStorage.setItem('isPlaySoundEffect', JSON.stringify(this.isPlaySoundEffect));
+        this.setDepthBtnsEffect();
+        localStorage.setItem('isPlaySoundEffect', JSON.stringify(false));
       });
     this.soundOnBtn.name = 'soundOnBtn';
     this.soundOnBtn.scrollFactorX = 0;
@@ -132,6 +124,8 @@ export default class SoundModal extends Phaser.GameObjects.Container {
   }
 
   open() {
+    this.setDepthBtnsMusic();
+    this.setDepthBtnsEffect();
     console.log('open modal');
     this.background.setAlpha(1);
     this.setVisible(true);
@@ -165,5 +159,34 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.setVisible(false);
       },
     });
+  }
+
+  setDepthBtnsMusic() {
+    if (this.isPlayMusic) {
+      this.setMusicBtnsParams(2, 0, 1, 0);
+    } else {
+      this.setMusicBtnsParams(0, 2, 0, 1);
+    }
+  }
+
+  setMusicBtnsParams(a: number, b: number, c: number, d: number): void {
+    this.musicOnBtn.setDepth(a);
+    this.musicOffBtn.setDepth(b);
+    this.musicOnBtn.setAlpha(c);
+    this.musicOffBtn.setAlpha(d);
+  }
+
+  setDepthBtnsEffect() {
+    if (this.isPlaySoundEffect) {
+      this.setEffectBtnsParams(2, 0, 1, 0);
+    } else {
+      this.setEffectBtnsParams(0, 2, 0, 1);
+    }
+  }
+  setEffectBtnsParams(a: number, b: number, c: number, d: number): void {
+    this.soundOnBtn.setDepth(a);
+    this.soundOffBtn.setDepth(b);
+    this.soundOnBtn.setAlpha(c);
+    this.soundOffBtn.setAlpha(d);
   }
 }

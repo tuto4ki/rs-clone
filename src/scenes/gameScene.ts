@@ -37,9 +37,6 @@ export default class GameScene extends Phaser.Scene {
   private _playerType = PLAYER_TYPE.fox;
   private soundMuted = false;
   private previousVolume: number | undefined;
-  private isPlayMusic!: boolean;
-  private isPlaySoundEffect!: boolean;
-  // handleLocalStorageChange: any;
 
   constructor() {
     super(ESCENE.game);
@@ -52,6 +49,7 @@ export default class GameScene extends Phaser.Scene {
       this._playerType = data.playerType;
     }
     this._isFinish = false;
+    this._music.checkStorage();
   }
 
   public create(): void {
@@ -59,34 +57,8 @@ export default class GameScene extends Phaser.Scene {
 
     // create music
     this._music.create();
-    this.isPlayMusic = JSON.parse(localStorage.getItem('isPlayMusic') || 'true');
-    this.isPlaySoundEffect = JSON.parse(localStorage.getItem('isPlaySoundEffect') || 'true');
+    this._music.checkStorage();
     // Отслеживаем изменения в localstorage и обновляем значение isPlaySound
-    window.addEventListener('storage', (event: StorageEvent) => {
-      if (event.key === 'isPlayMusic' && event.newValue !== null) {
-        this.isPlayMusic = JSON.parse(event.newValue);
-        if (this.isPlayMusic) {
-          console.log('!true');
-          this._music.play(EMUSIC.soundBg);
-        } else {
-          console.log('true');
-          this._music.stop(EMUSIC.soundBg);
-        }
-      }
-      // if (event.key === 'isPlaySoundEffect' && event.newValue) {
-      //   this.isPlaySoundEffect = JSON.parse(event.newValue);
-      //   const isPlaySoundEffect = JSON.parse(event.newValue);
-      //   this.isPlaySoundEffect = isPlaySoundEffect;
-      //   if (isPlaySoundEffect) {
-      //     console.log('!true');
-      //     this._music.unMute();
-      //   } else {
-      //     console.log('true');
-      //     this._music.mute();
-      //   }
-      // }
-    });
-
     // load level 1
     const map = this.make.tilemap({ key: 'map', tileWidth: 64, tileHeight: 64 });
     const widthWorld = map.widthInPixels * SCALE_SIZE_WORLD;
@@ -156,7 +128,8 @@ export default class GameScene extends Phaser.Scene {
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
     this.events.on('resume', () => {
       this._statistics?.play();
-      this._music.play(EMUSIC.soundBg);
+      this._music.checkStorage();
+      this._music.playBg(EMUSIC.soundBg);
     });
     hotkeys('f1', () => {
       this.changeScene('HelpScene');
@@ -262,7 +235,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   private changeScene(nameScene: string, isDied?: boolean) {
-    // this._music.stop(EMUSIC.soundBg);
+    this._music.stop(EMUSIC.soundBg);
     this._statistics?.pause();
     this.scene.pause();
     this.scene.run(nameScene, { scene: ESCENE.game, isDied });
