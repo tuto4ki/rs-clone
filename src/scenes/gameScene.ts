@@ -53,6 +53,9 @@ export default class GameScene extends Phaser.Scene {
     if (data.isLevelNext) {
       this._levelNumber++;
     }
+    if (data.levelNumber) {
+      this._levelNumber = data.levelNumber;
+    }
     this._isFinish = false;
   }
 

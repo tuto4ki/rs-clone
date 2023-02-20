@@ -145,6 +145,7 @@ export default class PreloadScene extends Phaser.Scene {
       this.load.image(`levelTiles${i}`, `../assets/sprites/level${i}.png`);
       this.load.tilemapTiledJSON(`levelMap${i}`, `../assets/json/level${i}.json`);
       this.load.image(`${IMAGES.bgLevel}${i}`, `../assets/images/bgLevel${i}.png`);
+      this.load.image(`${IMAGES.bgLevel}${i}svg`, `../assets/images/bgLevel${i}.svg`);
     }
   }
 }

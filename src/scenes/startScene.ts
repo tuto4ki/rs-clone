@@ -1,8 +1,8 @@
 import hotkeys from 'hotkeys-js';
 import {
   PLAYER_TYPE,
-  HEIGHT_GAME,
-  WIDTH_GAME,
+  //HEIGHT_GAME,
+  //WIDTH_GAME,
   ESCENE,
   GEAR_BTN,
   HELP_BTN,
@@ -12,7 +12,11 @@ import {
   GAME_BACKGROUND,
   TITLE_STYLE,
   MODAL_TEXT_STYLE,
+  IMAGES,
 } from '../game/constGame';
+
+const POSITION_LVL = { x: 100, y: 80 };
+const POSITION_TITLE_LVL = 70;
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'F1' || event.key === 'F2') {
@@ -20,23 +24,24 @@ document.addEventListener('keydown', function (event) {
   }
 });
 export default class StartScene extends Phaser.Scene {
-  selectedCharacter: unknown;
-  textBtn: Phaser.GameObjects.Text | undefined;
+  private _levelSelected = 1;
 
   constructor() {
     super('Start');
   }
   public create(): void {
     this.cameras.main.setBackgroundColor(GAME_BACKGROUND);
-    const choose_title = this.add.text(WIDTH_GAME / 2, 30, 'Choose Your Character ', TITLE_STYLE).setOrigin(0.5, 0.5);
+    const choose_title = this.add
+      .text(+this.game.config.width / 2, 30, 'Choose Your Character ', TITLE_STYLE)
+      .setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 
     const playerCat = this.add
-      .image(WIDTH_GAME / 2 - 100, HEIGHT_GAME / 2 - 200, CAT_AVATAR)
+      .image(+this.game.config.width / 2 - 100, +this.game.config.height / 2 - 200, CAT_AVATAR)
       .setInteractive({ useHandCursor: true })
       .setScale(0.2);
     const playerFox = this.add
-      .image(WIDTH_GAME / 2 + 100, HEIGHT_GAME / 2 - 200, FOX_AVATAR)
+      .image(+this.game.config.width / 2 + 100, +this.game.config.height / 2 - 200, FOX_AVATAR)
       .setInteractive({ useHandCursor: true })
       .setScale(0.2);
     playerCat.name = PLAYER_TYPE.cat;
@@ -72,17 +77,17 @@ export default class StartScene extends Phaser.Scene {
     hotkeys('f2', () => {
       this.changeScene('SettingsScene');
     });
-    this.textBtn = this.add
+    this.add
       .text(
-        WIDTH_GAME / 2,
-        HEIGHT_GAME - 80,
+        +this.game.config.width / 2,
+        +this.game.config.height - 80,
         'To start playing, select a character and press the Play button',
         MODAL_TEXT_STYLE
       )
       .setOrigin(0.5, 0.5);
 
     const play_btn = this.add
-      .image(WIDTH_GAME / 2, HEIGHT_GAME - 30, PLAY_BTN)
+      .image(+this.game.config.width / 2, +this.game.config.height - 30, PLAY_BTN)
       .setInteractive({ useHandCursor: true })
       .setScale(0.25);
     play_btn.name = 'play_btn';
@@ -91,9 +96,14 @@ export default class StartScene extends Phaser.Scene {
         return;
       } else {
         this.scene.pause();
-        this.scene.start(ESCENE.game, { scene: ESCENE.start, playerType: SELECTED_CHARACTER.name });
+        this.scene.start(ESCENE.game, {
+          scene: ESCENE.start,
+          playerType: SELECTED_CHARACTER.name,
+          levelNumber: this._levelSelected,
+        });
       }
     });
+    this.levelChooseView();
     play_btn.setTint(0xa79999);
     play_btn.disableInteractive();
   }
@@ -101,5 +111,44 @@ export default class StartScene extends Phaser.Scene {
   private changeScene(nameScene: string): void {
     this.scene.pause();
     this.scene.launch(nameScene, { scene: ESCENE.start });
+  }
+
+  private levelChooseView() {
+    const choose_title = this.add
+      .text(+this.game.config.width / 2, +this.game.config.height / 2 - POSITION_TITLE_LVL, 'Choose Level', TITLE_STYLE)
+      .setOrigin(0.5);
+    choose_title.name = 'titleLevel';
+
+    const level1 = this.add
+      .image(
+        +this.game.config.width / 2 - POSITION_LVL.x,
+        +this.game.config.height / 2 + POSITION_LVL.y,
+        `${IMAGES.bgLevel}1svg`
+      )
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.4);
+    const level2 = this.add
+      .image(
+        +this.game.config.width / 2 + POSITION_LVL.x,
+        +this.game.config.height / 2 + POSITION_LVL.y,
+        `${IMAGES.bgLevel}2svg`
+      )
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.37);
+    level1.name = `${IMAGES.bgLevel}1`;
+    level2.name = `${IMAGES.bgLevel}2`;
+    level1.setTint(0xffffff);
+    level2.setTint(0xa79999);
+
+    level1.on('pointerdown', () => {
+      this._levelSelected = 1;
+      level1.setTint(0xffffff);
+      level2.setTint(0xa79999);
+    });
+    level2.on('pointerdown', () => {
+      this._levelSelected = 2;
+      level2.setTint(0xffffff);
+      level1.setTint(0xa79999);
+    });
   }
 }
