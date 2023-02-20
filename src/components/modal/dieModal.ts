@@ -23,7 +23,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     height: number,
     isDied: boolean,
     typeScene: string,
-    isLevelNext = true
+    isLevelNext = false
   ) {
     super(scene, x, y);
     this._typeScene = typeScene;
@@ -33,7 +33,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setStrokeStyle(3, 0x00ff00);
     this.background.scrollFactorX = 0;
     this.add(this.background);
-    const posTextY = isDied ? 20 : 0;
+    const posTextY = isDied || !isLevelNext ? 20 : 0;
     this.header = scene.add
       .text(0, -(height / 2) + 30, isDied ? 'Unfortunately you died... ' : 'Congratulations! You won ', TITLE_STYLE)
       .setOrigin(0.5, 0.5);
@@ -83,7 +83,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       });
     this._nextLevelText = scene.add.text(posTextX, 20, 'Next Level', MODAL_TEXT_STYLE).setOrigin(0, 0.5);
     this._nextLevelText.scrollFactorX = 0;
-    if (!isDied) {
+    if (!isDied && isLevelNext) {
       this.add(this._nextLevelBtn);
       this.add(this._nextLevelText);
     }

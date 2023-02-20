@@ -7,6 +7,7 @@ const HEIGHT_MODAL = 350;
 export default class EndGameScene extends Phaser.Scene {
   private _typeScene = '';
   private _isWin = false;
+  private _isLevelNext = false;
 
   constructor() {
     super(ESCENE.end);
@@ -20,7 +21,8 @@ export default class EndGameScene extends Phaser.Scene {
       WIDTH_MODAL,
       HEIGHT_MODAL,
       this._isWin,
-      this._typeScene
+      this._typeScene,
+      this._isLevelNext
     );
     dieModal.scrollFactorX = 0;
     dieModal.setScale(0);
@@ -33,6 +35,9 @@ export default class EndGameScene extends Phaser.Scene {
     this._typeScene = data.scene;
     if (data.isDied !== undefined) {
       this._isWin = data.isDied;
+    }
+    if (data.isLevelNext !== undefined) {
+      this._isLevelNext = data.isLevelNext;
     }
   }
 }
