@@ -55,4 +55,8 @@ export default class Music {
   public unMute() {
     this._mapSounds.forEach((value) => value, (this._scene.sound.volume = 1));
   }
+
+  // public muteMusic() {
+
+  // }
 }

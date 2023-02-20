@@ -12,11 +12,23 @@ export default class SoundModal extends Phaser.GameObjects.Container {
   soundOffBtn: Phaser.GameObjects.Image;
   soundOnBtn: Phaser.GameObjects.Image;
   private _typeScene: string;
+  public isPlayMusic: boolean;
+  public isPlaySoundEffect: boolean;
 
-  constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, typeScene: string) {
+  constructor(
+    scene: Phaser.Scene,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    typeScene: string
+    // isPlayMusic?: boolean,
+    // isPlaySoundEffect?: boolean
+  ) {
     super(scene, x, y);
     this._typeScene = typeScene;
-
+    this.isPlayMusic = JSON.parse(localStorage.getItem('isPlayMusic') || 'true');
+    this.isPlaySoundEffect = JSON.parse(localStorage.getItem('isPlaySoundEffect') || 'true');
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x2b2b2b, 1)
       .setOrigin(0.5, 0.5)
@@ -43,6 +55,8 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.musicOnBtn.setDepth(2);
         this.musicOnBtn.setAlpha(1);
         this.musicOffBtn.setAlpha(0);
+        this.isPlayMusic = true;
+        localStorage.setItem('isPlayMusic', JSON.stringify(this.isPlayMusic));
       });
     this.musicOffBtn.name = 'musicOffBtn';
     this.musicOffBtn.scrollFactorX = 0;
@@ -56,6 +70,8 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.musicOffBtn.setDepth(2);
         this.musicOnBtn.setAlpha(0);
         this.musicOffBtn.setAlpha(1);
+        this.isPlayMusic = false;
+        localStorage.setItem('isPlayMusic', JSON.stringify(this.isPlayMusic));
       });
     this.musicOnBtn.name = 'musicOnBtn';
     this.musicOnBtn.scrollFactorX = 0;
@@ -69,6 +85,8 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.soundOnBtn.setDepth(2);
         this.soundOnBtn.setAlpha(1);
         this.soundOffBtn.setAlpha(0);
+        this.isPlaySoundEffect = true;
+        localStorage.setItem('isPlaySoundEffect', JSON.stringify(this.isPlaySoundEffect));
       });
     this.soundOffBtn.name = 'soundOffBtn';
     this.soundOffBtn.scrollFactorX = 0;
@@ -82,6 +100,8 @@ export default class SoundModal extends Phaser.GameObjects.Container {
         this.soundOffBtn.setDepth(2);
         this.soundOffBtn.setAlpha(1);
         this.soundOnBtn.setAlpha(0);
+        this.isPlaySoundEffect = false;
+        localStorage.setItem('isPlaySoundEffect', JSON.stringify(this.isPlaySoundEffect));
       });
     this.soundOnBtn.name = 'soundOnBtn';
     this.soundOnBtn.scrollFactorX = 0;
