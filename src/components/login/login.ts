@@ -1,6 +1,6 @@
 import { elementGenerator } from '../controller/taggenerator';
 import { login, register } from '../controller/requests';
-import { responseStatus } from '../../game/constGame';
+import { responseStatus } from '../controller/const';
 import './style.css';
 
 export default class Login {

@@ -1,0 +1,35 @@
+.score{
+  &__row{
+    display: flex;
+    flex-direction: row;
+    &:not(.score__headline):hover{
+      .score__cell{
+        background-color: rgba(0, 255, 255, 0.5);
+      }
+    }
+  }
+  &__pos{
+    flex: 0 0 30px;
+    text-align: right;
+    padding-right: 5px;
+  }
+  &__owner{
+    flex: 0 0 150px;
+  }
+  &__level{
+    flex: 0 0 70px;
+    text-align: center;
+  }
+  &__time{
+    flex: 0 0 150px;
+    text-align: center;
+  }
+  &__coins{
+    flex: 0 0 150px;
+    text-align: center;
+  }
+  &__cell{
+    margin: 0;
+    padding: 3px 5px;
+  }
+}

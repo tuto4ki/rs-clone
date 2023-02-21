@@ -1,4 +1,4 @@
-import { PLAYER_TYPE } from "./constGame";
+import { PLAYER_TYPE } from './constGame';
 
 export default interface IAnimationKey {
   walk: string;

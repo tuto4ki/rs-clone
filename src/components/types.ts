@@ -1,4 +1,7 @@
-export type OveralScore = Array<IWinner>;
+export interface IOveralScore {
+  pageCount: number;
+  data: Array<IWinner>;
+}
 
 export interface ISortQuery {
   sort?: string;
@@ -12,6 +15,11 @@ export interface IWinner {
   username: string;
   level: number;
   score: number;
-  time: string;
+  time: number;
   isStart?: boolean;
+}
+
+export interface ISelectData {
+  sortData: number;
+  level: number;
 }

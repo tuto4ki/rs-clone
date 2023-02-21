@@ -85,15 +85,6 @@ export const enum EMUSIC {
   win = 'win',
 }
 
-export const serverAdress = 'http://localhost:3000';
-
-export const responseStatus = {
-  error: 500,
-  created: 201,
-  ok: 200,
-  notFound: 404,
-};
-
 export const enum ESCENE {
   preload = 'Preload',
   start = 'Start',
