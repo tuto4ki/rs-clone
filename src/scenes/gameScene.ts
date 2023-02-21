@@ -49,6 +49,7 @@ export default class GameScene extends Phaser.Scene {
       this._playerType = data.playerType;
     }
     this._isFinish = false;
+    this._music.checkStorage();
   }
 
   public create(): void {
@@ -56,6 +57,8 @@ export default class GameScene extends Phaser.Scene {
 
     // create music
     this._music.create();
+    this._music.checkStorage();
+    // Отслеживаем изменения в localstorage и обновляем значение isPlaySound
     // load level 1
     const map = this.make.tilemap({ key: 'map', tileWidth: 64, tileHeight: 64 });
     const widthWorld = map.widthInPixels * SCALE_SIZE_WORLD;
@@ -125,7 +128,8 @@ export default class GameScene extends Phaser.Scene {
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
     this.events.on('resume', () => {
       this._statistics?.play();
-      this._music.play(EMUSIC.soundBg);
+      this._music.checkStorage();
+      this._music.playBg(EMUSIC.soundBg);
     });
     hotkeys('f1', () => {
       this.changeScene('HelpScene');
