@@ -1,3 +1,9 @@
+export const enum EGAME_SETTINGS {
+  maxLevel = 2,
+  width = 1000,
+  height = 750,
+}
+
 export const WIDTH_GAME = 1000;
 
 export const HEIGHT_GAME = 750;
@@ -20,7 +26,7 @@ export const HEIGHT_PLAYER = 360;
 
 export const SCALE_SIZE_PLAYER = 0.2;
 
-export const SCALE_SIZE_WORLD = 1.2;
+export const SCALE_SIZE_WORLD = 1;
 
 export const EMPTY_PICTURE_WIDTH = 300;
 
@@ -30,6 +36,19 @@ export const enum ENEMY_TYPE {
   zombieGirl = 'zombieGirl',
   zombieMan = 'zombieMan',
   wraith = 'wraith',
+}
+
+export const enum EGAME_MAP {
+  levelMap = 'levelMap',
+  levelTiles = 'levelTiles',
+  waterObj = 'waterObj',
+  stumpObj = 'stumpObj',
+  endGame = 'endGame',
+  ground = 'ground',
+  background = 'background',
+  water = 'water',
+  entityObj = 'entityObj',
+  level = 'level',
 }
 
 export const enum PLAYER_TYPE {
@@ -46,7 +65,7 @@ export const enum ENTITY_ANIMATION {
 }
 
 export const enum IMAGES {
-  bgLevel1 = 'bgGame',
+  bgLevel = 'bgLevel',
   emptyPicture = 'emptyPicture',
   plate = 'plate',
 }
@@ -73,6 +92,10 @@ export const enum ESCENE {
   settings = 'SettingsScene',
   help = 'HelpScene',
   end = 'EndGameScene',
+}
+
+export const enum EBUTTON {
+  nextLevel = 'nextLevel',
 }
 
 export const GEAR_BTN = 'GEAR_BTN';

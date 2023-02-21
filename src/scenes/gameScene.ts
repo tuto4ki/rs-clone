@@ -10,6 +10,8 @@ import {
   ESCENE,
   GEAR_BTN,
   HELP_BTN,
+  EGAME_MAP,
+  EGAME_SETTINGS,
 } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import Money from '../game/money';
@@ -48,39 +50,48 @@ export default class GameScene extends Phaser.Scene {
     if (data.playerType) {
       this._playerType = data.playerType;
     }
+    if (data.isLevelNext) {
+      this._levelNumber++;
+    }
+    if (data.levelNumber) {
+      this._levelNumber = data.levelNumber;
+    }
     this._isFinish = false;
     this._music.checkStorage();
   }
 
   public create(): void {
-    console.log(this._music);
-
     // create music
     this._music.create();
     this._music.checkStorage();
     // Отслеживаем изменения в localstorage и обновляем значение isPlaySound
     // load level 1
-    const map = this.make.tilemap({ key: 'map', tileWidth: 64, tileHeight: 64 });
+    const map = this.make.tilemap({ key: `${EGAME_MAP.levelMap}${this._levelNumber}`, tileWidth: 64, tileHeight: 64 });
     const widthWorld = map.widthInPixels * SCALE_SIZE_WORLD;
     // create background
-    for (let n = 0; n < widthWorld / +this.game.config.width; n += 1) {
-      this.add.image(+this.game.config.width * n, 0, IMAGES.bgLevel1).setOrigin(0, 0);
+    let xPosBg = 0;
+    while (xPosBg <= widthWorld) {
+      const img = this.add.image(xPosBg, 0, `${IMAGES.bgLevel}${this._levelNumber}`).setOrigin(0, 0);
+      xPosBg = img.x + img.width;
     }
-    const waterObj = new Obstacles(this, map, 'waterObj');
-    const stumpObj = new Obstacles(this, map, 'stumpObj');
-    const plateObj = new Obstacles(this, map, 'endGame', IMAGES.plate);
-    const tileset = map.addTilesetImage('freeTiles', 'tiles');
-    const ground = map.createLayer('ground', tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
-    map.createLayer('background', tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
-    map.createLayer('water', tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
+    const waterObj = new Obstacles(this, map, EGAME_MAP.waterObj);
+    const stumpObj = new Obstacles(this, map, EGAME_MAP.stumpObj);
+    const plateObj = new Obstacles(this, map, EGAME_MAP.endGame, IMAGES.plate);
+    const tileset = map.addTilesetImage(
+      `${EGAME_MAP.level}${this._levelNumber}`,
+      `${EGAME_MAP.levelTiles}${this._levelNumber}`
+    );
+    const ground = map.createLayer(EGAME_MAP.ground, tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
+    map.createLayer(EGAME_MAP.background, tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
+    map.createLayer(EGAME_MAP.water, tileset, 0, 0).setScale(SCALE_SIZE_WORLD);
     this.physics.world.setBounds(0, 0, widthWorld, +this.game.config.height);
     this._cursor = this.input.keyboard.createCursorKeys();
     // create player
-    this._player = new Player(this, 100, 480, this._playerType); // PLAYER_TYPE.fox);
+    this._player = new Player(this, 100, 480, this._playerType);
     this.physics.add.collider(ground, this._player.sprite);
     ground.setCollisionBetween(0, 31);
     // create enemies
-    this._enemies = new Enemies(this, map, 'entityObj');
+    this._enemies = new Enemies(this, map, EGAME_MAP.entityObj);
     this.physics.add.collider(ground, this._enemies.listEnemies);
     this.physics.add.collider(this._player?.sprite, this._enemies.listEnemies, this.checkCollision.bind(this)).name =
       COLLISION_PLAYER_ENEMY;
@@ -91,7 +102,7 @@ export default class GameScene extends Phaser.Scene {
     this._cursor?.space.on('down', this.cursorDown.bind(this));
     // camera
     this.cameras.main.setBounds(0, 0, widthWorld, +this.game.config.height);
-    this.cameras.main.startFollow(this._player.sprite, true);
+    this.cameras.main.startFollow(this._player.sprite, true, 0.1);
     // collision with player
     if (this.player) {
       waterObj.addPhysicsCallBack(this, this.player, () => {
@@ -124,18 +135,18 @@ export default class GameScene extends Phaser.Scene {
     const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'helpBtn';
     helpBtn.scrollFactorX = 0;
-    gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
-    helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
+    gearBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.settings), this);
+    helpBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.help), this);
     this.events.on('resume', () => {
       this._statistics?.play();
       this._music.checkStorage();
       this._music.playBg(EMUSIC.soundBg);
     });
     hotkeys('f1', () => {
-      this.changeScene('HelpScene');
+      this.changeScene(ESCENE.help);
     });
     hotkeys('f2', () => {
-      this.changeScene('SettingsScene');
+      this.changeScene(ESCENE.settings);
     });
     hotkeys('m', () => {
       if (!this.soundMuted) {
@@ -183,7 +194,7 @@ export default class GameScene extends Phaser.Scene {
   public gameOver(isDied: boolean) {
     this._isFinish = true;
     setTimeout(() => {
-      this.changeScene('EndGameScene', isDied);
+      this.changeScene(ESCENE.end, isDied);
     }, END_GAME_TIMEOUT);
   }
 
@@ -238,6 +249,6 @@ export default class GameScene extends Phaser.Scene {
     this._music.stop(EMUSIC.soundBg);
     this._statistics?.pause();
     this.scene.pause();
-    this.scene.run(nameScene, { scene: ESCENE.game, isDied });
+    this.scene.run(nameScene, { scene: ESCENE.game, isDied, isLevelNext: this._levelNumber < EGAME_SETTINGS.maxLevel });
   }
 }

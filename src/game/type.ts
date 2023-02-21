@@ -18,4 +18,6 @@ export interface IPassScene {
   isDied?: boolean;
   playerType?: PLAYER_TYPE;
   isStart?: boolean;
+  isLevelNext?: boolean;
+  levelNumber? : number;
 }

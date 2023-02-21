@@ -22,6 +22,10 @@ export default class Game {
       parent: 'main',
       width: WIDTH_GAME,
       height: HEIGHT_GAME,
+      fps: {
+        target: 60,
+        forceSetTimeOut: true,
+      },
       physics: {
         default: 'arcade',
         arcade: {

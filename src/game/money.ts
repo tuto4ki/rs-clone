@@ -8,8 +8,11 @@ export default class Money {
     const listMoney = map.getObjectLayer(type)['objects'];
     listMoney.forEach((object) => {
       if (object.x && object.y) {
+        const posX = object.x + (object.width ? object.width / 2 : 0);
+        const posY = object.y - (object.height ? object.height / 2 : 0);
         const money = this._listMoney
-          .create(object.x * SCALE_SIZE_WORLD, object.y * SCALE_SIZE_WORLD, MONEY)
+          .create(posX * SCALE_SIZE_WORLD, posY * SCALE_SIZE_WORLD, MONEY)
+          .setOrigin(0.5)
           .play(MONEY);
         money.name = MONEY;
       }
