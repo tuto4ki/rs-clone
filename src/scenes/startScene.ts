@@ -58,12 +58,14 @@ export default class StartScene extends Phaser.Scene {
     const enButton = this.add
       .image(POSITION_LNG_X, POSITION_EN_Y, EN_logo)
       .setInteractive({ useHandCursor: true })
-      .setScale(0.8);
+      .setScale(0.8)
+      .setTint(0xfd581e);
     enButton.name = 'enButton';
     enButton.on('pointerdown', () => {
       i18next.changeLanguage('en').then(() => {
         localStorage.setItem('lang', 'en');
         this.scene.restart();
+        this.chooseTint();
       });
     });
     const ruButton = this.add
@@ -75,6 +77,7 @@ export default class StartScene extends Phaser.Scene {
       i18next.changeLanguage('ru').then(() => {
         localStorage.setItem('lang', 'ru');
         this.scene.restart();
+        this.chooseTint();
       });
     });
     const lvButton = this.add
@@ -86,6 +89,7 @@ export default class StartScene extends Phaser.Scene {
       i18next.changeLanguage('lv').then(() => {
         localStorage.setItem('lang', 'lv');
         this.scene.restart();
+        this.chooseTint();
       });
     });
     //
@@ -171,6 +175,29 @@ export default class StartScene extends Phaser.Scene {
     this.levelChooseView();
     play_btn.setTint(0xa79999);
     play_btn.disableInteractive();
+    this.chooseTint();
+  }
+
+  private chooseTint(): void {
+    const currentLang = localStorage.getItem('lang');
+    const enButtonImg = this.children.getByName('enButton') as Phaser.GameObjects.Image;
+    const ruButtonImg = this.children.getByName('ruButton') as Phaser.GameObjects.Image;
+    const lvButtonImg = this.children.getByName('lvButton') as Phaser.GameObjects.Image;
+    if (currentLang === 'en') {
+      enButtonImg.setTint(0xfd581e);
+      ruButtonImg.setTint(0xffffff);
+      lvButtonImg.setTint(0xffffff);
+    }
+    if (currentLang === 'ru') {
+      enButtonImg.setTint(0xffffff);
+      ruButtonImg.setTint(0xfd581e);
+      lvButtonImg.setTint(0xffffff);
+    }
+    if (currentLang === 'lv') {
+      enButtonImg.setTint(0xffffff);
+      ruButtonImg.setTint(0xffffff);
+      lvButtonImg.setTint(0xfd581e);
+    }
   }
 
   private changeScene(nameScene: string): void {
