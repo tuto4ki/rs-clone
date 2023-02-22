@@ -257,6 +257,11 @@ export default class GameScene extends Phaser.Scene {
     this._music.stop(EMUSIC.soundBg);
     this._statistics?.pause();
     this.scene.pause();
-    this.scene.run(nameScene, { scene: ESCENE.game, isDied, isLevelNext: this._levelNumber < EGAME_SETTINGS.maxLevel });
+    this.scene.run(nameScene, {
+      scene: ESCENE.game,
+      isDied,
+      isLevelNext: this._levelNumber < EGAME_SETTINGS.maxLevel,
+      playerType: this._playerType,
+    });
   }
 }

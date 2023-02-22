@@ -24,7 +24,7 @@ export const WIDTH_PLAYER = 180;
 
 export const HEIGHT_PLAYER = 360;
 
-export const SCALE_SIZE_PLAYER = 0.2;
+export const SCALE_SIZE_PLAYER = 0.18;
 
 export const SCALE_SIZE_WORLD = 1;
 
@@ -49,6 +49,8 @@ export const enum EGAME_MAP {
   water = 'water',
   entityObj = 'entityObj',
   level = 'level',
+  width = 64,
+  height = 64,
 }
 
 export const enum PLAYER_TYPE {
@@ -68,6 +70,7 @@ export const enum IMAGES {
   bgLevel = 'bgLevel',
   emptyPicture = 'emptyPicture',
   plate = 'plate',
+  tunnel = 'tunnel',
 }
 
 export const MONEY = 'money';
@@ -92,6 +95,7 @@ export const enum ESCENE {
   settings = 'SettingsScene',
   help = 'HelpScene',
   end = 'EndGameScene',
+  tunnel = 'TunnelScene',
 }
 
 export const enum EBUTTON {

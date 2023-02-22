@@ -6,6 +6,7 @@ import HelpScene from '../../scenes/helpScene';
 import PreloadScene from '../../scenes/preloadScene';
 import SettingsScene from '../../scenes/settingsScene';
 import StartScene from '../../scenes/startScene';
+import TunnelScene from '../../scenes/tunnelScene';
 import './game.scss';
 
 export default class Game {
@@ -36,7 +37,7 @@ export default class Game {
         },
       },
       backgroundColor: GAME_BACKGROUND,
-      scene: [PreloadScene, GameScene, StartScene, SettingsScene, HelpScene, EndGameScene],
+      scene: [PreloadScene, GameScene, StartScene, SettingsScene, HelpScene, EndGameScene, TunnelScene],
     });
   }
 }

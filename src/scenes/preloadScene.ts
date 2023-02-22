@@ -20,6 +20,7 @@ import {
   HEIGHT_GAME,
   EGAME_SETTINGS,
   EBUTTON,
+  EGAME_MAP,
 } from '../game/constGame';
 
 const COLOR_PRELOAD = 0x222222;
@@ -60,6 +61,10 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level
     this.loadLevel(EGAME_SETTINGS.maxLevel);
+    // load pre scene
+    this.load.tilemapTiledJSON(`${EGAME_MAP.levelMap}1-2`, `../assets/json/level1-2.json`);
+    this.load.image(`${IMAGES.tunnel}1`, '../assets/images/levelTunnel1.png');
+    this.load.image(`${IMAGES.tunnel}2`, '../assets/images/levelTunnel2.png');
     // load music
     this.load.audio(EMUSIC.soundBg, '../assets/sound/soundBg.mp3');
     this.load.audio(EMUSIC.jump, '../assets/sound/soundJump.ogg');
@@ -142,8 +147,8 @@ export default class PreloadScene extends Phaser.Scene {
 
   loadLevel(numLevel: number): void {
     for (let i = 1; i <= numLevel; i++) {
-      this.load.image(`levelTiles${i}`, `../assets/sprites/level${i}.png`);
-      this.load.tilemapTiledJSON(`levelMap${i}`, `../assets/json/level${i}.json`);
+      this.load.image(`${EGAME_MAP.levelTiles}${i}`, `../assets/sprites/level${i}.png`);
+      this.load.tilemapTiledJSON(`${EGAME_MAP.levelMap}${i}`, `../assets/json/level${i}.json`);
       this.load.image(`${IMAGES.bgLevel}${i}`, `../assets/images/bgLevel${i}.png`);
       this.load.image(`${IMAGES.bgLevel}${i}svg`, `../assets/images/bgLevel${i}.svg`);
     }

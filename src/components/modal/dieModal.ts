@@ -1,4 +1,4 @@
-import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON } from '../../game/constGame';
+import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON, PLAYER_TYPE } from '../../game/constGame';
 
 // const TEXT_POS = 100;
 const SCALE_BTN = 0.3;
@@ -13,6 +13,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
   private image: Phaser.GameObjects.Image;
   private _nextLevelBtn: Phaser.GameObjects.Image;
   private _nextLevelText: Phaser.GameObjects.Text;
+  private _playerType: PLAYER_TYPE;
   private _typeScene: string;
 
   constructor(
@@ -23,10 +24,12 @@ export default class DieModal extends Phaser.GameObjects.Container {
     height: number,
     isDied: boolean,
     typeScene: string,
+    playerType: PLAYER_TYPE,
     isLevelNext = false
   ) {
     super(scene, x, y);
     this._typeScene = typeScene;
+    this._playerType = playerType;
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x2b2b2b, 1)
       .setOrigin(0.5, 0.5)
@@ -79,7 +82,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setScale(-SCALE_BTN, SCALE_BTN)
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
-        this.close(ESCENE.game, isLevelNext);
+        this.close(ESCENE.tunnel, isLevelNext);
       });
     this._nextLevelText = scene.add.text(posTextX, 20, 'Next Level', MODAL_TEXT_STYLE).setOrigin(0, 0.5);
     this._nextLevelText.scrollFactorX = 0;
@@ -100,7 +103,6 @@ export default class DieModal extends Phaser.GameObjects.Container {
   }
 
   public open(): void {
-    console.log('open modal');
     this.background.setAlpha(1);
     this.setVisible(true);
     this.scene.tweens.add({
@@ -117,7 +119,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     });
   }
 
-  private close(typeScene: ESCENE, isLevelNext?: boolean): void {
+  private close(typeScene: ESCENE, isLevelNext = false): void {
     this.background.setAlpha(0);
     this.scene.tweens.add({
       targets: this,
@@ -130,7 +132,11 @@ export default class DieModal extends Phaser.GameObjects.Container {
       onComplete: () => {
         this.isOpen = false;
         this.setVisible(false);
-        this.scene.scene.start(typeScene, { scene: ESCENE.end, isLevelNext: isLevelNext });
+        this.scene.scene.start(typeScene, {
+          scene: ESCENE.end,
+          isLevelNext: isLevelNext,
+          playerType: this._playerType,
+        });
       },
     });
   }

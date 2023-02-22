@@ -1,8 +1,6 @@
 import hotkeys from 'hotkeys-js';
 import {
   PLAYER_TYPE,
-  //HEIGHT_GAME,
-  //WIDTH_GAME,
   ESCENE,
   GEAR_BTN,
   HELP_BTN,
