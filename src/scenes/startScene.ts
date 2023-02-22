@@ -1,4 +1,8 @@
 import hotkeys from 'hotkeys-js';
+import i18next from 'i18next';
+import enTranslation from '../components/locale/en.json';
+import ruTranslation from '../components/locale/ru.json';
+import lvTranslation from '../components/locale/lv.json';
 import {
   PLAYER_TYPE,
   //HEIGHT_GAME,
@@ -13,7 +17,19 @@ import {
   TITLE_STYLE,
   MODAL_TEXT_STYLE,
   IMAGES,
+  EN_logo,
+  RU_logo,
+  LV_logo,
 } from '../game/constGame';
+
+i18next.init({
+  lng: localStorage.getItem('lang') || 'en',
+  resources: {
+    en: { translation: enTranslation },
+    ru: { translation: ruTranslation },
+    lv: { translation: lvTranslation },
+  },
+});
 
 const POSITION_LVL = { x: 100, y: 80 };
 const POSITION_TITLE_LVL = 70;
@@ -30,9 +46,35 @@ export default class StartScene extends Phaser.Scene {
     super('Start');
   }
   public create(): void {
+    //
+    const enButton = this.add.image(26, 30, EN_logo).setInteractive({ useHandCursor: true }).setScale(0.8);
+    enButton.name = 'enButton';
+    enButton.on('pointerdown', () => {
+      i18next.changeLanguage('en').then(() => {
+        localStorage.setItem('lang', 'en');
+        this.scene.restart();
+      });
+    });
+    const ruButton = this.add.image(26, 72, RU_logo).setInteractive({ useHandCursor: true }).setScale(0.8);
+    ruButton.name = 'ruButton';
+    ruButton.on('pointerdown', () => {
+      i18next.changeLanguage('ru').then(() => {
+        localStorage.setItem('lang', 'ru');
+        this.scene.restart();
+      });
+    });
+    const lvButton = this.add.image(26, 112, LV_logo).setInteractive({ useHandCursor: true }).setScale(0.8);
+    lvButton.name = 'lvButton';
+    lvButton.on('pointerdown', () => {
+      i18next.changeLanguage('lv').then(() => {
+        localStorage.setItem('lang', 'lv');
+        this.scene.restart();
+      });
+    });
+    //
     this.cameras.main.setBackgroundColor(GAME_BACKGROUND);
     const choose_title = this.add
-      .text(+this.game.config.width / 2, 30, 'Choose Your Character ', TITLE_STYLE)
+      .text(+this.game.config.width / 2, 30, i18next.t<string>(`chooseChar`), TITLE_STYLE)
       .setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 
@@ -81,7 +123,7 @@ export default class StartScene extends Phaser.Scene {
       .text(
         +this.game.config.width / 2,
         +this.game.config.height - 80,
-        'To start playing, select a character and press the Play button',
+        i18next.t<string>(`playDescription`),
         MODAL_TEXT_STYLE
       )
       .setOrigin(0.5, 0.5);
@@ -115,7 +157,12 @@ export default class StartScene extends Phaser.Scene {
 
   private levelChooseView() {
     const choose_title = this.add
-      .text(+this.game.config.width / 2, +this.game.config.height / 2 - POSITION_TITLE_LVL, 'Choose Level', TITLE_STYLE)
+      .text(
+        +this.game.config.width / 2,
+        +this.game.config.height / 2 - POSITION_TITLE_LVL,
+        i18next.t<string>(`chooseLevel`),
+        TITLE_STYLE
+      )
       .setOrigin(0.5);
     choose_title.name = 'titleLevel';
 

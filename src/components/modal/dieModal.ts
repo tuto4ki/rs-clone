@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON } from '../../game/constGame';
 
 // const TEXT_POS = 100;
@@ -35,12 +36,17 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.add(this.background);
     const posTextY = isDied || !isLevelNext ? 20 : 0;
     this.header = scene.add
-      .text(0, -(height / 2) + 30, isDied ? 'Unfortunately you died... ' : 'Congratulations! You won ', TITLE_STYLE)
+      .text(
+        0,
+        -(height / 2) + 30,
+        isDied ? i18next.t<string>(`dieMessage`) : i18next.t<string>(`congratMessage`),
+        TITLE_STYLE
+      )
       .setOrigin(0.5, 0.5);
     this.header.scrollFactorX = 0;
     this.add(this.header);
     this.homeBtn = scene.add
-      .image(-161, 130 - posTextY, END_MODAL.homeBtn)
+      .image(-181, 130 - posTextY, END_MODAL.homeBtn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
@@ -51,7 +57,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.homeBtn.scrollFactorX = 0;
 
     this.reloadBtn = scene.add
-      .image(-161, 75 - posTextY, END_MODAL.reloadBtn)
+      .image(-181, 75 - posTextY, END_MODAL.reloadBtn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
@@ -65,11 +71,11 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.image.name = isDied ? END_MODAL.gravestone : END_MODAL.winCup;
     const posTextX = -width / 2 + this.homeBtn.width * SCALE_BTN + 35;
     this.restartText = scene.add
-      .text(posTextX, 75 - posTextY, 'Press RESTART to restart level', MODAL_TEXT_STYLE)
+      .text(posTextX, 75 - posTextY, i18next.t<string>(`pressRestart`), MODAL_TEXT_STYLE)
       .setOrigin(0, 0.5);
     this.restartText.scrollFactorX = 0;
     this.homeText = scene.add
-      .text(posTextX, 130 - posTextY, 'Press HOME to home page', MODAL_TEXT_STYLE)
+      .text(posTextX, 130 - posTextY, i18next.t<string>(`pressHome`), MODAL_TEXT_STYLE)
       .setOrigin(0, 0.5);
     this.homeText.scrollFactorX = 0;
 
@@ -81,7 +87,9 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .on('pointerdown', () => {
         this.close(ESCENE.game, isLevelNext);
       });
-    this._nextLevelText = scene.add.text(posTextX, 20, 'Next Level', MODAL_TEXT_STYLE).setOrigin(0, 0.5);
+    this._nextLevelText = scene.add
+      .text(posTextX, 20, i18next.t<string>(`nextLevel`), MODAL_TEXT_STYLE)
+      .setOrigin(0, 0.5);
     this._nextLevelText.scrollFactorX = 0;
     if (!isDied && isLevelNext) {
       this.add(this._nextLevelBtn);

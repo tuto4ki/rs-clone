@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import { CLOSE_BTN, HOW_TO_PLAY, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../../game/constGame';
 
 export default class HelpModal extends Phaser.GameObjects.Container {
@@ -24,31 +25,21 @@ export default class HelpModal extends Phaser.GameObjects.Container {
 
     this.add(this.background);
 
-    this.header = scene.add.text(0, -(height / 2) + 20, 'How to play ', TITLE_STYLE).setOrigin(0.5, 0.5);
+    this.header = scene.add
+      .text(0, -(height / 2) + 20, i18next.t<string>(`howToPlay`), TITLE_STYLE)
+      .setOrigin(0.5, 0.5);
     this.header.scrollFactorX = 0;
 
     this.add(this.header);
 
-    this.howControl = scene.add
-      .text(
-        40,
-        -220,
-        '- Press UP to JUMP\n\n- Press LEFT to move left\n\n- Press RIGHT to move right',
-        MODAL_TEXT_STYLE
-      )
-      .setOrigin(0.5, 0.5);
+    this.howControl = scene.add.text(100, -220, i18next.t<string>(`pressBtns`), MODAL_TEXT_STYLE).setOrigin(0.5, 0.5);
     this.howControl.name = 'howControl';
     this.howControl.scrollFactorX = 0;
 
     this.add(this.howControl);
 
     this.howPlaySettings = scene.add
-      .text(
-        40,
-        -40,
-        '1 - Collect coins\n2 - Jump to the islets\n3 - Avoid falling into water and touching enemies, otherwise death\n4 - Enemy can be killed by jumping on it\n5 - Collect coins from killed enemies\n6 - Get to the finish to pass the level!',
-        MODAL_TEXT_STYLE_000
-      )
+      .text(40, -40, i18next.t<string>(`descriptionsControl`), MODAL_TEXT_STYLE_000)
       .setOrigin(0.5, 0.5);
     this.howPlaySettings.name = 'howPlaySettings';
     this.howPlaySettings.scrollFactorX = 0;

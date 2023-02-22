@@ -105,6 +105,9 @@ export const CLOSE_BTN = 'CLOSE_BTN';
 export const HOW_TO_PLAY = 'HOW_TO_PLAY';
 export const CAT_AVATAR = 'catAvatar';
 export const FOX_AVATAR = 'foxAvatar';
+export const EN_logo = 'EN';
+export const RU_logo = 'RU';
+export const LV_logo = 'LV';
 
 export const enum END_MODAL {
   homeBtn = 'homeBtn',

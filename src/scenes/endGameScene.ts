@@ -2,7 +2,7 @@ import DieModal from '../components/modal/dieModal';
 import { ESCENE } from '../game/constGame';
 import { IPassScene } from '../game/type';
 
-const WIDTH_MODAL = 400;
+const WIDTH_MODAL = 450;
 const HEIGHT_MODAL = 350;
 export default class EndGameScene extends Phaser.Scene {
   private _typeScene = '';
