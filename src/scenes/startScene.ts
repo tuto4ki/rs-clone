@@ -33,6 +33,14 @@ i18next.init({
 
 const POSITION_LVL = { x: 100, y: 80 };
 const POSITION_TITLE_LVL = 70;
+const POSITION_LNG_X = 26;
+const POSITION_EN_Y = 30;
+const POSITION_RU_Y = 72;
+const POSITION_LV_Y = 112;
+const POSITION_Y = 30;
+const POSITION_X_BTN = 977;
+const POSITION_Y_GEAR = 71;
+const POSITION_Y_HELP = 29;
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'F1' || event.key === 'F2') {
@@ -47,7 +55,10 @@ export default class StartScene extends Phaser.Scene {
   }
   public create(): void {
     //
-    const enButton = this.add.image(26, 30, EN_logo).setInteractive({ useHandCursor: true }).setScale(0.8);
+    const enButton = this.add
+      .image(POSITION_LNG_X, POSITION_EN_Y, EN_logo)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.8);
     enButton.name = 'enButton';
     enButton.on('pointerdown', () => {
       i18next.changeLanguage('en').then(() => {
@@ -55,7 +66,10 @@ export default class StartScene extends Phaser.Scene {
         this.scene.restart();
       });
     });
-    const ruButton = this.add.image(26, 72, RU_logo).setInteractive({ useHandCursor: true }).setScale(0.8);
+    const ruButton = this.add
+      .image(POSITION_LNG_X, POSITION_RU_Y, RU_logo)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.8);
     ruButton.name = 'ruButton';
     ruButton.on('pointerdown', () => {
       i18next.changeLanguage('ru').then(() => {
@@ -63,7 +77,10 @@ export default class StartScene extends Phaser.Scene {
         this.scene.restart();
       });
     });
-    const lvButton = this.add.image(26, 112, LV_logo).setInteractive({ useHandCursor: true }).setScale(0.8);
+    const lvButton = this.add
+      .image(POSITION_LNG_X, POSITION_LV_Y, LV_logo)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.8);
     lvButton.name = 'lvButton';
     lvButton.on('pointerdown', () => {
       i18next.changeLanguage('lv').then(() => {
@@ -74,7 +91,7 @@ export default class StartScene extends Phaser.Scene {
     //
     this.cameras.main.setBackgroundColor(GAME_BACKGROUND);
     const choose_title = this.add
-      .text(+this.game.config.width / 2, 30, i18next.t<string>(`chooseChar`), TITLE_STYLE)
+      .text(+this.game.config.width / 2, POSITION_Y, i18next.t<string>(`chooseChar`), TITLE_STYLE)
       .setOrigin(0.5, 0.5);
     choose_title.name = 'title';
 
@@ -106,11 +123,17 @@ export default class StartScene extends Phaser.Scene {
       play_btn.setTint(0xffffff).setInteractive();
     });
     // модалки start
-    const gearBtn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add
+      .image(POSITION_X_BTN, POSITION_Y_GEAR, GEAR_BTN)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.47);
     gearBtn.name = 'GEAR_BTN';
     gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
 
-    const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add
+      .image(POSITION_X_BTN, POSITION_Y_HELP, HELP_BTN)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.25);
     helpBtn.name = 'help_btn';
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
     hotkeys('f1', () => {

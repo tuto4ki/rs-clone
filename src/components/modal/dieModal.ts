@@ -3,6 +3,11 @@ import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON } from '../..
 
 // const TEXT_POS = 100;
 const SCALE_BTN = 0.3;
+const NEXT_BTN_Y = 20;
+const NEXT_BTN_X = -161;
+const POSITION_IMG_X = 0;
+const POSITION_IMG_Y = -42;
+const POSITION_BTNS_X = -181;
 export default class DieModal extends Phaser.GameObjects.Container {
   private background: Phaser.GameObjects.Rectangle;
   private header: Phaser.GameObjects.Text;
@@ -46,7 +51,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.header.scrollFactorX = 0;
     this.add(this.header);
     this.homeBtn = scene.add
-      .image(-181, 130 - posTextY, END_MODAL.homeBtn)
+      .image(POSITION_BTNS_X, 130 - posTextY, END_MODAL.homeBtn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
@@ -57,7 +62,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.homeBtn.scrollFactorX = 0;
 
     this.reloadBtn = scene.add
-      .image(-181, 75 - posTextY, END_MODAL.reloadBtn)
+      .image(POSITION_BTNS_X, 75 - posTextY, END_MODAL.reloadBtn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.3)
       .setOrigin(0.5, 0.5)
@@ -67,7 +72,9 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.reloadBtn.name = 'reloadBtn';
     this.reloadBtn.scrollFactorX = 0;
 
-    this.image = scene.add.image(0, -42, isDied ? END_MODAL.gravestone : END_MODAL.winCup).setOrigin(0.5, 0.5);
+    this.image = scene.add
+      .image(POSITION_IMG_X, POSITION_IMG_Y, isDied ? END_MODAL.gravestone : END_MODAL.winCup)
+      .setOrigin(0.5, 0.5);
     this.image.name = isDied ? END_MODAL.gravestone : END_MODAL.winCup;
     const posTextX = -width / 2 + this.homeBtn.width * SCALE_BTN + 35;
     this.restartText = scene.add
@@ -80,7 +87,7 @@ export default class DieModal extends Phaser.GameObjects.Container {
     this.homeText.scrollFactorX = 0;
 
     this._nextLevelBtn = scene.add
-      .image(-161, 20, EBUTTON.nextLevel)
+      .image(NEXT_BTN_X, NEXT_BTN_Y, EBUTTON.nextLevel)
       .setInteractive({ useHandCursor: true })
       .setScale(-SCALE_BTN, SCALE_BTN)
       .setOrigin(0.5, 0.5)
