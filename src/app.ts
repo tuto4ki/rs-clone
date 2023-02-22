@@ -1,3 +1,4 @@
+import { createListenerLS } from './components/controller/localStorage';
 import Footer from './components/footer/footer';
 import Game from './components/game/game';
 import Header from './components/header/header';
@@ -12,6 +13,7 @@ export default class App {
   // menu: Menu;
 
   constructor() {
+    createListenerLS();
     this.header = new Header();
     this.game = new Game();
     this.footer = new Footer();
@@ -22,10 +24,9 @@ export default class App {
   start() {
     document.body.append(
       this.header.createHeader(),
-      this.login.createForm(),
-      // this.game.createGame(),
+      this.login.createForm(() => this.game.startGame()),
       this.footer.createFooter()
     );
-    this.game.startGame();
+    // this.game.startGame();
   }
 }

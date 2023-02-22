@@ -24,7 +24,7 @@ export default class Game {
       height: HEIGHT_GAME,
       fps: {
         target: 60,
-        forceSetTimeOut: true,
+        forceSetTimeOut: false,
       },
       physics: {
         default: 'arcade',

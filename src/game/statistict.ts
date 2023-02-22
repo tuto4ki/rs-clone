@@ -49,7 +49,7 @@ export default class Statistics {
   public update() {
     const currentTime = new Date();
     this._time = Math.floor((currentTime.getTime() - this._startTime.getTime()) / MILLISECONDS);
-    this._timeSprite.setText((this._pauseTime + this._time).toString());
+    this._timeSprite.setText(this.gameTime().toString());
   }
 
   public gameTime(): number {

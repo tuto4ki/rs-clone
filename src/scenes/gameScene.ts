@@ -1,4 +1,6 @@
 import hotkeys from 'hotkeys-js';
+import { getUserLS } from '../components/controller/localStorage';
+import { addScore } from '../components/controller/requests';
 import {
   COLLISION_PLAYER_ENEMY,
   IMAGES,
@@ -194,6 +196,12 @@ export default class GameScene extends Phaser.Scene {
   public gameOver(isDied: boolean) {
     this._isFinish = true;
     setTimeout(() => {
+      // if win -> create score
+      // change login tuto4ki
+      const user = getUserLS();
+      if (this._statistics && !isDied && user) {
+        addScore(user, this._levelNumber, this._statistics.score, this._statistics?.gameTime());
+      }
       this.changeScene(ESCENE.end, isDied);
     }, END_GAME_TIMEOUT);
   }

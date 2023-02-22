@@ -1,4 +1,5 @@
 export const serverAdress = 'http://localhost:3000';
+//export const serverAdress = 'https://rs-clone-server-smfd.onrender.com';
 
 export const responseStatus = {
   error: 500,

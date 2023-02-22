@@ -2,6 +2,7 @@ import { elementGenerator } from '../controller/taggenerator';
 import { login, register } from '../controller/requests';
 import { responseStatus } from '../controller/const';
 import './style.css';
+import { setUserLS } from '../controller/localStorage';
 
 export default class Login {
   private _headline: HTMLParagraphElement;
@@ -13,10 +14,12 @@ export default class Login {
   private _spanSign: HTMLSpanElement;
   private _signToggleBtn: HTMLButtonElement;
   private _wrapp: HTMLDivElement;
+  private _nonRegistration: HTMLButtonElement;
 
   private _canSendReg = false;
   private _errLogin: HTMLSpanElement;
   private _errPass: HTMLSpanElement;
+  private _callbackGame: (() => void) | null = null;
 
   constructor() {
     this._loginState = true;
@@ -38,6 +41,8 @@ export default class Login {
     });
     this._wrapp.append(this._spanSign, this._signToggleBtn);
 
+    this._nonRegistration = elementGenerator.createButton({ className: 'toggleBtn' });
+
     this._form = elementGenerator.createDiv({ className: 'form' });
 
     this._button.addEventListener('click', () => {
@@ -49,6 +54,7 @@ export default class Login {
       this._loginField.clearInputValue();
       this._passwordField.clearInputValue();
     });
+    this._nonRegistration.addEventListener('click', () => this.secondScene());
     this._errLogin = elementGenerator.createSpan({ className: 'errLogin' });
     this._errPass = elementGenerator.createSpan({ className: 'errPass' });
   }
@@ -71,6 +77,7 @@ export default class Login {
     this._button.innerHTML = `${this._loginState ? 'Login' : 'Registration'}`;
     this._spanSign.innerText = `${this._loginState ? "You don't have an account?" : 'Already have an account?'}`;
     this._signToggleBtn.innerText = `${this._loginState ? 'Registration' : 'Login Now'}`;
+    this._nonRegistration.innerHTML = 'Continue without registration';
   }
 
   setTranslation() {
@@ -81,7 +88,8 @@ export default class Login {
     // TODO
   }
 
-  createForm(): HTMLDivElement {
+  createForm(callbackGame: () => void): HTMLDivElement {
+    this._callbackGame = callbackGame;
     this.setFieldText();
     this._form.append(
       this._headline,
@@ -90,7 +98,8 @@ export default class Login {
       this._passwordField.getInputField(),
       this._errPass,
       this._button,
-      this._wrapp
+      this._wrapp,
+      this._nonRegistration
     );
 
     return this._form;
@@ -132,6 +141,7 @@ export default class Login {
               this.errorMsg('User Not found');
               break;
             case responseStatus.ok:
+              setUserLS(this._loginField.getInputValue());
               this.secondScene();
               break;
           }
@@ -143,6 +153,7 @@ export default class Login {
               this.errorMsg('User already exist');
               break;
             case responseStatus.created:
+              setUserLS(this._loginField.getInputValue());
               this.secondScene();
               break;
           }
@@ -151,9 +162,13 @@ export default class Login {
     }
   }
   private secondScene() {
-    const canvas = document.querySelector('canvas') as HTMLElement;
+    // this._callbackLogin(login);
+    // const canvas = document.querySelector('canvas') as HTMLElement;
     // если залогинился тогда, или если зарегистрировался тогда.... или если продолжить без регистрации то ->
-    canvas.style.visibility = 'visible';
+    // canvas.style.visibility = 'visible';
+    if (this._callbackGame) {
+      this._callbackGame();
+    }
     this._form.style.display = 'none';
   }
 
