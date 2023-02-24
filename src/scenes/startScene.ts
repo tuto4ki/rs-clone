@@ -13,9 +13,6 @@ import {
   MODAL_TEXT_STYLE,
   IMAGES,
   EBUTTON,
-  EN_logo,
-  RU_logo,
-  LV_logo,
 } from '../game/constGame';
 
 i18next.init({
@@ -52,11 +49,11 @@ export default class StartScene extends Phaser.Scene {
   public create(): void {
     //
     const enButton = this.add
-      .image(POSITION_LNG_X, POSITION_EN_Y, EN_logo)
+      .image(POSITION_LNG_X, POSITION_EN_Y, EBUTTON.langEn)
       .setInteractive({ useHandCursor: true })
       .setScale(0.8)
       .setTint(0xfd581e);
-    enButton.name = 'enButton';
+    enButton.name = EBUTTON.langEn;
     enButton.on('pointerdown', () => {
       i18next.changeLanguage('en').then(() => {
         localStorage.setItem('lang', 'en');
@@ -65,10 +62,10 @@ export default class StartScene extends Phaser.Scene {
       });
     });
     const ruButton = this.add
-      .image(POSITION_LNG_X, POSITION_RU_Y, RU_logo)
+      .image(POSITION_LNG_X, POSITION_RU_Y, EBUTTON.langRu)
       .setInteractive({ useHandCursor: true })
       .setScale(0.8);
-    ruButton.name = 'ruButton';
+    ruButton.name = EBUTTON.langRu;
     ruButton.on('pointerdown', () => {
       i18next.changeLanguage('ru').then(() => {
         localStorage.setItem('lang', 'ru');
@@ -77,10 +74,10 @@ export default class StartScene extends Phaser.Scene {
       });
     });
     const lvButton = this.add
-      .image(POSITION_LNG_X, POSITION_LV_Y, LV_logo)
+      .image(POSITION_LNG_X, POSITION_LV_Y, EBUTTON.langLv)
       .setInteractive({ useHandCursor: true })
       .setScale(0.8);
-    lvButton.name = 'lvButton';
+    lvButton.name = EBUTTON.langLv;
     lvButton.on('pointerdown', () => {
       i18next.changeLanguage('lv').then(() => {
         localStorage.setItem('lang', 'lv');
@@ -127,20 +124,20 @@ export default class StartScene extends Phaser.Scene {
       .image(POSITION_X_BTN, POSITION_Y_GEAR, EBUTTON.gear)
       .setInteractive({ useHandCursor: true })
       .setScale(0.47);
-    gearBtn.name = 'GEAR_BTN';
-    gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
+    gearBtn.name = EBUTTON.gear;
+    gearBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.settings), this);
 
     const helpBtn = this.add
       .image(POSITION_X_BTN, POSITION_Y_HELP, EBUTTON.help)
       .setInteractive({ useHandCursor: true })
       .setScale(0.25);
     helpBtn.name = 'help_btn';
-    helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
+    helpBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.help), this);
     hotkeys('f1', () => {
-      this.changeScene('HelpScene');
+      this.changeScene(ESCENE.help);
     });
     hotkeys('f2', () => {
-      this.changeScene('SettingsScene');
+      this.changeScene(ESCENE.settings);
     });
     this.add
       .text(
@@ -155,7 +152,7 @@ export default class StartScene extends Phaser.Scene {
       .image(+this.game.config.width / 2, +this.game.config.height - 30, EBUTTON.play)
       .setInteractive({ useHandCursor: true })
       .setScale(0.25);
-    play_btn.name = 'play_btn';
+    play_btn.name = EBUTTON.play;
     play_btn.on('pointerdown', () => {
       if (SELECTED_CHARACTER === null) {
         return;
@@ -176,23 +173,24 @@ export default class StartScene extends Phaser.Scene {
 
   private chooseTint(): void {
     const currentLang = localStorage.getItem('lang');
-    const enButtonImg = this.children.getByName('enButton') as Phaser.GameObjects.Image;
-    const ruButtonImg = this.children.getByName('ruButton') as Phaser.GameObjects.Image;
-    const lvButtonImg = this.children.getByName('lvButton') as Phaser.GameObjects.Image;
-    if (currentLang === 'en') {
-      enButtonImg.setTint(0xfd581e);
-      ruButtonImg.setTint(0xffffff);
-      lvButtonImg.setTint(0xffffff);
-    }
-    if (currentLang === 'ru') {
-      enButtonImg.setTint(0xffffff);
-      ruButtonImg.setTint(0xfd581e);
-      lvButtonImg.setTint(0xffffff);
-    }
-    if (currentLang === 'lv') {
-      enButtonImg.setTint(0xffffff);
-      ruButtonImg.setTint(0xffffff);
-      lvButtonImg.setTint(0xfd581e);
+    const enButtonImg = this.children.getByName(EBUTTON.langEn) as Phaser.GameObjects.Image;
+    const ruButtonImg = this.children.getByName(EBUTTON.langRu) as Phaser.GameObjects.Image;
+    const lvButtonImg = this.children.getByName(EBUTTON.langLv) as Phaser.GameObjects.Image;
+    switch (currentLang) {
+      case 'en':
+        enButtonImg.setTint(0xfd581e);
+        ruButtonImg.setTint(0xffffff);
+        lvButtonImg.setTint(0xffffff);
+        break;
+      case 'ru':
+        enButtonImg.setTint(0xffffff);
+        ruButtonImg.setTint(0xfd581e);
+        lvButtonImg.setTint(0xffffff);
+        break;
+      case 'lv':
+        enButtonImg.setTint(0xffffff);
+        ruButtonImg.setTint(0xffffff);
+        lvButtonImg.setTint(0xfd581e);
     }
   }
 

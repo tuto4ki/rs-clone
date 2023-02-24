@@ -10,21 +10,16 @@ import {
   SOUND_BTNS,
   CAT_AVATAR,
   FOX_AVATAR,
-  WIDTH_GAME,
-  HEIGHT_GAME,
   EGAME_SETTINGS,
   EBUTTON,
   EGAME_MAP,
   END_MODAL,
-  EN_logo,
-  RU_logo,
-  LV_logo,
 } from '../game/constGame';
 
 const COLOR_PRELOAD = 0x222222;
 const COLOR_PROGRESS = 0xffffff;
-const PROGRESS_BOX = { x: WIDTH_GAME / 2 - 160, y: HEIGHT_GAME / 2 - 25, width: 320, height: 50 };
-const PROGRESS_BAR = { x: WIDTH_GAME / 2 - 150, y: HEIGHT_GAME / 2 - 15, width: 300, height: 30 };
+const PROGRESS_BOX = { x: EGAME_SETTINGS.width / 2 - 160, y: EGAME_SETTINGS.height / 2 - 25, width: 320, height: 50 };
+const PROGRESS_BAR = { x: EGAME_SETTINGS.width / 2 - 150, y: EGAME_SETTINGS.height / 2 - 15, width: 300, height: 30 };
 
 export default class PreloadScene extends Phaser.Scene {
   selectedCharacter: unknown;
@@ -75,23 +70,23 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image(EBUTTON.gear, '../assets/sprites/gear.png');
     this.load.image(EBUTTON.help, '../assets/sprites/buttons/helpBtn.svg');
     this.load.image(EBUTTON.play, '../assets/sprites/buttons/playBtn.svg');
-    this.load.image('exitBtn', '../assets/sprites/buttons/exitBtn.svg');
+    // this.load.image('exitBtn', '../assets/sprites/buttons/exitBtn.svg');
     this.load.image(END_MODAL.homeBtn, '../assets/sprites/buttons/homeBtn.svg');
-    this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
-    this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
+    // this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
+    // this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
     this.load.image(END_MODAL.reloadBtn, '../assets/sprites/buttons/reloadBtn.svg');
     this.load.image(SOUND_BTNS.musicOnBtn, '../assets/sprites/buttons/musicOn.svg');
     this.load.image(SOUND_BTNS.musicOffBtn, '../assets/sprites/buttons/musicOff.svg');
     this.load.image(SOUND_BTNS.soundOnBtn, '../assets/sprites/buttons/soundOn.svg');
     this.load.image(SOUND_BTNS.soundOffBtn, '../assets/sprites/buttons/soundOff.svg');
-    this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
+    this.load.image(EBUTTON.leaderboard, '../assets/sprites/buttons/leaderboardBtn.svg');
     this.load.image(EBUTTON.close, '../assets/sprites/buttons/closeBtn.svg');
     this.load.image(EBUTTON.howPlay, '../assets/sprites/howToPlay.png');
     this.load.image(END_MODAL.gravestone, '../assets/sprites/gravestone.svg');
     this.load.image(END_MODAL.winCup, '../assets/images/win.png');
-    this.load.image(EN_logo, '../assets/images/en.png');
-    this.load.image(RU_logo, '../assets/images/ru.png');
-    this.load.image(LV_logo, '../assets/images/lv.png');
+    this.load.image(EBUTTON.langEn, '../assets/images/en.png');
+    this.load.image(EBUTTON.langRu, '../assets/images/ru.png');
+    this.load.image(EBUTTON.langLv, '../assets/images/lv.png');
     this.load.image(CAT_AVATAR, '../assets/sprites/catAvatar.png');
     this.load.image(FOX_AVATAR, '../assets/sprites/foxAvatar.png');
     const fonts = new WebFontFile(this.load, 'Itim');

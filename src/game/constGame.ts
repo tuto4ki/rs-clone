@@ -4,10 +4,6 @@ export const enum EGAME_SETTINGS {
   height = 750,
 }
 
-export const WIDTH_GAME = 1000;
-
-export const HEIGHT_GAME = 750;
-
 export const GRAVITY = 500;
 
 export const GAME_BACKGROUND = '#2e2b2b';
@@ -104,6 +100,9 @@ export const enum EBUTTON {
   close = 'CLOSE_BTN',
   howPlay = 'HOW_TO_PLAY',
   leaderboard = 'LEADER_BOARD_BTN',
+  langEn = 'enButton',
+  langRu = 'ruButton',
+  langLv = 'lvButton',
 }
 
 export const CAT_AVATAR = 'catAvatar';

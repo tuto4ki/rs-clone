@@ -1,5 +1,5 @@
 import * as Phaser from 'phaser';
-import { WIDTH_GAME, HEIGHT_GAME, GRAVITY, GAME_BACKGROUND } from '../../game/constGame';
+import { GRAVITY, GAME_BACKGROUND, EGAME_SETTINGS } from '../../game/constGame';
 import EndGameScene from '../../scenes/endGameScene';
 import GameScene from '../../scenes/gameScene';
 import HelpScene from '../../scenes/helpScene';
@@ -21,8 +21,8 @@ export default class Game {
     new Phaser.Game({
       type: Phaser.AUTO,
       parent: 'main',
-      width: WIDTH_GAME,
-      height: HEIGHT_GAME,
+      width: EGAME_SETTINGS.width,
+      height: EGAME_SETTINGS.height,
       fps: {
         target: 60,
         forceSetTimeOut: false,

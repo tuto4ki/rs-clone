@@ -1,5 +1,5 @@
 import HelpModal from '../components/modal/helpModal';
-import { ESCENE, HEIGHT_GAME, WIDTH_GAME } from '../game/constGame';
+import { ESCENE } from '../game/constGame';
 import { IPassScene } from '../game/type';
 
 export default class HelpScene extends Phaser.Scene {
@@ -12,10 +12,10 @@ export default class HelpScene extends Phaser.Scene {
   public create(): void {
     const howToPlayModal = new HelpModal(
       this,
-      WIDTH_GAME / 2,
-      HEIGHT_GAME / 2,
-      WIDTH_GAME - 60,
-      HEIGHT_GAME - 60,
+      +this.game.config.width / 2,
+      +this.game.config.height / 2,
+      +this.game.config.width - 60,
+      +this.game.config.height - 60,
       this._typeScene
     );
     howToPlayModal.setScale(0);
