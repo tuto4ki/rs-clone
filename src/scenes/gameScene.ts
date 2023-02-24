@@ -10,10 +10,9 @@ import {
   SCALE_SIZE_WORLD,
   EMUSIC,
   ESCENE,
-  GEAR_BTN,
-  HELP_BTN,
   EGAME_MAP,
   EGAME_SETTINGS,
+  EBUTTON,
 } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import Money from '../game/money';
@@ -130,11 +129,11 @@ export default class GameScene extends Phaser.Scene {
     // score and time
     this._statistics = new Statistics(this, 30, 30);
     //settings modal
-    const gearBtn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add.image(977, 71, EBUTTON.gear).setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.scrollFactorX = 0;
     gearBtn.name = 'gearBtn';
     gearBtn.scrollFactorX = 0;
-    const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add.image(976, 29, EBUTTON.help).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'helpBtn';
     helpBtn.scrollFactorX = 0;
     gearBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.settings), this);

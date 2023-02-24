@@ -28,9 +28,7 @@ export const SCALE_SIZE_PLAYER = 0.18;
 
 export const SCALE_SIZE_WORLD = 1;
 
-export const EMPTY_PICTURE_WIDTH = 300;
-
-export const EMPTY_PICTURE_HEIGHT = 150;
+export const EMPTY_PICTURE = 64;
 
 export const enum ENEMY_TYPE {
   zombieGirl = 'zombieGirl',
@@ -100,13 +98,14 @@ export const enum ESCENE {
 
 export const enum EBUTTON {
   nextLevel = 'nextLevel',
+  gear = 'GEAR_BTN',
+  help = 'HELP_BTN',
+  play = 'PLAY_BTN',
+  close = 'CLOSE_BTN',
+  howPlay = 'HOW_TO_PLAY',
+  leaderboard = 'LEADER_BOARD_BTN',
 }
 
-export const GEAR_BTN = 'GEAR_BTN';
-export const HELP_BTN = 'HELP_BTN';
-export const PLAY_BTN = 'PLAY_BTN';
-export const CLOSE_BTN = 'CLOSE_BTN';
-export const HOW_TO_PLAY = 'HOW_TO_PLAY';
 export const CAT_AVATAR = 'catAvatar';
 export const FOX_AVATAR = 'foxAvatar';
 

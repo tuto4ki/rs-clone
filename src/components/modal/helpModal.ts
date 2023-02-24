@@ -1,4 +1,4 @@
-import { CLOSE_BTN, HOW_TO_PLAY, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../../game/constGame';
+import { EBUTTON, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../../game/constGame';
 
 export default class HelpModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Image;
@@ -14,7 +14,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     this._typeScene = typeScene;
 
     this.background = scene.add
-      .image(0, 0, HOW_TO_PLAY)
+      .image(0, 0, EBUTTON.howPlay)
       .setDisplaySize(width, height)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -55,7 +55,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
 
     this.add(this.howPlaySettings);
     this.closeButton = scene.add
-      .image(466, -340, CLOSE_BTN)
+      .image(466, -340, EBUTTON.close)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })

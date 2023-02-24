@@ -7,12 +7,6 @@ import {
   PLAYER_TYPE,
   EMUSIC,
   ESCENE,
-  GEAR_BTN,
-  HELP_BTN,
-  PLAY_BTN,
-  END_MODAL,
-  CLOSE_BTN,
-  HOW_TO_PLAY,
   SOUND_BTNS,
   CAT_AVATAR,
   FOX_AVATAR,
@@ -21,6 +15,7 @@ import {
   EGAME_SETTINGS,
   EBUTTON,
   EGAME_MAP,
+  END_MODAL,
 } from '../game/constGame';
 
 const COLOR_PRELOAD = 0x222222;
@@ -74,9 +69,9 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.audio(EMUSIC.win, '../assets/sound/soundWin.mp3');
     // load button
     this.load.image(EBUTTON.nextLevel, '../assets/sprites/buttons/backBtn.svg');
-    this.load.image(GEAR_BTN, '../assets/sprites/gear.png');
-    this.load.image(HELP_BTN, '../assets/sprites/buttons/helpBtn.svg');
-    this.load.image(PLAY_BTN, '../assets/sprites/buttons/playBtn.svg');
+    this.load.image(EBUTTON.gear, '../assets/sprites/gear.png');
+    this.load.image(EBUTTON.help, '../assets/sprites/buttons/helpBtn.svg');
+    this.load.image(EBUTTON.play, '../assets/sprites/buttons/playBtn.svg');
     this.load.image('exitBtn', '../assets/sprites/buttons/exitBtn.svg');
     this.load.image(END_MODAL.homeBtn, '../assets/sprites/buttons/homeBtn.svg');
     this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
@@ -87,8 +82,8 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image(SOUND_BTNS.soundOnBtn, '../assets/sprites/buttons/soundOn.svg');
     this.load.image(SOUND_BTNS.soundOffBtn, '../assets/sprites/buttons/soundOff.svg');
     this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
-    this.load.image(CLOSE_BTN, '../assets/sprites/buttons/closeBtn.svg');
-    this.load.image(HOW_TO_PLAY, '../assets/sprites/howToPlay.png');
+    this.load.image(EBUTTON.close, '../assets/sprites/buttons/closeBtn.svg');
+    this.load.image(EBUTTON.howPlay, '../assets/sprites/howToPlay.png');
     this.load.image(END_MODAL.gravestone, '../assets/sprites/gravestone.svg');
     this.load.image(END_MODAL.winCup, '../assets/images/win.png');
     this.load.image(CAT_AVATAR, '../assets/sprites/catAvatar.png');

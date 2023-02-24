@@ -1,12 +1,4 @@
-import {
-  EGAME_MAP,
-  EMPTY_PICTURE_HEIGHT,
-  EMPTY_PICTURE_WIDTH,
-  ESCENE,
-  IMAGES,
-  PLAYER_TYPE,
-  SCALE_SIZE_WORLD,
-} from '../game/constGame';
+import { EGAME_MAP, EMPTY_PICTURE, ESCENE, IMAGES, PLAYER_TYPE, SCALE_SIZE_WORLD } from '../game/constGame';
 import Player from '../game/player';
 import { IPassScene } from '../game/type';
 
@@ -55,7 +47,7 @@ export default class TunnelScene extends Phaser.Scene {
       pic.body.width = tunnelObj.width * SCALE_SIZE_WORLD;
       pic.body.height = tunnelObj.height * SCALE_SIZE_WORLD;
       pic
-        .setScale(pic.body.width / EMPTY_PICTURE_WIDTH, pic.body.height / EMPTY_PICTURE_HEIGHT)
+        .setScale(pic.body.width / EMPTY_PICTURE, pic.body.height / EMPTY_PICTURE)
         .setOrigin(0)
         .refreshBody();
     }

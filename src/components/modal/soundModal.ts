@@ -1,4 +1,4 @@
-import { CLOSE_BTN, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../../game/constGame';
+import { EBUTTON, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../../game/constGame';
 
 export default class SoundModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Rectangle;
@@ -106,7 +106,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
     this.add(this.soundOnBtn);
 
     this.closeButton = scene.add
-      .image(168, -98, CLOSE_BTN)
+      .image(168, -98, EBUTTON.close)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })

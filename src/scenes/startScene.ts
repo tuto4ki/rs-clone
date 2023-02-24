@@ -2,15 +2,13 @@ import hotkeys from 'hotkeys-js';
 import {
   PLAYER_TYPE,
   ESCENE,
-  GEAR_BTN,
-  HELP_BTN,
-  PLAY_BTN,
   CAT_AVATAR,
   FOX_AVATAR,
   GAME_BACKGROUND,
   TITLE_STYLE,
   MODAL_TEXT_STYLE,
   IMAGES,
+  EBUTTON,
 } from '../game/constGame';
 
 const POSITION_LVL = { x: 100, y: 80 };
@@ -62,11 +60,11 @@ export default class StartScene extends Phaser.Scene {
       play_btn.setTint(0xffffff).setInteractive();
     });
     // модалки start
-    const gearBtn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add.image(977, 71, EBUTTON.gear).setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.name = 'GEAR_BTN';
     gearBtn.on('pointerdown', this.changeScene.bind(this, 'SettingsScene'), this);
 
-    const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add.image(976, 29, EBUTTON.help).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'help_btn';
     helpBtn.on('pointerdown', this.changeScene.bind(this, 'HelpScene'), this);
     hotkeys('f1', () => {
@@ -85,7 +83,7 @@ export default class StartScene extends Phaser.Scene {
       .setOrigin(0.5, 0.5);
 
     const play_btn = this.add
-      .image(+this.game.config.width / 2, +this.game.config.height - 30, PLAY_BTN)
+      .image(+this.game.config.width / 2, +this.game.config.height - 30, EBUTTON.play)
       .setInteractive({ useHandCursor: true })
       .setScale(0.25);
     play_btn.name = 'play_btn';
