@@ -38,5 +38,9 @@
   "level": "Līmenis",
   "nextPage": "Nākamā lapa",
   "prevPage": "Iepriekšēja lapa",
-  "Continue without registration": "Turpināt bez reģistrācijas"
+  "Continue without registration": "Turpināt bez reģistrācijas",
+  "username": "Lietotājvārds",
+  "password": "Parole",
+  "enterUsername": "Ievadiet lietotājvārdu",
+  "enterPassword": "Ievadiet savu paroli"
 }

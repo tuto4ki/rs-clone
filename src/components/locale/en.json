@@ -38,5 +38,9 @@
   "level": "Level",
   "nextPage": "Next page",
   "prevPage": "Prev page",
-  "Continue without registration": "Continue without registration"
+  "Continue without registration": "Continue without registration",
+  "username": "Lietotājvārds",
+  "password": "Parole",
+  "enterUsername": "Ievadiet lietotājvārdu",
+  "enterPassword": "Ievadiet savu paroli"
 }
