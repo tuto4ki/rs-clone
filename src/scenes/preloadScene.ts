@@ -16,6 +16,9 @@ import {
   EBUTTON,
   EGAME_MAP,
   END_MODAL,
+  EN_logo,
+  RU_logo,
+  LV_logo,
 } from '../game/constGame';
 
 const COLOR_PRELOAD = 0x222222;
@@ -86,6 +89,9 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image(EBUTTON.howPlay, '../assets/sprites/howToPlay.png');
     this.load.image(END_MODAL.gravestone, '../assets/sprites/gravestone.svg');
     this.load.image(END_MODAL.winCup, '../assets/images/win.png');
+    this.load.image(EN_logo, '../assets/images/en.png');
+    this.load.image(RU_logo, '../assets/images/ru.png');
+    this.load.image(LV_logo, '../assets/images/lv.png');
     this.load.image(CAT_AVATAR, '../assets/sprites/catAvatar.png');
     this.load.image(FOX_AVATAR, '../assets/sprites/foxAvatar.png');
     const fonts = new WebFontFile(this.load, 'Itim');

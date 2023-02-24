@@ -108,6 +108,9 @@ export const enum EBUTTON {
 
 export const CAT_AVATAR = 'catAvatar';
 export const FOX_AVATAR = 'foxAvatar';
+export const EN_logo = 'EN';
+export const RU_logo = 'RU';
+export const LV_logo = 'LV';
 
 export const enum END_MODAL {
   homeBtn = 'homeBtn',

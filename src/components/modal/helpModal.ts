@@ -1,5 +1,14 @@
+import i18next from 'i18next';
 import { EBUTTON, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../../game/constGame';
 
+const POSITION_X = 0;
+const POSITION_Y = 0;
+const HOW_CONTROL_X = 100;
+const HOW_CONTROL_Y = -220;
+const HOW_PLAY_X = 40;
+const HOW_PLAY_Y = -40;
+const CLOSE_BTN_X = 466;
+const CLOSE_BTN_Y = -340;
 export default class HelpModal extends Phaser.GameObjects.Container {
   background: Phaser.GameObjects.Image;
   header: Phaser.GameObjects.Text;
@@ -14,7 +23,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     this._typeScene = typeScene;
 
     this.background = scene.add
-      .image(0, 0, EBUTTON.howPlay)
+      .image(POSITION_X, POSITION_Y, EBUTTON.howPlay)
       .setDisplaySize(width, height)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -24,18 +33,15 @@ export default class HelpModal extends Phaser.GameObjects.Container {
 
     this.add(this.background);
 
-    this.header = scene.add.text(0, -(height / 2) + 20, 'How to play ', TITLE_STYLE).setOrigin(0.5, 0.5);
+    this.header = scene.add
+      .text(POSITION_X, -(height / 2) + 20, i18next.t<string>(`howToPlay`), TITLE_STYLE)
+      .setOrigin(0.5, 0.5);
     this.header.scrollFactorX = 0;
 
     this.add(this.header);
 
     this.howControl = scene.add
-      .text(
-        40,
-        -220,
-        '- Press UP to JUMP\n\n- Press LEFT to move left\n\n- Press RIGHT to move right',
-        MODAL_TEXT_STYLE
-      )
+      .text(HOW_CONTROL_X, HOW_CONTROL_Y, i18next.t<string>(`pressBtns`), MODAL_TEXT_STYLE)
       .setOrigin(0.5, 0.5);
     this.howControl.name = 'howControl';
     this.howControl.scrollFactorX = 0;
@@ -43,19 +49,14 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     this.add(this.howControl);
 
     this.howPlaySettings = scene.add
-      .text(
-        40,
-        -40,
-        '1 - Collect coins\n2 - Jump to the islets\n3 - Avoid falling into water and touching enemies, otherwise death\n4 - Enemy can be killed by jumping on it\n5 - Collect coins from killed enemies\n6 - Get to the finish to pass the level!',
-        MODAL_TEXT_STYLE_000
-      )
+      .text(HOW_PLAY_X, HOW_PLAY_Y, i18next.t<string>(`descriptionsControl`), MODAL_TEXT_STYLE_000)
       .setOrigin(0.5, 0.5);
     this.howPlaySettings.name = 'howPlaySettings';
     this.howPlaySettings.scrollFactorX = 0;
 
     this.add(this.howPlaySettings);
     this.closeButton = scene.add
-      .image(466, -340, EBUTTON.close)
+      .image(CLOSE_BTN_X, CLOSE_BTN_Y, EBUTTON.close)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
