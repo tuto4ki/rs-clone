@@ -2,6 +2,7 @@ import { elementGenerator } from '../controller/taggenerator';
 import { login, register } from '../controller/requests';
 import { responseStatus } from '../controller/const';
 import './style.css';
+import i18next from 'i18next';
 
 export default class Login {
   private _headline: HTMLParagraphElement;
@@ -58,27 +59,15 @@ export default class Login {
     this.setFieldText();
   }
 
-  // buttonPressed() {
-  //   if (this._loginState) {
-  //     //logging
-  //   } else {
-  //     //registration
-  //   }
-  // }
-
   private setFieldText() {
-    this._headline.innerText = `${this._loginState ? 'Login' : 'Registration'}`;
-    this._button.innerHTML = `${this._loginState ? 'Login' : 'Registration'}`;
-    this._spanSign.innerText = `${this._loginState ? "You don't have an account?" : 'Already have an account?'}`;
-    this._signToggleBtn.innerText = `${this._loginState ? 'Registration' : 'Login Now'}`;
-  }
-
-  setTranslation() {
-    this.setFieldText();
-    this._headline.innerText = 'iz massiva text';
-    this._loginField.setTranslation();
-    this._passwordField.setTranslation();
-    // TODO
+    this._headline.innerText = `${this._loginState ? i18next.t<string>(`login`) : i18next.t<string>(`registration`)}`;
+    this._button.innerHTML = `${this._loginState ? i18next.t<string>(`login`) : i18next.t<string>(`registration`)}`;
+    this._spanSign.innerText = `${
+      this._loginState ? i18next.t<string>(`dontHaveAcc`) : i18next.t<string>(`alreadyHaveAccount`)
+    }`;
+    this._signToggleBtn.innerText = `${
+      this._loginState ? i18next.t<string>(`registration`) : i18next.t<string>(`login`)
+    }`;
   }
 
   createForm(): HTMLDivElement {
@@ -102,7 +91,7 @@ export default class Login {
 
     if (this._loginField.getInputValue() === '') {
       this._loginField.setErrorMessage();
-      this._errLogin.innerText = 'Error: username field can`t be empty';
+      this._errLogin.innerText = i18next.t<string>(`errorUsername`);
       this._canSendReg = false;
     } else {
       this._loginField.setSuccessMessage();
@@ -112,7 +101,7 @@ export default class Login {
 
     if (this._passwordField.getInputValue() === '' || this._passwordField.getInputValue().length < 8) {
       this._passwordField.setErrorMessage();
-      this._errPass.innerText = 'Error: password field can`t be empty and password must be at least 8 characters';
+      this._errPass.innerText = i18next.t<string>(`errorPassword`);
       this._canSendReg = false;
     } else {
       this._passwordField.setSuccessMessage();
@@ -126,10 +115,10 @@ export default class Login {
         await login(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
           switch (res.status) {
             case responseStatus.error:
-              this.errorMsg('Wrong password');
+              this.errorMsg(i18next.t<string>(`wrongPassword`));
               break;
             case responseStatus.notFound:
-              this.errorMsg('User Not found');
+              this.errorMsg(i18next.t<string>(`userNotFound`));
               break;
             case responseStatus.ok:
               this.secondScene();
@@ -140,7 +129,7 @@ export default class Login {
         await register(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
           switch (res.status) {
             case responseStatus.error:
-              this.errorMsg('User already exist');
+              this.errorMsg(i18next.t<string>(`userExist`));
               break;
             case responseStatus.created:
               this.secondScene();
@@ -206,9 +195,5 @@ class InputField {
   setSuccessMessage() {
     this._inputField.classList.remove('error');
     this._inputField.classList.add('success');
-  }
-
-  setTranslation() {
-    // set translation for inputs TODO
   }
 }

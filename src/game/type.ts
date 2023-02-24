@@ -19,5 +19,5 @@ export interface IPassScene {
   playerType?: PLAYER_TYPE;
   isStart?: boolean;
   isLevelNext?: boolean;
-  levelNumber? : number;
+  levelNumber?: number;
 }

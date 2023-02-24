@@ -10,7 +10,7 @@ export default class SettingsScene extends Phaser.Scene {
   }
 
   public create(): void {
-    const modal = new SoundModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 340, 200, this._typeScene);
+    const modal = new SoundModal(this, WIDTH_GAME / 2, HEIGHT_GAME / 2, 400, 200, this._typeScene);
     modal.setScale(0);
     this.add.existing(modal);
     modal.open();
