@@ -38,5 +38,9 @@
   "level": "Level",
   "nextPage": "Next page",
   "prevPage": "Prev page",
-  "noRegistration": "Continue without registration"
+  "noRegistration": "Continue without registration",
+  "username": "Username",
+  "password": "Password",
+  "enterUsername": "Enter Username",
+  "enterPassword": "Enter Password"
 }

@@ -24,8 +24,20 @@ export default class Login {
 
   constructor() {
     this._loginState = true;
-    this._loginField = new InputField('text', '', 'user-name', 'Username', 'Enter username');
-    this._passwordField = new InputField('password', '', 'pwd', 'Password', 'Enter your password');
+    this._loginField = new InputField(
+      'text',
+      '',
+      'user-name',
+      i18next.t<string>(`username`),
+      i18next.t<string>(`enterUsername`)
+    );
+    this._passwordField = new InputField(
+      'password',
+      '',
+      'pwd',
+      i18next.t<string>(`password`),
+      i18next.t<string>(`enterPassword`)
+    );
 
     this._headline = elementGenerator.createParagraph({
       className: 'headline',

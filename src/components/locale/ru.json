@@ -38,5 +38,9 @@
   "level": "Уровень",
   "nextPage": "Следующая страница",
   "prevPage": "Предыдущая страница",
-  "noRegistration": "Продолжить без регистрации"
+  "noRegistration": "Продолжить без регистрации",
+  "username": "Логин",
+  "password": "Пароль",
+  "enterUsername": "Введите логин",
+  "enterPassword": "Введите ваш пароль"
 }
