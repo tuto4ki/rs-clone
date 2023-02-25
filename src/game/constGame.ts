@@ -71,9 +71,10 @@ export const enum IMAGES {
   emptyPicture = 'emptyPicture',
   plate = 'plate',
   tunnel = 'tunnel',
+  money = 'money',
 }
 
-export const MONEY = 'money';
+// export const MONEY = ;
 
 export const MONEY_SCORE = 50;
 

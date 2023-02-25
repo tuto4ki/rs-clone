@@ -3,7 +3,6 @@ import {
   ENEMY_TYPE,
   ENTITY_ANIMATION,
   IMAGES,
-  MONEY,
   PLAYER_TYPE,
   EMUSIC,
   ESCENE,
@@ -51,7 +50,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
     this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
-    this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
+    this.load.atlas(IMAGES.money, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level
     this.loadLevel(EGAME_SETTINGS.maxLevel);
     // load pre scene
@@ -120,7 +119,7 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   private createAnimationMoney(): void {
-    this.addAnimationToManager(MONEY, MONEY, 'gold_', 1, 10, 2, 10, -1);
+    this.addAnimationToManager(IMAGES.money, IMAGES.money, 'gold_', 1, 10, 2, 10, -1);
   }
 
   private addAnimationToManager(
@@ -146,7 +145,7 @@ export default class PreloadScene extends Phaser.Scene {
       this.load.image(`${EGAME_MAP.levelTiles}${i}`, `../assets/sprites/level${i}.png`);
       this.load.tilemapTiledJSON(`${EGAME_MAP.levelMap}${i}`, `../assets/json/level${i}.json`);
       this.load.image(`${IMAGES.bgLevel}${i}`, `../assets/images/bgLevel${i}.png`);
-      this.load.image(`${IMAGES.bgLevel}${i}svg`, `../assets/images/bgLevel${i}.svg`);
+      this.load.image(`${IMAGES.bgLevel}${i}svg`, `../assets/images/bgLevel${i}${i}.png`);
     }
   }
 }

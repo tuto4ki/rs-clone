@@ -4,7 +4,6 @@ import { addScore } from '../components/controller/requests';
 import {
   COLLISION_PLAYER_ENEMY,
   IMAGES,
-  MONEY,
   MONEY_SCORE,
   PLAYER_TYPE,
   SCALE_SIZE_WORLD,
@@ -97,7 +96,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this._player?.sprite, this._enemies.listEnemies, this.checkCollision.bind(this)).name =
       COLLISION_PLAYER_ENEMY;
     // create money
-    const moneyObj = new Money(this, map, `${MONEY}Obj`);
+    const moneyObj = new Money(this, map, `${IMAGES.money}Obj`);
     // control player
     this._cursor?.up.on('down', this.cursorDown.bind(this));
     this._cursor?.space.on('down', this.cursorDown.bind(this));
@@ -239,7 +238,7 @@ export default class GameScene extends Phaser.Scene {
     if (this._statistics) {
       this._statistics.score += MONEY_SCORE;
     }
-    if (money.name === MONEY) {
+    if (money.name === IMAGES.money) {
       money.destroy();
     } else {
       player.destroy();

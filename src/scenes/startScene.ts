@@ -194,16 +194,14 @@ export default class StartScene extends Phaser.Scene {
         +this.game.config.height / 2 + POSITION_LVL.y,
         `${IMAGES.bgLevel}1svg`
       )
-      .setInteractive({ useHandCursor: true })
-      .setScale(0.4);
+      .setInteractive({ useHandCursor: true });
     const level2 = this.add
       .image(
         +this.game.config.width / 2 + POSITION_LVL.x,
         +this.game.config.height / 2 + POSITION_LVL.y,
         `${IMAGES.bgLevel}2svg`
       )
-      .setInteractive({ useHandCursor: true })
-      .setScale(0.37);
+      .setInteractive({ useHandCursor: true });
     level1.name = `${IMAGES.bgLevel}1`;
     level2.name = `${IMAGES.bgLevel}2`;
     level1.setTint(0xffffff);
