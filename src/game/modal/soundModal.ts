@@ -1,4 +1,4 @@
-import { EBUTTON, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../../game/constGame';
+import { EBUTTON, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../constGame';
 import i18next from 'i18next';
 const POSITION_CLOSE_X = 200;
 const POSITION_CLOSE_Y = -98;

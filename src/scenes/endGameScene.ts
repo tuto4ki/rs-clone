@@ -1,11 +1,10 @@
-import DieModal from '../components/modal/dieModal';
+import DieModal from '../game/modal/dieModal';
 import { ESCENE, PLAYER_TYPE } from '../game/constGame';
 import { IPassScene } from '../game/type';
 
 const WIDTH_MODAL = 450;
 const HEIGHT_MODAL = 350;
 export default class EndGameScene extends Phaser.Scene {
-  private _typeScene = '';
   private _isWin = false;
   private _isLevelNext = false;
   private _playerType = PLAYER_TYPE.fox;
@@ -22,7 +21,6 @@ export default class EndGameScene extends Phaser.Scene {
       WIDTH_MODAL,
       HEIGHT_MODAL,
       this._isWin,
-      this._typeScene,
       this._playerType,
       this._isLevelNext
     );
@@ -34,7 +32,6 @@ export default class EndGameScene extends Phaser.Scene {
   }
 
   public init(data: IPassScene): void {
-    this._typeScene = data.scene;
     if (data.isDied !== undefined) {
       this._isWin = data.isDied;
     }

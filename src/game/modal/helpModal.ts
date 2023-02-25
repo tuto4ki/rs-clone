@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { EBUTTON, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../../game/constGame';
+import { EBUTTON, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../constGame';
 
 const POSITION_X = 0;
 const POSITION_Y = 0;

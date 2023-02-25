@@ -3,14 +3,14 @@ import Footer from './components/footer/footer';
 import Game from './components/game/game';
 import Header from './components/header/header';
 import Login from './components/login/login';
-// import Menu from './components/menu/menu';
+import Popup from './components/popup/popup';
 
 export default class App {
   header: Header;
   game: Game;
   footer: Footer;
   login: Login;
-  // menu: Menu;
+  popup: Popup;
 
   constructor() {
     createListenerLS();
@@ -18,15 +18,16 @@ export default class App {
     this.game = new Game();
     this.footer = new Footer();
     this.login = new Login();
-    // this.menu = new Menu();
+    this.popup = new Popup();
   }
 
   start() {
     document.body.append(
       this.header.createHeader(),
+      this.popup.createPopup(),
+      this.game.createGame(),
       this.login.createForm(() => this.game.startGame()),
       this.footer.createFooter()
     );
-    // this.game.startGame();
   }
 }

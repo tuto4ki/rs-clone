@@ -1,4 +1,4 @@
-import SoundModal from '../components/modal/soundModal';
+import SoundModal from '../game/modal/soundModal';
 import { ESCENE } from '../game/constGame';
 import { IPassScene } from '../game/type';
 

@@ -3,6 +3,7 @@ import { GRAVITY, GAME_BACKGROUND, EGAME_SETTINGS } from '../../game/constGame';
 import EndGameScene from '../../scenes/endGameScene';
 import GameScene from '../../scenes/gameScene';
 import HelpScene from '../../scenes/helpScene';
+import PopupScene from '../../scenes/popupScene';
 import PreloadScene from '../../scenes/preloadScene';
 import SettingsScene from '../../scenes/settingsScene';
 import StartScene from '../../scenes/startScene';
@@ -37,7 +38,7 @@ export default class Game {
         },
       },
       backgroundColor: GAME_BACKGROUND,
-      scene: [PreloadScene, GameScene, StartScene, SettingsScene, HelpScene, EndGameScene, TunnelScene],
+      scene: [PreloadScene, GameScene, StartScene, SettingsScene, HelpScene, EndGameScene, TunnelScene, PopupScene],
     });
   }
 }

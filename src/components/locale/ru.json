@@ -42,5 +42,14 @@
   "username": "Логин",
   "password": "Пароль",
   "enterUsername": "Введите логин",
-  "enterPassword": "Введите ваш пароль"
+  "enterPassword": "Введите ваш пароль",
+  "back": "Назад",
+  "sortby": "Сортировать по..",
+  "sortScoreASC": "очкам ASC",
+  "sortScoreDesc": "очкам DESC",
+  "sortTimeASC": "времени ASC",
+  "sortTimeDESC": "времени DESC",
+  "allLevels": "Все уровни",
+  "level1": "Уровень 1",
+  "level2": "Уровень 2"
 }

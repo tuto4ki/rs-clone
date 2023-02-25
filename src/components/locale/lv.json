@@ -42,5 +42,14 @@
   "username": "Lietotājvārds",
   "password": "Parole",
   "enterUsername": "Ievadiet lietotājvārdu",
-  "enterPassword": "Ievadiet savu paroli"
+  "enterPassword": "Ievadiet savu paroli",
+  "back": "Atpakaļ",
+  "sortby": "Kārtot pēc..",
+  "sortScoreASC": "Kārtot rezultātu ASC",
+  "sortScoreDesc": "Kārtot rezultātu DESC",
+  "sortTimeASC": "Kārtošanas laiks ASC",
+  "sortTimeDESC": "Kārtošanas laiks DESC",
+  "allLevels": "Visi līmeņi",
+  "level1": "Līmenis 1",
+  "level2": "Līmenis 2"
 }

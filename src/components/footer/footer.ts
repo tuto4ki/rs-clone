@@ -1,7 +1,7 @@
 export default class Footer {
   createFooter(): HTMLElement {
-    const footer = document.createElement('header');
-    footer.classList.add('header');
+    const footer = document.createElement('footer');
+    footer.classList.add('footer');
     return footer;
   }
 }

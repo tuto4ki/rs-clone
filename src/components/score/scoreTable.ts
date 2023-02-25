@@ -2,6 +2,7 @@ import { elementGenerator } from '../controller/taggenerator';
 import { IWinner, ISortQuery, ISelectData } from '../types';
 import { getScores } from '../controller/requests';
 import { scoreRowsCount, orderParametrsRequest } from '../controller/const';
+import i18next from 'i18next';
 
 export class ScoreTable {
   private _sortQuery: ISortQuery;
@@ -133,12 +134,12 @@ export class ScoreTable {
   };
 
   setTranslation = (): void => {
-    this._userPosH.innerText = 'Nr';
-    this._userNameH.innerText = 'Player name';
-    this._userScoreH.innerText = 'Coin count';
-    this._userTimeH.innerText = 'Time';
-    this._userLevelH.innerText = 'Level';
-    this._nextPage.innerText = 'Next page';
-    this._prevPage.innerText = 'Prev page';
+    this._userPosH.innerText = 'N';
+    this._userNameH.innerText = i18next.t<string>('name');
+    this._userScoreH.innerText = i18next.t<string>('coinCount');
+    this._userTimeH.innerText = i18next.t<string>('time');
+    this._userLevelH.innerText = i18next.t<string>('level');
+    this._nextPage.innerText = i18next.t<string>('nextPage');
+    this._prevPage.innerText = i18next.t<string>('prevPage');
   };
 }

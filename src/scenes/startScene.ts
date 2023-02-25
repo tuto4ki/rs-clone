@@ -3,6 +3,7 @@ import i18next from 'i18next';
 import enTranslation from '../components/locale/en.json';
 import ruTranslation from '../components/locale/ru.json';
 import lvTranslation from '../components/locale/lv.json';
+import { ScoreView } from '../components/score/scoreView';
 import {
   PLAYER_TYPE,
   ESCENE,
@@ -13,6 +14,7 @@ import {
   MODAL_TEXT_STYLE,
   IMAGES,
   EBUTTON,
+  ELANG,
 } from '../game/constGame';
 
 i18next.init({
@@ -34,6 +36,7 @@ const POSITION_Y = 30;
 const POSITION_X_BTN = 977;
 const POSITION_Y_GEAR = 71;
 const POSITION_Y_HELP = 29;
+const POSITION_Y_LDRBRD = 112;
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'F1' || event.key === 'F2') {
@@ -44,53 +47,19 @@ export default class StartScene extends Phaser.Scene {
   private _levelSelected = 1;
 
   constructor() {
-    super('Start');
+    super(ESCENE.start);
   }
+
   public create(): void {
-    //
-    const enButton = this.add
-      .image(POSITION_LNG_X, POSITION_EN_Y, EBUTTON.langEn)
-      .setInteractive({ useHandCursor: true })
-      .setScale(0.8)
-      .setTint(0xfd581e);
-    enButton.name = EBUTTON.langEn;
-    enButton.on('pointerdown', () => {
-      i18next.changeLanguage('en').then(() => {
-        localStorage.setItem('lang', 'en');
-        this.scene.restart();
-        this.chooseTint();
-      });
-    });
-    const ruButton = this.add
-      .image(POSITION_LNG_X, POSITION_RU_Y, EBUTTON.langRu)
-      .setInteractive({ useHandCursor: true })
-      .setScale(0.8);
-    ruButton.name = EBUTTON.langRu;
-    ruButton.on('pointerdown', () => {
-      i18next.changeLanguage('ru').then(() => {
-        localStorage.setItem('lang', 'ru');
-        this.scene.restart();
-        this.chooseTint();
-      });
-    });
-    const lvButton = this.add
-      .image(POSITION_LNG_X, POSITION_LV_Y, EBUTTON.langLv)
-      .setInteractive({ useHandCursor: true })
-      .setScale(0.8);
-    lvButton.name = EBUTTON.langLv;
-    lvButton.on('pointerdown', () => {
-      i18next.changeLanguage('lv').then(() => {
-        localStorage.setItem('lang', 'lv');
-        this.scene.restart();
-        this.chooseTint();
-      });
-    });
-    //
     this.cameras.main.setBackgroundColor(GAME_BACKGROUND);
     const choose_title = this.add
       .text(+this.game.config.width / 2, POSITION_Y, i18next.t<string>(`chooseChar`), TITLE_STYLE)
       .setOrigin(0.5, 0.5);
     choose_title.name = 'title';
+    // create button language
+    this.createButtonLanguage(POSITION_LNG_X, POSITION_EN_Y, EBUTTON.langEn, ELANG.en);
+    this.createButtonLanguage(POSITION_LNG_X, POSITION_RU_Y, EBUTTON.langRu, ELANG.ru);
+    this.createButtonLanguage(POSITION_LNG_X, POSITION_LV_Y, EBUTTON.langLv, ELANG.lv);
 
     const playerCat = this.add
       .image(+this.game.config.width / 2 - 100, +this.game.config.height / 2 - 200, CAT_AVATAR)
@@ -131,8 +100,17 @@ export default class StartScene extends Phaser.Scene {
       .image(POSITION_X_BTN, POSITION_Y_HELP, EBUTTON.help)
       .setInteractive({ useHandCursor: true })
       .setScale(0.25);
-    helpBtn.name = 'help_btn';
+    helpBtn.name = EBUTTON.help;
     helpBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.help), this);
+
+    const leaderboardBtn = this.add
+      .image(POSITION_X_BTN, POSITION_Y_LDRBRD, EBUTTON.leaderboard)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.25);
+    leaderboardBtn.name = EBUTTON.help;
+    leaderboardBtn.on('pointerdown', this.showScore.bind(this), this);
+
+    // add hot keys
     hotkeys('f1', () => {
       this.changeScene(ESCENE.help);
     });
@@ -177,17 +155,17 @@ export default class StartScene extends Phaser.Scene {
     const ruButtonImg = this.children.getByName(EBUTTON.langRu) as Phaser.GameObjects.Image;
     const lvButtonImg = this.children.getByName(EBUTTON.langLv) as Phaser.GameObjects.Image;
     switch (currentLang) {
-      case 'en':
+      case ELANG.en:
         enButtonImg.setTint(0xfd581e);
         ruButtonImg.setTint(0xffffff);
         lvButtonImg.setTint(0xffffff);
         break;
-      case 'ru':
+      case ELANG.ru:
         enButtonImg.setTint(0xffffff);
         ruButtonImg.setTint(0xfd581e);
         lvButtonImg.setTint(0xffffff);
         break;
-      case 'lv':
+      case ELANG.lv:
         enButtonImg.setTint(0xffffff);
         ruButtonImg.setTint(0xffffff);
         lvButtonImg.setTint(0xfd581e);
@@ -240,6 +218,37 @@ export default class StartScene extends Phaser.Scene {
       this._levelSelected = 2;
       level2.setTint(0xffffff);
       level1.setTint(0xa79999);
+    });
+  }
+
+  private createButtonLanguage(x: number, y: number, langImg: EBUTTON, lang: ELANG): void {
+    const langButton = this.add
+      .image(x, y, langImg)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.8)
+      .setTint(0xfd581e);
+    langButton.name = langImg;
+    langButton.on('pointerdown', () => {
+      i18next.changeLanguage(lang).then(() => {
+        localStorage.setItem('lang', lang);
+        this.scene.restart();
+        this.chooseTint();
+      });
+    });
+  }
+
+  private showScore() {
+    const score = new ScoreView();
+    const scoreView = score.getScoreView();
+    scoreView.then((tableScore) => {
+      document.querySelector('.main')?.classList.add('hidden');
+      document.querySelector('.popup')?.append(tableScore);
+      document.querySelector('.popupBg')?.classList.remove('hidden');
+      document.querySelector('.popupBg')?.classList.add('flex');
+      const btn = document.querySelector('.button');
+      if (btn?.innerHTML) {
+        btn.innerHTML = i18next.t<string>('back');
+      }
     });
   }
 }

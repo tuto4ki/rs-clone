@@ -42,5 +42,14 @@
   "username": "Username",
   "password": "Password",
   "enterUsername": "Enter Username",
-  "enterPassword": "Enter Password"
+  "enterPassword": "Enter Password",
+  "back": "Back",
+  "sortby": "Sort by..",
+  "sortScoreASC": "Sort score ASC",
+  "sortScoreDesc": "Sort score DESC",
+  "sortTimeASC": "Sort time ASC",
+  "sortTimeDESC": "Sort time DESC",
+  "allLevels": "All Levels",
+  "level1": "Level 1",
+  "level2": "Level 2"
 }

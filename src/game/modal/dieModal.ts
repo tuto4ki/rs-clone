@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON, PLAYER_TYPE } from '../../game/constGame';
+import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON, PLAYER_TYPE } from '../constGame';
 
 // const TEXT_POS = 100;
 const SCALE_BTN = 0.3;
@@ -19,7 +19,6 @@ export default class DieModal extends Phaser.GameObjects.Container {
   private _nextLevelBtn: Phaser.GameObjects.Image;
   private _nextLevelText: Phaser.GameObjects.Text;
   private _playerType: PLAYER_TYPE;
-  private _typeScene: string;
 
   constructor(
     scene: Phaser.Scene,
@@ -28,12 +27,10 @@ export default class DieModal extends Phaser.GameObjects.Container {
     width: number,
     height: number,
     isDied: boolean,
-    typeScene: string,
     playerType: PLAYER_TYPE,
     isLevelNext = false
   ) {
     super(scene, x, y);
-    this._typeScene = typeScene;
     this._playerType = playerType;
     this.background = scene.add
       .rectangle(0, 0, width, height, 0x2b2b2b, 1)

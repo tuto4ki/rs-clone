@@ -1,4 +1,4 @@
-import HelpModal from '../components/modal/helpModal';
+import HelpModal from '../game/modal/helpModal';
 import { ESCENE } from '../game/constGame';
 import { IPassScene } from '../game/type';
 

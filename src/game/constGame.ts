@@ -4,6 +4,12 @@ export const enum EGAME_SETTINGS {
   height = 750,
 }
 
+export const enum ELANG {
+  ru = 'ru',
+  en = 'en',
+  lv = 'lv',
+}
+
 export const GRAVITY = 500;
 
 export const GAME_BACKGROUND = '#2e2b2b';
@@ -90,6 +96,7 @@ export const enum ESCENE {
   help = 'HelpScene',
   end = 'EndGameScene',
   tunnel = 'TunnelScene',
+  popup = 'Popup',
 }
 
 export const enum EBUTTON {

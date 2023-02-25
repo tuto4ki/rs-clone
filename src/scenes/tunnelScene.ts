@@ -17,7 +17,7 @@ export default class TunnelScene extends Phaser.Scene {
   private _player: Player | null = null;
 
   constructor() {
-    super('TunnelScene');
+    super(ESCENE.tunnel);
   }
 
   public create(): void {
