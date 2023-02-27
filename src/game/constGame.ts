@@ -4,9 +4,11 @@ export const enum EGAME_SETTINGS {
   height = 750,
 }
 
-export const WIDTH_GAME = 1000;
-
-export const HEIGHT_GAME = 750;
+export const enum ELANG {
+  ru = 'ru',
+  en = 'en',
+  lv = 'lv',
+}
 
 export const GRAVITY = 500;
 
@@ -24,13 +26,11 @@ export const WIDTH_PLAYER = 180;
 
 export const HEIGHT_PLAYER = 360;
 
-export const SCALE_SIZE_PLAYER = 0.2;
+export const SCALE_SIZE_PLAYER = 0.18;
 
 export const SCALE_SIZE_WORLD = 1;
 
-export const EMPTY_PICTURE_WIDTH = 300;
-
-export const EMPTY_PICTURE_HEIGHT = 150;
+export const EMPTY_PICTURE = 64;
 
 export const enum ENEMY_TYPE {
   zombieGirl = 'zombieGirl',
@@ -49,6 +49,8 @@ export const enum EGAME_MAP {
   water = 'water',
   entityObj = 'entityObj',
   level = 'level',
+  width = 64,
+  height = 64,
 }
 
 export const enum PLAYER_TYPE {
@@ -68,9 +70,11 @@ export const enum IMAGES {
   bgLevel = 'bgLevel',
   emptyPicture = 'emptyPicture',
   plate = 'plate',
+  tunnel = 'tunnel',
+  money = 'money',
 }
 
-export const MONEY = 'money';
+// export const MONEY = ;
 
 export const MONEY_SCORE = 50;
 
@@ -92,17 +96,23 @@ export const enum ESCENE {
   settings = 'SettingsScene',
   help = 'HelpScene',
   end = 'EndGameScene',
+  tunnel = 'TunnelScene',
+  popup = 'Popup',
 }
 
 export const enum EBUTTON {
   nextLevel = 'nextLevel',
+  gear = 'GEAR_BTN',
+  help = 'HELP_BTN',
+  play = 'PLAY_BTN',
+  close = 'CLOSE_BTN',
+  howPlay = 'HOW_TO_PLAY',
+  leaderboard = 'LEADER_BOARD_BTN',
+  langEn = 'enButton',
+  langRu = 'ruButton',
+  langLv = 'lvButton',
 }
 
-export const GEAR_BTN = 'GEAR_BTN';
-export const HELP_BTN = 'HELP_BTN';
-export const PLAY_BTN = 'PLAY_BTN';
-export const CLOSE_BTN = 'CLOSE_BTN';
-export const HOW_TO_PLAY = 'HOW_TO_PLAY';
 export const CAT_AVATAR = 'catAvatar';
 export const FOX_AVATAR = 'foxAvatar';
 export const EN_logo = 'EN';

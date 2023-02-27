@@ -1,12 +1,5 @@
 import ChaseEnemy from './chaseEnemy';
-import {
-  EMPTY_PICTURE_HEIGHT,
-  EMPTY_PICTURE_WIDTH,
-  ENEMY_TYPE,
-  ENTITY_ANIMATION,
-  MASS_PLAYER,
-  SCALE_SIZE_WORLD,
-} from '../constGame';
+import { EMPTY_PICTURE, ENEMY_TYPE, ENTITY_ANIMATION, MASS_PLAYER, SCALE_SIZE_WORLD } from '../constGame';
 import Enemy from './enemy';
 import IAnimationKey from '../type';
 
@@ -59,7 +52,7 @@ export default class Enemies {
         obj.body.height = object.height;
         obj
           .setOrigin(0, 0)
-          .setScale(obj.body.width / EMPTY_PICTURE_WIDTH, obj.body.height / EMPTY_PICTURE_HEIGHT)
+          .setScale(obj.body.width / EMPTY_PICTURE, obj.body.height / EMPTY_PICTURE)
           .refreshBody();
       }
     });

@@ -1,0 +1,19 @@
+.hidden {
+  display: none;
+}
+.flex {
+  display: flex;
+}
+.popupBg {
+  height: 100vh;
+  text-align: right;
+  justify-content: center;
+  align-items: center;
+  .popup {
+    width: 700px;
+    text-align: right;
+    padding: 20px;
+    background-color: #2e2b2b;
+    border-radius: 4px;
+  }
+}

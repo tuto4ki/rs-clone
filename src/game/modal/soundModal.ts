@@ -1,5 +1,5 @@
+import { EBUTTON, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../constGame';
 import i18next from 'i18next';
-import { CLOSE_BTN, MODAL_TEXT_STYLE, SOUND_BTNS, TITLE_STYLE } from '../../game/constGame';
 const POSITION_CLOSE_X = 200;
 const POSITION_CLOSE_Y = -98;
 const POSITION_SOUND_BTN_X = -160;
@@ -112,7 +112,7 @@ export default class SoundModal extends Phaser.GameObjects.Container {
     this.add(this.soundOnBtn);
 
     this.closeButton = scene.add
-      .image(POSITION_CLOSE_X, POSITION_CLOSE_Y, CLOSE_BTN)
+      .image(POSITION_CLOSE_X, POSITION_CLOSE_Y, EBUTTON.close)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })

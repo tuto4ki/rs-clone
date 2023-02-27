@@ -1,17 +1,17 @@
 import hotkeys from 'hotkeys-js';
+import { getUserLS } from '../components/controller/localStorage';
+import { addScore } from '../components/controller/requests';
 import {
   COLLISION_PLAYER_ENEMY,
   IMAGES,
-  MONEY,
   MONEY_SCORE,
   PLAYER_TYPE,
   SCALE_SIZE_WORLD,
   EMUSIC,
   ESCENE,
-  GEAR_BTN,
-  HELP_BTN,
   EGAME_MAP,
   EGAME_SETTINGS,
+  EBUTTON,
 } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import Money from '../game/money';
@@ -96,7 +96,7 @@ export default class GameScene extends Phaser.Scene {
     this.physics.add.collider(this._player?.sprite, this._enemies.listEnemies, this.checkCollision.bind(this)).name =
       COLLISION_PLAYER_ENEMY;
     // create money
-    const moneyObj = new Money(this, map, `${MONEY}Obj`);
+    const moneyObj = new Money(this, map, `${IMAGES.money}Obj`);
     // control player
     this._cursor?.up.on('down', this.cursorDown.bind(this));
     this._cursor?.space.on('down', this.cursorDown.bind(this));
@@ -128,11 +128,11 @@ export default class GameScene extends Phaser.Scene {
     // score and time
     this._statistics = new Statistics(this, 30, 30);
     //settings modal
-    const gearBtn = this.add.image(977, 71, GEAR_BTN).setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add.image(977, 71, EBUTTON.gear).setInteractive({ useHandCursor: true }).setScale(0.47);
     gearBtn.scrollFactorX = 0;
     gearBtn.name = 'gearBtn';
     gearBtn.scrollFactorX = 0;
-    const helpBtn = this.add.image(976, 29, HELP_BTN).setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add.image(976, 29, EBUTTON.help).setInteractive({ useHandCursor: true }).setScale(0.25);
     helpBtn.name = 'helpBtn';
     helpBtn.scrollFactorX = 0;
     gearBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.settings), this);
@@ -194,6 +194,12 @@ export default class GameScene extends Phaser.Scene {
   public gameOver(isDied: boolean) {
     this._isFinish = true;
     setTimeout(() => {
+      // if win -> create score
+      // change login tuto4ki
+      const user = getUserLS();
+      if (this._statistics && !isDied && user) {
+        addScore(user, this._levelNumber, this._statistics.score, this._statistics?.gameTime());
+      }
       this.changeScene(ESCENE.end, isDied);
     }, END_GAME_TIMEOUT);
   }
@@ -232,7 +238,7 @@ export default class GameScene extends Phaser.Scene {
     if (this._statistics) {
       this._statistics.score += MONEY_SCORE;
     }
-    if (money.name === MONEY) {
+    if (money.name === IMAGES.money) {
       money.destroy();
     } else {
       player.destroy();
@@ -249,6 +255,11 @@ export default class GameScene extends Phaser.Scene {
     this._music.stop(EMUSIC.soundBg);
     this._statistics?.pause();
     this.scene.pause();
-    this.scene.run(nameScene, { scene: ESCENE.game, isDied, isLevelNext: this._levelNumber < EGAME_SETTINGS.maxLevel });
+    this.scene.run(nameScene, {
+      scene: ESCENE.game,
+      isDied,
+      isLevelNext: this._levelNumber < EGAME_SETTINGS.maxLevel,
+      playerType: this._playerType,
+    });
   }
 }

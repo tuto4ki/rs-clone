@@ -1,10 +1,4 @@
-import { MONEY, STATISTICS_TEXT_STYLE } from './constGame';
-
-// enum Styles {
-//   color = '#008080',
-//   font = 'Itim',
-//   size = '36',
-// }
+import { IMAGES, STATISTICS_TEXT_STYLE } from './constGame';
 
 const POS_TEXT = 40;
 
@@ -21,7 +15,7 @@ export default class Statistics {
   private _startTime: Date;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
-    scene.add.sprite(x, y, MONEY).setOrigin(0).scrollFactorX = 0;
+    scene.add.sprite(x, y, IMAGES.money).setOrigin(0).scrollFactorX = 0;
     this._scoreSprite = scene.add.text(x + POS_TEXT, y, this._score.toString(), STATISTICS_TEXT_STYLE).setOrigin(0);
     this._scoreSprite.scrollFactorX = 0;
     this._timeSprite = scene.add.text(x + POS_TIME, y, this._time.toString(), STATISTICS_TEXT_STYLE).setOrigin(0);
@@ -49,7 +43,7 @@ export default class Statistics {
   public update() {
     const currentTime = new Date();
     this._time = Math.floor((currentTime.getTime() - this._startTime.getTime()) / MILLISECONDS);
-    this._timeSprite.setText((this._pauseTime + this._time).toString());
+    this._timeSprite.setText(this.gameTime().toString());
   }
 
   public gameTime(): number {

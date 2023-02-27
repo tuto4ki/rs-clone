@@ -1,5 +1,5 @@
 import GameScene from '../scenes/gameScene';
-import { EMPTY_PICTURE_HEIGHT, EMPTY_PICTURE_WIDTH, IMAGES, SCALE_SIZE_WORLD } from './constGame';
+import { EMPTY_PICTURE, IMAGES, SCALE_SIZE_WORLD } from './constGame';
 import Player from './player';
 
 export default class Obstacles {
@@ -19,7 +19,7 @@ export default class Obstacles {
           obj.body.width = object.width * SCALE_SIZE_WORLD;
           obj.body.height = object.height * SCALE_SIZE_WORLD;
           if (pictureDefault === IMAGES.emptyPicture) {
-            obj.setScale(obj.body.width / EMPTY_PICTURE_WIDTH, obj.body.height / EMPTY_PICTURE_HEIGHT).setOrigin(0);
+            obj.setScale(obj.body.width / EMPTY_PICTURE, obj.body.height / EMPTY_PICTURE).setOrigin(0);
           } else {
             obj.setOrigin(1);
           }

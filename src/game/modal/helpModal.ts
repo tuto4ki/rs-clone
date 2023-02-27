@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { CLOSE_BTN, HOW_TO_PLAY, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../../game/constGame';
+import { EBUTTON, MODAL_TEXT_STYLE, MODAL_TEXT_STYLE_000, TITLE_STYLE } from '../constGame';
 
 const POSITION_X = 0;
 const POSITION_Y = 0;
@@ -23,7 +23,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
     this._typeScene = typeScene;
 
     this.background = scene.add
-      .image(POSITION_X, POSITION_Y, HOW_TO_PLAY)
+      .image(POSITION_X, POSITION_Y, EBUTTON.howPlay)
       .setDisplaySize(width, height)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })
@@ -56,7 +56,7 @@ export default class HelpModal extends Phaser.GameObjects.Container {
 
     this.add(this.howPlaySettings);
     this.closeButton = scene.add
-      .image(CLOSE_BTN_X, CLOSE_BTN_Y, CLOSE_BTN)
+      .image(CLOSE_BTN_X, CLOSE_BTN_Y, EBUTTON.close)
       .setScale(0.2)
       .setOrigin(0.5, 0.5)
       .setInteractive({ useHandCursor: true })

@@ -1,35 +1,56 @@
+.score-container {
+  select, .next-page, .prev-page {
+    cursor: pointer;
+    background-color: #b3d02a;
+    color: white;
+    padding: 5px;
+    margin: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  .next-page:disabled, .prev-page:disabled {
+    background-color: rgba(239, 239, 239, 0.3);
+    cursor: default;
+  }
+}
 .score{
-  &__row{
+  color: white;
+  &-container {
+    text-align: left;
+  }
+  &__row {
     display: flex;
     flex-direction: row;
     &:not(.score__headline):hover{
       .score__cell{
-        background-color: rgba(0, 255, 255, 0.5);
+        background-color: #b3d02a;
       }
     }
   }
-  &__pos{
+  &__pos {
     flex: 0 0 30px;
     text-align: right;
     padding-right: 5px;
   }
-  &__owner{
+  &__owner {
     flex: 0 0 150px;
   }
-  &__level{
+  &__level {
     flex: 0 0 70px;
     text-align: center;
   }
-  &__time{
+  &__time {
     flex: 0 0 150px;
     text-align: center;
   }
-  &__coins{
+  &__coins {
     flex: 0 0 150px;
     text-align: center;
   }
-  &__cell{
+  &__cell {
     margin: 0;
     padding: 3px 5px;
   }
+
 }

@@ -3,6 +3,7 @@ import { ScoreTable } from './scoreTable';
 import { selectOrderParametrs, selectLevelParametrs } from '../controller/const';
 
 import './score.scss';
+import i18next from 'i18next';
 
 export class ScoreView {
   private _scoreTable: ScoreTable;
@@ -43,7 +44,7 @@ export class ScoreView {
     selectParametrs.forEach((e, i) => {
       const option = document.createElement('option');
       option.value = String(i);
-      option.text = e;
+      option.text = i18next.t<string>(e);
       select.append(option);
     });
 

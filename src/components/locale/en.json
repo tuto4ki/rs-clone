@@ -38,9 +38,18 @@
   "level": "Level",
   "nextPage": "Next page",
   "prevPage": "Prev page",
-  "Continue without registration": "Continue without registration",
-  "username": "Lietotājvārds",
-  "password": "Parole",
-  "enterUsername": "Ievadiet lietotājvārdu",
-  "enterPassword": "Ievadiet savu paroli"
+  "noRegistration": "Continue without registration",
+  "username": "Username",
+  "password": "Password",
+  "enterUsername": "Enter Username",
+  "enterPassword": "Enter Password",
+  "back": "Back",
+  "sortby": "Sort by..",
+  "sortScoreASC": "Sort score ASC",
+  "sortScoreDesc": "Sort score DESC",
+  "sortTimeASC": "Sort time ASC",
+  "sortTimeDESC": "Sort time DESC",
+  "allLevels": "All Levels",
+  "level1": "Level 1",
+  "level2": "Level 2"
 }

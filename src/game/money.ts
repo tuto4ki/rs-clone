@@ -1,4 +1,4 @@
-import { MONEY, SCALE_SIZE_WORLD } from './constGame';
+import { IMAGES, SCALE_SIZE_WORLD } from './constGame';
 
 export default class Money {
   private _listMoney: Phaser.Physics.Arcade.StaticGroup;
@@ -11,10 +11,10 @@ export default class Money {
         const posX = object.x + (object.width ? object.width / 2 : 0);
         const posY = object.y - (object.height ? object.height / 2 : 0);
         const money = this._listMoney
-          .create(posX * SCALE_SIZE_WORLD, posY * SCALE_SIZE_WORLD, MONEY)
+          .create(posX * SCALE_SIZE_WORLD, posY * SCALE_SIZE_WORLD, IMAGES.money)
           .setOrigin(0.5)
-          .play(MONEY);
-        money.name = MONEY;
+          .play(IMAGES.money);
+        money.name = IMAGES.money;
       }
     });
   }

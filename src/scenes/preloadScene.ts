@@ -3,32 +3,22 @@ import {
   ENEMY_TYPE,
   ENTITY_ANIMATION,
   IMAGES,
-  MONEY,
   PLAYER_TYPE,
   EMUSIC,
   ESCENE,
-  GEAR_BTN,
-  HELP_BTN,
-  PLAY_BTN,
-  END_MODAL,
-  CLOSE_BTN,
-  HOW_TO_PLAY,
   SOUND_BTNS,
   CAT_AVATAR,
   FOX_AVATAR,
-  WIDTH_GAME,
-  HEIGHT_GAME,
   EGAME_SETTINGS,
   EBUTTON,
-  EN_logo,
-  RU_logo,
-  LV_logo,
+  EGAME_MAP,
+  END_MODAL,
 } from '../game/constGame';
 
 const COLOR_PRELOAD = 0x222222;
 const COLOR_PROGRESS = 0xffffff;
-const PROGRESS_BOX = { x: WIDTH_GAME / 2 - 160, y: HEIGHT_GAME / 2 - 25, width: 320, height: 50 };
-const PROGRESS_BAR = { x: WIDTH_GAME / 2 - 150, y: HEIGHT_GAME / 2 - 15, width: 300, height: 30 };
+const PROGRESS_BOX = { x: EGAME_SETTINGS.width / 2 - 160, y: EGAME_SETTINGS.height / 2 - 25, width: 320, height: 50 };
+const PROGRESS_BAR = { x: EGAME_SETTINGS.width / 2 - 150, y: EGAME_SETTINGS.height / 2 - 15, width: 300, height: 30 };
 
 export default class PreloadScene extends Phaser.Scene {
   selectedCharacter: unknown;
@@ -60,9 +50,13 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
     this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
-    this.load.atlas(MONEY, '../assets/sprites/money.png', '../assets/json/money.json');
+    this.load.atlas(IMAGES.money, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level
     this.loadLevel(EGAME_SETTINGS.maxLevel);
+    // load pre scene
+    this.load.tilemapTiledJSON(`${EGAME_MAP.levelMap}1-2`, `../assets/json/level1-2.json`);
+    this.load.image(`${IMAGES.tunnel}1`, '../assets/images/levelTunnel1.png');
+    this.load.image(`${IMAGES.tunnel}2`, '../assets/images/levelTunnel2.png');
     // load music
     this.load.audio(EMUSIC.soundBg, '../assets/sound/soundBg.mp3');
     this.load.audio(EMUSIC.jump, '../assets/sound/soundJump.ogg');
@@ -72,26 +66,26 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.audio(EMUSIC.win, '../assets/sound/soundWin.mp3');
     // load button
     this.load.image(EBUTTON.nextLevel, '../assets/sprites/buttons/backBtn.svg');
-    this.load.image(GEAR_BTN, '../assets/sprites/gear.png');
-    this.load.image(HELP_BTN, '../assets/sprites/buttons/helpBtn.svg');
-    this.load.image(PLAY_BTN, '../assets/sprites/buttons/playBtn.svg');
-    this.load.image('exitBtn', '../assets/sprites/buttons/exitBtn.svg');
+    this.load.image(EBUTTON.gear, '../assets/sprites/gear.png');
+    this.load.image(EBUTTON.help, '../assets/sprites/buttons/helpBtn.svg');
+    this.load.image(EBUTTON.play, '../assets/sprites/buttons/playBtn.svg');
+    // this.load.image('exitBtn', '../assets/sprites/buttons/exitBtn.svg');
     this.load.image(END_MODAL.homeBtn, '../assets/sprites/buttons/homeBtn.svg');
-    this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
-    this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
+    // this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
+    // this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
     this.load.image(END_MODAL.reloadBtn, '../assets/sprites/buttons/reloadBtn.svg');
     this.load.image(SOUND_BTNS.musicOnBtn, '../assets/sprites/buttons/musicOn.svg');
     this.load.image(SOUND_BTNS.musicOffBtn, '../assets/sprites/buttons/musicOff.svg');
     this.load.image(SOUND_BTNS.soundOnBtn, '../assets/sprites/buttons/soundOn.svg');
     this.load.image(SOUND_BTNS.soundOffBtn, '../assets/sprites/buttons/soundOff.svg');
-    this.load.image('leaderBoardBtn', '../assets/sprites/buttons/leaderboardBtn.svg');
-    this.load.image(CLOSE_BTN, '../assets/sprites/buttons/closeBtn.svg');
-    this.load.image(HOW_TO_PLAY, '../assets/sprites/howToPlay.png');
+    this.load.image(EBUTTON.leaderboard, '../assets/sprites/buttons/leaderboardBtn.svg');
+    this.load.image(EBUTTON.close, '../assets/sprites/buttons/closeBtn.svg');
+    this.load.image(EBUTTON.howPlay, '../assets/sprites/howToPlay.png');
     this.load.image(END_MODAL.gravestone, '../assets/sprites/gravestone.svg');
     this.load.image(END_MODAL.winCup, '../assets/images/win.png');
-    this.load.image(EN_logo, '../assets/images/en.png');
-    this.load.image(RU_logo, '../assets/images/ru.png');
-    this.load.image(LV_logo, '../assets/images/lv.png');
+    this.load.image(EBUTTON.langEn, '../assets/images/en.png');
+    this.load.image(EBUTTON.langRu, '../assets/images/ru.png');
+    this.load.image(EBUTTON.langLv, '../assets/images/lv.png');
     this.load.image(CAT_AVATAR, '../assets/sprites/catAvatar.png');
     this.load.image(FOX_AVATAR, '../assets/sprites/foxAvatar.png');
     const fonts = new WebFontFile(this.load, 'Itim');
@@ -125,7 +119,7 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   private createAnimationMoney(): void {
-    this.addAnimationToManager(MONEY, MONEY, 'gold_', 1, 10, 2, 10, -1);
+    this.addAnimationToManager(IMAGES.money, IMAGES.money, 'gold_', 1, 10, 2, 10, -1);
   }
 
   private addAnimationToManager(
@@ -148,10 +142,10 @@ export default class PreloadScene extends Phaser.Scene {
 
   loadLevel(numLevel: number): void {
     for (let i = 1; i <= numLevel; i++) {
-      this.load.image(`levelTiles${i}`, `../assets/sprites/level${i}.png`);
-      this.load.tilemapTiledJSON(`levelMap${i}`, `../assets/json/level${i}.json`);
+      this.load.image(`${EGAME_MAP.levelTiles}${i}`, `../assets/sprites/level${i}.png`);
+      this.load.tilemapTiledJSON(`${EGAME_MAP.levelMap}${i}`, `../assets/json/level${i}.json`);
       this.load.image(`${IMAGES.bgLevel}${i}`, `../assets/images/bgLevel${i}.png`);
-      this.load.image(`${IMAGES.bgLevel}${i}svg`, `../assets/images/bgLevel${i}.svg`);
+      this.load.image(`${IMAGES.bgLevel}${i}svg`, `../assets/images/bgLevel${i}${i}.png`);
     }
   }
 }
