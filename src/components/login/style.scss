@@ -19,6 +19,10 @@ body {
   font-family: 'Itim', sans-serif;
   margin: 0px;
   padding: 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
 }
 
 button {
