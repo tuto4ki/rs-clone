@@ -15,6 +15,10 @@ const baseConfig = {
     module: {
       rules: [
         {
+          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+        },
+        {
           test: /\.ts$/i,
           use: 'ts-loader',
         },

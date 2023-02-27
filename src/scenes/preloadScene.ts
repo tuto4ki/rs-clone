@@ -48,7 +48,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas(PLAYER_TYPE.cat, '../assets/sprites/cat.png', '../assets/json/cat.json');
     this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
-    this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
+    // this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
     this.load.atlas(IMAGES.money, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level
@@ -97,7 +97,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.createAnimationPlayer(PLAYER_TYPE.cat);
     this.createAnimationZombie(ENEMY_TYPE.zombieGirl);
     this.createAnimationZombie(ENEMY_TYPE.zombieMan);
-    this.createAnimationWraith(ENEMY_TYPE.wraith);
+    //this.createAnimationWraith(ENEMY_TYPE.wraith);
     this.createAnimationMoney();
   }
   private createAnimationPlayer(type: string): void {
@@ -112,12 +112,12 @@ export default class PreloadScene extends Phaser.Scene {
     this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 8, 2, 10, 0);
     this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 3, 10, 2, 15, -1);
   }
-
+  /*
   private createAnimationWraith(type: string): void {
     this.addAnimationToManager(`${ENTITY_ANIMATION.walk}${type}`, type, 'Walk_', 0, 11, 2, 10, -1);
     this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 0, 14, 2, 10, 0);
   }
-
+  */
   private createAnimationMoney(): void {
     this.addAnimationToManager(IMAGES.money, IMAGES.money, 'gold_', 1, 10, 2, 10, -1);
   }

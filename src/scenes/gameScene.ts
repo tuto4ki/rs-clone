@@ -159,6 +159,7 @@ export default class GameScene extends Phaser.Scene {
       .setScale(0.25)
       .setOrigin(0.5, 0.5)
       .on('pointerdown', () => {
+        this._music.stop(EMUSIC.soundBg);
         this.scene.start(ESCENE.start);
       });
     homeBtn.name = 'homeBtn';

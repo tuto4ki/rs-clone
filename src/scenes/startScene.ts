@@ -157,11 +157,6 @@ export default class StartScene extends Phaser.Scene {
     const ruButtonImg = this.children.getByName(EBUTTON.langRu) as Phaser.GameObjects.Image;
     const lvButtonImg = this.children.getByName(EBUTTON.langLv) as Phaser.GameObjects.Image;
     switch (currentLang) {
-      case ELANG.en:
-        enButtonImg.setTint(COLOR_ACTIVE);
-        ruButtonImg.setTint(COLOR_NOACTIVE);
-        lvButtonImg.setTint(COLOR_NOACTIVE);
-        break;
       case ELANG.ru:
         enButtonImg.setTint(COLOR_NOACTIVE);
         ruButtonImg.setTint(COLOR_ACTIVE);
@@ -171,6 +166,11 @@ export default class StartScene extends Phaser.Scene {
         enButtonImg.setTint(COLOR_NOACTIVE);
         ruButtonImg.setTint(COLOR_NOACTIVE);
         lvButtonImg.setTint(COLOR_ACTIVE);
+        break;
+      default:
+        enButtonImg.setTint(COLOR_ACTIVE);
+        ruButtonImg.setTint(COLOR_NOACTIVE);
+        lvButtonImg.setTint(COLOR_NOACTIVE);
     }
   }
 
