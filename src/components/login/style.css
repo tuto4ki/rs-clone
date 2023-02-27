@@ -19,6 +19,10 @@ body {
   font-family: 'Itim', sans-serif;
   margin: 0px;
   padding: 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
 }
 
 button {
@@ -127,4 +131,26 @@ span {
   font-size: 18px;
   align-self: start;
   color: red;
+}
+
+.main {
+  margin: auto;
+  text-align: center;
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.footer-img {
+  width: 36px;
+  height: 36px;
+}
+
+.footer-text {
+  color: white;
 }
