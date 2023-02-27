@@ -48,7 +48,6 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.atlas(PLAYER_TYPE.cat, '../assets/sprites/cat.png', '../assets/json/cat.json');
     this.load.atlas(ENEMY_TYPE.zombieGirl, '../assets/sprites/zombieGirl.png', '../assets/json/zombieGirl.json');
     this.load.atlas(ENEMY_TYPE.zombieMan, '../assets/sprites/zombieMan.png', '../assets/json/zombieMan.json');
-    // this.load.atlas(ENEMY_TYPE.wraith, '../assets/sprites/wraith.png', '../assets/json/wraith.json');
     this.load.image(IMAGES.plate, '../assets/images/plateEndGame.png');
     this.load.atlas(IMAGES.money, '../assets/sprites/money.png', '../assets/json/money.json');
     // load level
@@ -69,10 +68,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.image(EBUTTON.gear, '../assets/sprites/gear.png');
     this.load.image(EBUTTON.help, '../assets/sprites/buttons/helpBtn.svg');
     this.load.image(EBUTTON.play, '../assets/sprites/buttons/playBtn.svg');
-    // this.load.image('exitBtn', '../assets/sprites/buttons/exitBtn.svg');
     this.load.image(END_MODAL.homeBtn, '../assets/sprites/buttons/homeBtn.svg');
-    // this.load.image('infoBtn', '../assets/sprites/buttons/infoBtn.svg');
-    // this.load.image('menuBtn', '../assets/sprites/buttons/menuBtn.svg');
     this.load.image(END_MODAL.reloadBtn, '../assets/sprites/buttons/reloadBtn.svg');
     this.load.image(SOUND_BTNS.musicOnBtn, '../assets/sprites/buttons/musicOn.svg');
     this.load.image(SOUND_BTNS.musicOffBtn, '../assets/sprites/buttons/musicOff.svg');
@@ -97,7 +93,6 @@ export default class PreloadScene extends Phaser.Scene {
     this.createAnimationPlayer(PLAYER_TYPE.cat);
     this.createAnimationZombie(ENEMY_TYPE.zombieGirl);
     this.createAnimationZombie(ENEMY_TYPE.zombieMan);
-    //this.createAnimationWraith(ENEMY_TYPE.wraith);
     this.createAnimationMoney();
   }
   private createAnimationPlayer(type: string): void {
@@ -112,12 +107,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 1, 8, 2, 10, 0);
     this.addAnimationToManager(`${ENTITY_ANIMATION.run}${type}`, type, 'Run_', 3, 10, 2, 15, -1);
   }
-  /*
-  private createAnimationWraith(type: string): void {
-    this.addAnimationToManager(`${ENTITY_ANIMATION.walk}${type}`, type, 'Walk_', 0, 11, 2, 10, -1);
-    this.addAnimationToManager(`${ENTITY_ANIMATION.dead}${type}`, type, 'Dead_', 0, 14, 2, 10, 0);
-  }
-  */
+
   private createAnimationMoney(): void {
     this.addAnimationToManager(IMAGES.money, IMAGES.money, 'gold_', 1, 10, 2, 10, -1);
   }

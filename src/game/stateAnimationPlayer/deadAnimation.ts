@@ -12,15 +12,15 @@ export default class DeadAnimation extends StateAnimation {
     this.player.sprite.setScale(this.player.sprite.scaleX, this.player.sprite.scaleY).body.setVelocityX(0);
   }
   onExit(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
   moveLeft(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
   moveRight(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
   jump(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
 }

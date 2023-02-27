@@ -36,6 +36,6 @@ export default class FallRightAnimation extends StateAnimation {
     }
   }
   jump(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
 }

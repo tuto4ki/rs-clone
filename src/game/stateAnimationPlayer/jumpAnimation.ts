@@ -47,6 +47,6 @@ export default class JumpAnimation extends StateAnimation {
     }
   }
   jump(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
 }

@@ -22,7 +22,7 @@ export const SPEED_UP_PLAYER = 2.2;
 
 export const MASS_PLAYER = 10;
 
-export const WIDTH_PLAYER = 180;
+export const WIDTH_PLAYER = 160;
 
 export const HEIGHT_PLAYER = 360;
 
@@ -35,7 +35,6 @@ export const EMPTY_PICTURE = 64;
 export const enum ENEMY_TYPE {
   zombieGirl = 'zombieGirl',
   zombieMan = 'zombieMan',
-  wraith = 'wraith',
 }
 
 export const enum EGAME_MAP {
@@ -73,8 +72,6 @@ export const enum IMAGES {
   tunnel = 'tunnel',
   money = 'money',
 }
-
-// export const MONEY = ;
 
 export const MONEY_SCORE = 50;
 
