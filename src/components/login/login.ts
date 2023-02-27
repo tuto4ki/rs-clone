@@ -1,7 +1,7 @@
 import { elementGenerator } from '../controller/taggenerator';
 import { login, register } from '../controller/requests';
 import { responseStatus } from '../controller/const';
-import './style.css';
+import './style.scss';
 import { setUserLS } from '../controller/localStorage';
 import i18next from 'i18next';
 
@@ -109,7 +109,9 @@ export default class Login {
   private async validateInputs() {
     //
     console.log('validate');
-
+    if (this._button.classList.contains('no-active')) {
+      return;
+    }
     if (this._loginField.getInputValue() === '') {
       this._loginField.setErrorMessage();
       this._errLogin.innerText = i18next.t<string>(`errorUsername`);
@@ -132,6 +134,7 @@ export default class Login {
     }
 
     if (this._canSendReg) {
+      this._button.classList.add('no-active');
       if (this._loginState) {
         await login(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
           switch (res.status) {
@@ -146,6 +149,7 @@ export default class Login {
               this.secondScene();
               break;
           }
+          this._button.classList.remove('no-active');
         });
       } else {
         await register(this._loginField.getInputValue(), this._passwordField.getInputValue()).then((res) => {
@@ -158,6 +162,7 @@ export default class Login {
               this.secondScene();
               break;
           }
+          this._button.classList.remove('no-active');
         });
       }
     }
