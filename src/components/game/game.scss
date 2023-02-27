@@ -1,6 +1,7 @@
 .main {
   margin: auto;
   text-align: center;
+  flex: 1 0 auto;
   &.pointer-event {
     pointer-events: none;
   }

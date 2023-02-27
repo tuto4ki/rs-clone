@@ -15,7 +15,7 @@ export default class IdleAnimation extends StateAnimation {
     this.player.sprite.body.setVelocityX(0);
   }
   onExit(): void {
-    console.log('no implement');
+    // console.log('no implement');
   }
   moveLeft(): void {
     this.player.changeState(new MoveLeftAnimation(this.player));

@@ -19,6 +19,11 @@ export function getUserLS(): string | null {
   return localStorage.getItem(ELOCAL_STRG.user);
 }
 
+export function isLoginLS(): boolean {
+  const user = getUserLS();
+  return user ? true : false;
+}
+
 function clearLS() {
   localStorage.removeItem(ELOCAL_STRG.user);
 }

@@ -1,7 +1,6 @@
 import i18next from 'i18next';
 import { END_MODAL, MODAL_TEXT_STYLE, TITLE_STYLE, ESCENE, EBUTTON, PLAYER_TYPE } from '../constGame';
 
-// const TEXT_POS = 100;
 const SCALE_BTN = 0.3;
 const NEXT_BTN_Y = 20;
 const POSITION_IMG_X = 0;
@@ -16,8 +15,8 @@ export default class DieModal extends Phaser.GameObjects.Container {
   private reloadBtn: Phaser.GameObjects.Image;
   private homeText: Phaser.GameObjects.Text;
   private image: Phaser.GameObjects.Image;
-  private _nextLevelBtn: Phaser.GameObjects.Image;
-  private _nextLevelText: Phaser.GameObjects.Text;
+  private _nextLevelBtn: Phaser.GameObjects.Image | null = null;
+  private _nextLevelText: Phaser.GameObjects.Text | null = null;
   private _playerType: PLAYER_TYPE;
 
   constructor(
@@ -85,19 +84,19 @@ export default class DieModal extends Phaser.GameObjects.Container {
       .setOrigin(0, 0.5);
     this.homeText.scrollFactorX = 0;
 
-    this._nextLevelBtn = scene.add
-      .image(POSITION_BTNS_X, NEXT_BTN_Y, EBUTTON.nextLevel)
-      .setInteractive({ useHandCursor: true })
-      .setScale(-SCALE_BTN, SCALE_BTN)
-      .setOrigin(0.5, 0.5)
-      .on('pointerdown', () => {
-        this.close(ESCENE.tunnel, isLevelNext);
-      });
-    this._nextLevelText = scene.add
-      .text(posTextX, 20, i18next.t<string>(`nextLevel`), MODAL_TEXT_STYLE)
-      .setOrigin(0, 0.5);
-    this._nextLevelText.scrollFactorX = 0;
     if (!isDied && isLevelNext) {
+      this._nextLevelBtn = scene.add
+        .image(POSITION_BTNS_X, NEXT_BTN_Y, EBUTTON.nextLevel)
+        .setInteractive({ useHandCursor: true })
+        .setScale(-SCALE_BTN, SCALE_BTN)
+        .setOrigin(0.5, 0.5)
+        .on('pointerdown', () => {
+          this.close(ESCENE.tunnel, isLevelNext);
+        });
+      this._nextLevelText = scene.add
+        .text(posTextX, 20, i18next.t<string>(`nextLevel`), MODAL_TEXT_STYLE)
+        .setOrigin(0, 0.5);
+      this._nextLevelText.scrollFactorX = 0;
       this.add(this._nextLevelBtn);
       this.add(this._nextLevelText);
     }

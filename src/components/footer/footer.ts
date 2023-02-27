@@ -1,4 +1,5 @@
 import { elementGenerator } from '../controller/taggenerator';
+import './footer.scss';
 export default class Footer {
   private _footer: HTMLDivElement;
   private _footerText: HTMLParagraphElement;

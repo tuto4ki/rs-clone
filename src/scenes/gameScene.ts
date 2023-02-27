@@ -12,6 +12,7 @@ import {
   EGAME_MAP,
   EGAME_SETTINGS,
   EBUTTON,
+  END_MODAL,
 } from '../game/constGame';
 import Enemies from '../game/enemies/enemies';
 import Money from '../game/money';
@@ -20,8 +21,12 @@ import Obstacles from '../game/obstacle';
 import Player from '../game/player';
 import Statistics from '../game/statistict';
 import { IPassScene } from '../game/type';
-// import EndGameScene from './endGameScene';
+
 const END_GAME_TIMEOUT = 1500;
+const POSITION_X_BTN = 977;
+const POSITION_Y_GEAR = 71;
+const POSITION_Y_HELP = 29;
+const POSITION_Y_HOME = 112;
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'F1' || event.key === 'F2') {
@@ -128,11 +133,17 @@ export default class GameScene extends Phaser.Scene {
     // score and time
     this._statistics = new Statistics(this, 30, 30);
     //settings modal
-    const gearBtn = this.add.image(977, 71, EBUTTON.gear).setInteractive({ useHandCursor: true }).setScale(0.47);
+    const gearBtn = this.add
+      .image(POSITION_X_BTN, POSITION_Y_GEAR, EBUTTON.gear)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.47);
     gearBtn.scrollFactorX = 0;
     gearBtn.name = 'gearBtn';
     gearBtn.scrollFactorX = 0;
-    const helpBtn = this.add.image(976, 29, EBUTTON.help).setInteractive({ useHandCursor: true }).setScale(0.25);
+    const helpBtn = this.add
+      .image(POSITION_X_BTN, POSITION_Y_HELP, EBUTTON.help)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.25);
     helpBtn.name = 'helpBtn';
     helpBtn.scrollFactorX = 0;
     gearBtn.on('pointerdown', this.changeScene.bind(this, ESCENE.settings), this);
@@ -142,6 +153,18 @@ export default class GameScene extends Phaser.Scene {
       this._music.checkStorage();
       this._music.playBg(EMUSIC.soundBg);
     });
+    const homeBtn = this.add
+      .image(POSITION_X_BTN, POSITION_Y_HOME, END_MODAL.homeBtn)
+      .setInteractive({ useHandCursor: true })
+      .setScale(0.25)
+      .setOrigin(0.5, 0.5)
+      .on('pointerdown', () => {
+        this._music.stop(EMUSIC.soundBg);
+        this.scene.start(ESCENE.start);
+      });
+    homeBtn.name = 'homeBtn';
+    homeBtn.scrollFactorX = 0;
+
     hotkeys('f1', () => {
       this.changeScene(ESCENE.help);
     });
