@@ -1,0 +1,141 @@
+/* itim-regular - latin */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Itim';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../../assets/fonts/itim-v10-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('../../assets/fonts/itim-v10-latin-regular.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */ url('../../assets/fonts/itim-v10-latin-regular.woff2') format('woff2'),
+    /* Super Modern Browsers */ url('../../assets/fonts/itim-v10-latin-regular.woff') format('woff'),
+    /* Modern Browsers */ url('../../assets/fonts/itim-v10-latin-regular.ttf') format('truetype'),
+    /* Safari, Android, iOS */ url('../../assets/fonts/itim-v10-latin-regular.svg#Itim') format('svg'); /* Legacy iOS */
+}
+
+body {
+  background: url('../../assets/images/bgImage.jpg') no-repeat center;
+  background-size: cover;
+  height: 100vh;
+  font-family: 'Itim', sans-serif;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+button {
+  font-family: 'Itim', sans-serif;
+}
+
+input:focus {
+  outline: 0;
+}
+
+.input-wrap .success {
+  border: 3px solid green;
+}
+
+.input-wrap .error {
+  border: 3px solid red;
+}
+
+.form {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  /*display: none;*/
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 50px auto;
+  padding: 20px;
+  background: url('../../assets/images/ground.png') center;
+  background-size: cover;
+
+  border-radius: 4px;
+  font-size: 12px;
+  position: absolute;
+  left: 39%;
+  top: 20%;
+}
+
+.input-wrap {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 10px 0;
+}
+
+.input-wrap input {
+  border: 2px solid #f0f0f0;
+  border-radius: 4px;
+  font-size: 18px;
+}
+.input-wrap label {
+  margin-bottom: 10px;
+}
+
+.registrationContainer,
+.loginContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.form .button {
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  color: white;
+  background-color: #b3d02a;
+  border: none;
+  border-radius: 4px;
+  font-size: 24px;
+}
+.toggleBtn {
+  border: none;
+  background: transparent;
+  font-size: 18px;
+}
+.toggleBtn:hover {
+  cursor: pointer;
+  color: blue;
+}
+
+.headline {
+  font-size: 36px;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+  /* visibility: hidden; */
+  margin: 0 auto;
+}
+
+label {
+  font-size: 18px;
+}
+
+span {
+  font-size: 16px;
+}
+
+.errLogin,
+.errPass {
+  font-size: 18px;
+  align-self: start;
+  color: red;
+}
+
+.form {
+  .no-active {
+    cursor: default;
+    opacity: 0.7;
+  }
+}

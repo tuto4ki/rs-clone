@@ -1,0 +1,55 @@
+{
+  "name": "rs-clone",
+  "version": "1.0.0",
+  "description": "RS-clone",
+  "private": true,
+  "scripts": {
+    "lint": "eslint --debug src/",
+    "lint:write": "eslint --debug src/ --fix",
+    "prettier": "prettier --write src/**/*.ts",
+    "start": "webpack serve --env mode=development",
+    "build": "webpack --config ./webpack.config.js --env mode=production",
+    "deploy": "npm run build && npx gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tuto4ki/rs-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tuto4ki/rs-clone/issues"
+  },
+  "homepage": "https://github.com/tuto4ki/rs-clone#readme",
+  "dependencies": {
+    "hotkeys-js": "^3.10.1",
+    "phaser": "^3.55.2",
+    "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@types/webfontloader": "^1.6.35",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-webpack-plugin": "^3.2.0",
+    "file-loader": "^6.2.0",
+    "gh-pages": "^4.0.0",
+    "html-webpack-plugin": "^5.5.0",
+    "i18next": "^22.4.5",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.1"
+  }
+}
